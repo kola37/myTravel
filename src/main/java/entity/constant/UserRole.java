@@ -25,8 +25,12 @@ public enum UserRole {
      * @param index index of the user role to return
      * @return the user role specified by index
      */
-    public UserRole getRole(int index) {
+    public static UserRole getRole(int index) {
         return UserRole.values()[index - 1];
+    }
+
+    public String getName() {
+        return name().toLowerCase();
     }
 
 }

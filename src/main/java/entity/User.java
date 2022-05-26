@@ -25,8 +25,8 @@ public class User implements Serializable {
     private String lastName;
     private String email;
     private UserRole role;
-    private List<Order> orders;
-    private boolean isLoggedOn;
+//    private List<Order> orders;
+//    private boolean isLoggedOn;
 
     public User() {
     }
@@ -87,21 +87,21 @@ public class User implements Serializable {
         this.role = role;
     }
 
-    public List<Order> getOrders() {
-        return orders;
-    }
+//    public List<Order> getOrders() {
+//        return orders;
+//    }
+//
+//    public void setOrders(List<Order> orders) {
+//        this.orders = orders;
+//    }
 
-    public void setOrders(List<Order> orders) {
-        this.orders = orders;
-    }
-
-    public boolean isLoggedOn() {
-        return isLoggedOn;
-    }
-
-    public void setLoggedOn(boolean loggedOn) {
-        isLoggedOn = loggedOn;
-    }
+//    public boolean isLoggedOn() {
+//        return isLoggedOn;
+//    }
+//
+//    public void setLoggedOn(boolean loggedOn) {
+//        isLoggedOn = loggedOn;
+//    }
 
 
     @Override
@@ -127,8 +127,8 @@ public class User implements Serializable {
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 ", role=" + role +
-                ", orderedToursCount=" + orders +
-                ", isLoggedOn=" + isLoggedOn +
+//                ", orderedToursCount=" + orders +
+//                ", isLoggedOn=" + isLoggedOn +
                 '}';
     }
 
@@ -143,6 +143,11 @@ public class User implements Serializable {
 
         public Builder() {
             user = new User();
+        }
+
+        public Builder withUserId(int id) {
+            user.userId = id;
+            return this;
         }
 
         public Builder withLogin(String login) {
@@ -175,10 +180,10 @@ public class User implements Serializable {
             return this;
         }
 
-        public Builder withOrders(List<Order> orders) {
-            user.orders = orders;
-            return this;
-        }
+//        public Builder withOrders(List<Order> orders) {
+//            user.orders = orders;
+//            return this;
+//        }
 
         public User build() {
             return user;

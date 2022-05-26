@@ -29,7 +29,7 @@ public enum HotelType {
      * @param index index of the hotel type to return
      * @return the type of hotels specified by index
      */
-    public HotelType getType(int index) {
+    public static HotelType getType(int index) {
         return HotelType.values()[index - 1];
     }
 }

@@ -24,7 +24,7 @@ public enum OrderStatus {
      * @param index index of the order status to return
      * @return the order status specified by index
      */
-    public OrderStatus getStatus(int index) {
+    public static OrderStatus getStatus(int index) {
         return OrderStatus.values()[index - 1];
     }
 

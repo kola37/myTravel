@@ -24,7 +24,7 @@ public enum TourType {
      * @param index index of the tour type to return
      * @return the tour type specified by index
      */
-    public TourType getType(int index) {
+    public static TourType getType(int index) {
         return TourType.values()[index - 1];
     }
 }
