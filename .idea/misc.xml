@@ -8,6 +8,10 @@
       </list>
     </option>
   </component>
+  <component name="ProjectResources">
+    <resource url="http://xmlns.jcp.org/xml/ns/javaee" location="$USER_HOME$/Library/Caches/JetBrains/IdeaIC2021.3/extResources/web-app_4_0.xsd" />
+    <resource url="https://java.sun.com/xml/ns/javaee" location="$USER_HOME$/Library/Caches/JetBrains/IdeaIC2021.3/extResources/web-app_4_0.xsd" />
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>

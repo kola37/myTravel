@@ -27,4 +27,8 @@ public enum TourType {
     public static TourType getType(int index) {
         return TourType.values()[index - 1];
     }
+
+    public String getName() {
+        return name().toLowerCase();
+    }
 }

@@ -32,4 +32,8 @@ public enum HotelType {
     public static HotelType getType(int index) {
         return HotelType.values()[index - 1];
     }
+
+    public String getName() {
+        return name().toLowerCase();
+    }
 }

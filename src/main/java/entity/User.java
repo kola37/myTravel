@@ -1,9 +1,6 @@
 package entity;
 
-import entity.constant.UserRole;
-
 import java.io.Serializable;
-import java.util.List;
 import java.util.Objects;
 
 /**
@@ -18,25 +15,24 @@ public class User implements Serializable {
     //use serialVersionUID for interoperability
     private static final long serialVersionUID = 3965776531575479619L;
 
-    private int userId;
+    private int id;
     private String login;
     private String password;
     private String firstName;
     private String lastName;
     private String email;
-    private UserRole role;
-//    private List<Order> orders;
-//    private boolean isLoggedOn;
+    private int roleId;
+    private boolean isBlocked;
 
     public User() {
     }
 
-    public int getUserId() {
-        return userId;
+    public int getId() {
+        return id;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getLogin() {
@@ -79,56 +75,46 @@ public class User implements Serializable {
         this.email = email;
     }
 
-    public UserRole getRole() {
-        return role;
+    public int getRoleId() {
+        return roleId;
     }
 
-    public void setRole(UserRole role) {
-        this.role = role;
+    public void setRoleId(int roleId) {
+        this.roleId = roleId;
     }
 
-//    public List<Order> getOrders() {
-//        return orders;
-//    }
-//
-//    public void setOrders(List<Order> orders) {
-//        this.orders = orders;
-//    }
+    public boolean isBlocked() {
+        return isBlocked;
+    }
 
-//    public boolean isLoggedOn() {
-//        return isLoggedOn;
-//    }
-//
-//    public void setLoggedOn(boolean loggedOn) {
-//        isLoggedOn = loggedOn;
-//    }
-
+    public void setBlocked(boolean blocked) {
+        isBlocked = blocked;
+    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return userId == user.userId && login.equals(user.login) && password.equals(user.password) && Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName) && Objects.equals(email, user.email) && role.equals(user.role);
+        return id == user.id && login.equals(user.login) && password.equals(user.password) && Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName) && Objects.equals(email, user.email) && roleId == user.roleId;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(userId, login, password, firstName, lastName, email, role);
+        return Objects.hash(id, login, password, firstName, lastName, email, roleId);
     }
 
     @Override
     public String toString() {
         return "User{" +
-                "userId=" + userId +
+                "id=" + id +
                 ", login='" + login + '\'' +
                 ", password='" + password + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
-                ", role=" + role +
-//                ", orderedToursCount=" + orders +
-//                ", isLoggedOn=" + isLoggedOn +
+                ", roleId=" + roleId +
+                ", isBlocked=" + isBlocked +
                 '}';
     }
 
@@ -145,8 +131,8 @@ public class User implements Serializable {
             user = new User();
         }
 
-        public Builder withUserId(int id) {
-            user.userId = id;
+        public Builder withId(int id) {
+            user.id = id;
             return this;
         }
 
@@ -175,15 +161,15 @@ public class User implements Serializable {
             return this;
         }
 
-        public Builder withRole(UserRole role) {
-            user.role = role;
+        public Builder withRoleId(int roleId) {
+            user.roleId = roleId;
             return this;
         }
 
-//        public Builder withOrders(List<Order> orders) {
-//            user.orders = orders;
-//            return this;
-//        }
+        public Builder withBlockedStatus(boolean isBlocked) {
+            user.isBlocked = isBlocked;
+            return this;
+        }
 
         public User build() {
             return user;

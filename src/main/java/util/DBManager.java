@@ -3,7 +3,6 @@ package util;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.*;
 import java.util.Properties;
@@ -55,7 +54,7 @@ public class DBManager {
             String user = properties.getProperty(DB_CONNECTION_USER);
             String password = properties.getProperty(DB_CONNECTION_PASSWORD);
             connection = DriverManager.getConnection(url, user, password);
-            LOG.info("Connection successfully created!: {}", connection);
+            LOG.trace("Connection successfully created!: {}", connection);
         } catch (SQLException e) {
             LOG.error("Failed to create connection!", e);
             throw new IllegalStateException("Failed to create connection!", e);

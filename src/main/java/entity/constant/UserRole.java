@@ -7,7 +7,7 @@ package entity.constant;
  * @author Anatolii Koliaka
  */
 public enum UserRole {
-    USER(1), REGISTERED_USER(2), MANAGER(3), ADMIN(4);
+    USER(1), MANAGER(2), ADMIN(3);
 
     private int index;
 

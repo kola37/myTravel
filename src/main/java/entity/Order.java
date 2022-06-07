@@ -3,6 +3,8 @@ package entity;
 import entity.constant.OrderStatus;
 
 import java.io.Serializable;
+import java.util.Date;
+import java.util.Objects;
 
 /**
  * Order entity with getters, setters and
@@ -15,53 +17,96 @@ public class Order implements Serializable {
     //use serialVersionUID for interoperability
     private static final long serialVersionUID = 4983601923663389209L;
 
-    private int orderId;
-    private User client;
-    private Tour tour;
-    private OrderStatus status;
+    private int id;
+    private int userId;
+    private int tourId;
+    private int statusId;
+    private Date orderDate;
+    private int discount;
+    private double totalPrice;
 
     public Order() {
     }
 
-    public int getOrderId() {
-        return orderId;
+    public int getId() {
+        return id;
     }
 
-    public void setOrderId(int orderId) {
-        this.orderId = orderId;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public User getClient() {
-        return client;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setClient(User client) {
-        this.client = client;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
-    public Tour getTour() {
-        return tour;
+    public int getTourId() {
+        return tourId;
     }
 
-    public void setTour(Tour tour) {
-        this.tour = tour;
+    public void setTourId(int tourId) {
+        this.tourId = tourId;
     }
 
-    public OrderStatus getStatus() {
-        return status;
+    public int getStatusId() {
+        return statusId;
     }
 
-    public void setStatus(OrderStatus status) {
-        this.status = status;
+    public void setStatusId(int statusId) {
+        this.statusId = statusId;
+    }
+
+    public Date getOrderDate() {
+        return orderDate;
+    }
+
+    public void setOrderDate(Date orderDate) {
+        this.orderDate = orderDate;
+    }
+
+    public int getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(int discount) {
+        this.discount = discount;
+    }
+
+    public double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Order order = (Order) o;
+        return id == order.id && userId == order.userId && tourId == order.tourId && statusId == order.statusId && discount == order.discount && Double.compare(order.totalPrice, totalPrice) == 0 && orderDate.equals(order.orderDate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, userId, tourId, statusId, orderDate, discount, totalPrice);
     }
 
     @Override
     public String toString() {
         return "Order{" +
-                "orderId=" + orderId +
-                ", client=" + client +
-                ", tour=" + tour +
-                ", status=" + status +
+                "id=" + id +
+                ", userId=" + userId +
+                ", tourId=" + tourId +
+                ", statusId=" + statusId +
+                ", orderDate=" + orderDate +
+                ", discount=" + discount +
+                ", totalPrice=" + totalPrice +
                 '}';
     }
 
@@ -78,18 +123,38 @@ public class Order implements Serializable {
             order = new Order();
         }
 
-        public Builder withClient(User client) {
-            order.client = client;
+        public Builder withId(int id) {
+            order.id = id;
             return this;
         }
 
-        public Builder withTour(Tour tour) {
-            order.tour = tour;
+        public Builder withUserId(int userId) {
+            order.userId = userId;
             return this;
         }
 
-        public Builder withOrderStatus(OrderStatus status) {
-            order.status = status;
+        public Builder withTourId(int tourId) {
+            order.tourId = tourId;
+            return this;
+        }
+
+        public Builder withOrderStatusId(int statusId) {
+            order.statusId = statusId;
+            return this;
+        }
+
+        public Builder withOrderDate(Date orderDate) {
+            order.orderDate = orderDate;
+            return this;
+        }
+
+        public Builder withDiscount(int discount) {
+            order.discount = discount;
+            return this;
+        }
+
+        public Builder withTotalPrice(double totalPrice) {
+            order.totalPrice = totalPrice;
             return this;
         }
 

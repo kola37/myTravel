@@ -1,7 +1,5 @@
 package entity;
 
-import entity.constant.HotelType;
-
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -16,19 +14,19 @@ public class Hotel implements Serializable {
     //use serialVersionUID for interoperability
     private static final long serialVersionUID = 3274783900451435009L;
 
-    private int hotelId;
+    private int id;
     private String name;
-    private HotelType type;
+    private int hotelTypeId;
 
     public Hotel() {
     }
 
-    public int getHotelId() {
-        return hotelId;
+    public int getId() {
+        return id;
     }
 
-    public void setHotelId(int hotelId) {
-        this.hotelId = hotelId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -39,12 +37,12 @@ public class Hotel implements Serializable {
         this.name = name;
     }
 
-    public HotelType getType() {
-        return type;
+    public int getHotelTypeId() {
+        return hotelTypeId;
     }
 
-    public void setType(HotelType type) {
-        this.type = type;
+    public void setHotelTypeId(int hotelTypeId) {
+        this.hotelTypeId = hotelTypeId;
     }
 
     @Override
@@ -52,20 +50,20 @@ public class Hotel implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Hotel hotel = (Hotel) o;
-        return hotelId == hotel.hotelId && Objects.equals(name, hotel.name) && type == hotel.type;
+        return id == hotel.id && Objects.equals(name, hotel.name) && hotelTypeId == hotel.hotelTypeId;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(hotelId, name, type);
+        return Objects.hash(id, name, hotelTypeId);
     }
 
     @Override
     public String toString() {
         return "Hotel{" +
-                "hotelId=" + hotelId +
+                "id=" + id +
                 ", name='" + name + '\'' +
-                ", type=" + type +
+                ", hotelTypeId=" + hotelTypeId +
                 '}';
     }
 
@@ -88,8 +86,8 @@ public class Hotel implements Serializable {
             return this;
         }
 
-        public Builder withHotelType(HotelType type) {
-            hotel.type = type;
+        public Builder withHotelTypeId(int hotelTypeId) {
+            hotel.hotelTypeId = hotelTypeId;
             return this;
         }
 

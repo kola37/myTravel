@@ -28,4 +28,8 @@ public enum OrderStatus {
         return OrderStatus.values()[index - 1];
     }
 
+    public String getName() {
+        return name().toLowerCase();
+    }
+
 }

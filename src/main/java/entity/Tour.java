@@ -1,7 +1,5 @@
 package entity;
 
-import entity.constant.TourType;
-
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -19,27 +17,28 @@ public class Tour implements Serializable {
     private static final String YES = "yes";
     private static final String NO = "no";
 
-    private int tourId;
+    private int id;
     private String name;
     private String description;
     private String image;
     private double price;
-    private double discount;
-    private double maxDiscount;
-    private TourType type;
-    private int person;
-    private Hotel hotel;
+//    private double discount;
+//    private double maxDiscount;
+    private int tourTypeId;
+    private int numOfPersons;
+    private int hotelId;
+    private int promotionId;
     private boolean isHot;
 
     public Tour() {
     }
 
-    public int getTourId() {
-        return tourId;
+    public int getId() {
+        return id;
     }
 
-    public void setTourId(int tourId) {
-        this.tourId = tourId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -74,44 +73,52 @@ public class Tour implements Serializable {
         this.price = price;
     }
 
-    public double getDiscount() {
-        return discount;
+//    public double getDiscount() {
+//        return discount;
+//    }
+//
+//    public void setDiscount(double discount) {
+//        this.discount = discount;
+//    }
+//
+//    public double getMaxDiscount() {
+//        return maxDiscount;
+//    }
+//
+//    public void setMaxDiscount(double maxDiscount) {
+//        this.maxDiscount = maxDiscount;
+//    }
+
+    public int getTourTypeId() {
+        return tourTypeId;
     }
 
-    public void setDiscount(double discount) {
-        this.discount = discount;
+    public void setTourTypeId(int tourTypeId) {
+        this.id = tourTypeId;
     }
 
-    public double getMaxDiscount() {
-        return maxDiscount;
+    public int getNumOfPersons() {
+        return numOfPersons;
     }
 
-    public void setMaxDiscount(double maxDiscount) {
-        this.maxDiscount = maxDiscount;
+    public void setNumOfPersons(int numOfPersons) {
+        this.numOfPersons = numOfPersons;
     }
 
-    public TourType getType() {
-        return type;
+    public int getHotelId() {
+        return hotelId;
     }
 
-    public void setType(TourType type) {
-        this.type = type;
+    public void setHotelId(int hotelId) {
+        this.hotelId = hotelId;
     }
 
-    public int getPerson() {
-        return person;
+    public int getPromotionId() {
+        return promotionId;
     }
 
-    public void setPerson(int person) {
-        this.person = person;
-    }
-
-    public Hotel getHotel() {
-        return hotel;
-    }
-
-    public void setHotel(Hotel hotel) {
-        this.hotel = hotel;
+    public void setPromotionId(int promotionId) {
+        this.promotionId = promotionId;
     }
 
     public boolean isHot() {
@@ -127,26 +134,28 @@ public class Tour implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Tour tour = (Tour) o;
-        return tourId == tour.tourId && Double.compare(tour.price, price) == 0 && Double.compare(tour.discount, discount) == 0 && Double.compare(tour.maxDiscount, maxDiscount) == 0 && person == tour.person && isHot == tour.isHot && Objects.equals(name, tour.name) && Objects.equals(description, tour.description) && Objects.equals(image, tour.image) && type == tour.type && Objects.equals(hotel, tour.hotel);
+        return id == tour.id && Double.compare(tour.price, price) == 0 && tourTypeId == tour.tourTypeId && numOfPersons == tour.numOfPersons && hotelId == tour.hotelId
+                && promotionId == tour.promotionId && isHot == tour.isHot && name.equals(tour.name) && description.equals(tour.description) && Objects.equals(image, tour.image);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(tourId, name, description, image, price, discount, maxDiscount, type, person, hotel, isHot);
+        return Objects.hash(id, name, description, image, price, tourTypeId, numOfPersons, hotelId, promotionId, isHot);
     }
 
     @Override
     public String toString() {
         return "Tour{" +
-                "tourId=" + tourId +
+                "id=" + id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", price=" + price +
-                ", discount=" + discount +
-                ", maxDiscount=" + maxDiscount +
-                ", type=" + type +
-                ", person=" + person +
-                ", hotel=" + hotel +
+//                ", discount=" + discount +
+//                ", maxDiscount=" + maxDiscount +
+                ", tourTypeId=" + tourTypeId +
+                ", person=" + numOfPersons +
+                ", hotelId=" + hotelId +
+                ", promotionId=" + promotionId +
                 ", isHot='" + (isHot ? YES : NO) + '\'' +
                 '}';
     }
@@ -162,6 +171,11 @@ public class Tour implements Serializable {
 
         public Builder() {
             tour = new Tour();
+        }
+
+        public Builder withId(int id) {
+            tour.id = id;
+            return this;
         }
 
         public Builder withName(String name){
@@ -184,28 +198,33 @@ public class Tour implements Serializable {
             return this;
         }
 
-        public Builder withDiscount(int discount){
-            tour.discount = discount;
+//        public Builder withDiscount(int discount){
+//            tour.discount = discount;
+//            return this;
+//        }
+//
+//        public Builder withMaxDiscount(int maxDiscount){
+//            tour.maxDiscount = maxDiscount;
+//            return this;
+//        }
+
+        public Builder withTourTypeId(int tourTypeId){
+            tour.tourTypeId = tourTypeId;
             return this;
         }
 
-        public Builder withMaxDiscount(int maxDiscount){
-            tour.maxDiscount = maxDiscount;
+        public Builder withNumOfPersons(int person){
+            tour.numOfPersons = person;
             return this;
         }
 
-        public Builder withType(TourType type){
-            tour.type = type;
+        public Builder withHotelId(int hotelId){
+            tour.hotelId = hotelId;
             return this;
         }
 
-        public Builder withPerson(int person){
-            tour.person = person;
-            return this;
-        }
-
-        public Builder withHotel(Hotel hotel){
-            tour.hotel = hotel;
+        public Builder withPromotionId(int promotionId){
+            tour.promotionId = promotionId;
             return this;
         }
 
