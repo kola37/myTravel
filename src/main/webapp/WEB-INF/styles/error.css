@@ -1,0 +1,22 @@
+/***************************************************************
+Style for the ERROR page
+***************************************************************/
+
+body{
+    margin-top: 100px;
+
+}
+
+h1 {
+    color: red;
+    text-align: center;
+}
+
+hr {
+    alignment: center;
+    /*width: 80%;*/
+}
+
+h3 {
+    text-align: center;
+}

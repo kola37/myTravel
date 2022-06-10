@@ -15,8 +15,8 @@ public class LoginCommand implements Command {
 
     private static final Logger LOG = LogManager.getLogger(LoginCommand.class);
 
-    private static final String ERROR_PAGE = "WEB-INF/view/error.jsp";
-    private static final String LOGIN_PAGE = "WEB-INF/view/login.jsp";
+    private static final String ERROR_PAGE = "WEB-INF/views/error.jsp";
+    private static final String LOGIN_PAGE = "WEB-INF/views/login.jsp";
     private static final String PARAMETER_LOGIN = "login";
     private static final String PARAMETER_PASSWORD = "password";
     private static final String PARAMETER_ROLE = "role";

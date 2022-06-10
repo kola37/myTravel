@@ -46,7 +46,7 @@ public class Main2 extends HttpServlet {
         req.setAttribute("message", "THIS IS PROSTO MESSAGE!");
         LOG.info(req.getAttribute("errorMessage"));
 
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/view/error.jsp");
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/views/error.jsp");
 
         dispatcher.forward(req, resp);
 
@@ -57,7 +57,7 @@ public class Main2 extends HttpServlet {
 //        req.setAttribute("errorMessage", "THIS IS MY ERROR MESSAGE! HUUUURRRRAAA!!!");
 //        LOG.info(req.getAttribute("errorMessage"));
 
-//        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/view/error.jsp");
+//        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/view/error123.jsp");
 //
 //        dispatcher.forward(req, resp);
 //        doGet(req, resp);

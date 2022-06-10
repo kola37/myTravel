@@ -1,0 +1,109 @@
+
+/***************************************************************
+Style for the HEADER fragment
+***************************************************************/
+body{
+    padding: 0;
+    margin: 0;
+    overflow-x: hidden;
+    /*set background image*/
+    /*background-color: azure ;*/
+    /*background-image: url(images/background-img.png);*/
+    /*background-repeat: no-repeat;*/
+    /*background-size: cover;*/
+    /*background-position: center 100%;*/
+}
+
+
+header{
+    background-color: honeydew;
+    text-align: center;
+    padding: 20px;
+    box-shadow: 0 0 3px darkcyan;
+}
+
+header ul{
+    display: flex;
+    justify-content: center;
+}
+
+header ul li{
+    position: relative;
+    display: inline;
+    padding-right: 45px;
+}
+
+
+header ul li a{
+    display: inline-block;
+    color: darkslategrey;
+    text-decoration: none;
+    /*font-size: large;*/
+    text-transform: uppercase;
+    padding: 12px;
+}
+
+header li a:hover{
+    color: green;
+}
+
+/*Account button*/
+.account{
+    float: right;
+    position:center;
+    margin-top: -23px;
+    margin-right: 20px;
+}
+
+.account:hover{
+   background-color: green;
+    border-radius: 50%;
+}
+
+.logo-img{
+    float: left;
+    position: center;
+    margin-top: -23px;
+    margin-left: -10px;
+}
+
+.active{
+    color: darkgreen;
+}
+
+/* Links inside the dropdown */
+/*.dropdown-content a {*/
+/*    color: black;*/
+/*    padding: 12px 16px;*/
+/*    text-decoration: none;*/
+/*    display: block;*/
+/*}*/
+header li ul{
+    /*position: absolute;*/
+    /*min-width: 150px;*/
+    /*display: none;*/
+
+    position: relative;
+    /*display: inline-block;*/
+
+    display: none;
+}
+
+header li:hover ul{
+    display: block;
+}
+
+header li ul li{
+    position: relative;
+    display: block;
+    /*border: 1px solid darkslategray;*/
+    /*display: none;*/
+    /*position: absolute;*/
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    min-width: 160px;
+}
+
+header li ul li a{
+    display: block;
+}

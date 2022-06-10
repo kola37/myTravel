@@ -16,7 +16,7 @@ public class DefaultCommand implements Command {
 
     private static final Logger LOG = LogManager.getLogger(LoginCommand.class);
 
-    private static final String ERROR_PAGE = "/WEB-INF/view/error.jsp";
+    private static final String ERROR_PAGE = "/WEB-INF/views/error.jsp";
 
 
     @Override

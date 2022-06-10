@@ -25,8 +25,8 @@ public class Controller extends HttpServlet {
 
     private static final Logger LOG = LogManager.getLogger(Controller.class);
 
-    private static final String ERROR_PAGE = "/WEB-INF/view/error.jsp";
-    private static final String HOME_PAGE = "/WEB-INF/view/home.jsp";
+    private static final String ERROR_PAGE = "/WEB-INF/views/error.jsp";
+    private static final String HOME_PAGE = "/WEB-INF/views/home.jsp";
     private static final String COMMAND = "command";
 
     @Override
