@@ -1,171 +1,117 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%--
+  Created by IntelliJ IDEA.
+  User: Anatolii Koliaka
+  Date: 09.06.2022
+  Time: 13:38
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<head>
-    <jsp:include page="headerLink.jspf"/>
-</head>
+<html>
 
+<style>
+    <%@include file="/WEB-INF/styles/header.css" %>
+</style>
+
+
+<body>
 
 <header>
-    <fmt:setLocale value="${sessionScope.language}"/>
-    <fmt:setBundle basename="localization.language" var="loc"/>
-    <fmt:setBundle basename="information" var="info"/>
+    <%--    Set user attributes--%>
+    <c:set var="user" value="u" scope="session"/>
+    <c:set var="userRole" value="user" scope="session"/>
 
-    <form action=${pageContext.request.contextPath}/online-shop method="get">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary" style="font-size: 20px">
+    <img src="${pageContext.request.contextPath}/images/travel-icon.png" alt="Logo" class="logo-img" width="108"
+         height="80">
+    <a href="#" class="logo">My travel</a>
+    <div class="navigation">
+        <ul class="menu">
+            <li class="menu-item"><a href="${pageContext.request.contextPath}/my-travel?command=home">Home</a></li>
+            <li class="menu-item">
+                <a class="sub-btn" href="${pageContext.request.contextPath}/my-travel?command=searchTour">Search
+                    tour</a>
+                <ul class="sub-menu">
+                    <li class="sub-item"><a href="#">Item 1</a></li>
+                    <li class="sub-item"><a href="#">Item 2</a></li>
+                    <li class="sub-item"><a href="#">Item 3</a></li>
+                </ul>
+            </li>
 
-            <div class="collapse navbar-collapse" id="navbarColor01">
-                <ul class="navbar-nav mr-auto">
-                    <a class="navbar-brand" style="font-size: 22px">
-                        <fmt:message bundle="${info}" key="information.name"/>
-                    </a>
-                    <li class="nav-item">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/online-shop?command=main">
-                            <fmt:message bundle="${loc}" key="language.home"/>
-                        </a>
-                    </li>
-
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
-                           aria-haspopup="true" aria-expanded="false">
-                            <fmt:message bundle="${loc}" key="language.catalog"/>
-                        </a>
-                        <div class="dropdown-menu">
-                            <c:forEach var="category" items="${categories}">
-                                <a class="dropdown-item" href="${pageContext.request.contextPath}/online-shop?command=catalog&categoryId=${category.id}">
-                                    <c:out value="${category.categoryName}"/></a>
-                            </c:forEach>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link"
-                           href="${pageContext.request.contextPath}/online-shop?command=promotions">
-                            <fmt:message bundle="${loc}" key="language.promotions"/>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/online-shop?command=contacts">
-                            <fmt:message bundle="${loc}" key="language.contacts"/>
-                        </a>
-                    </li>
-                    <c:if test="${role.name == 'admin'}">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"
-                               role="button"
-                               aria-haspopup="true" aria-expanded="false">
-                                <fmt:message bundle="${loc}" key="language.control"/>
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="userDropdown">
-                                <a class="dropdown-item"
-                                   href="${pageContext.request.contextPath}/online-shop?command=addProduct"><fmt:message bundle="${loc}" key="language.addProduct"/></a>
-                                <a class="dropdown-item"
-                                   href="${pageContext.request.contextPath}/online-shop?command=addPromotion"><fmt:message bundle="${loc}" key="language.addPromotion"/></a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item"
-                                   href="${pageContext.request.contextPath}/online-shop?command=viewOrders"><fmt:message bundle="${loc}" key="language.viewOrders"/></a>
-                            </div>
+      <%--  *** ONLY for users with role "admin" and "manager" *** --%>
+            <c:if test="${not empty user}">
+                <c:choose>
+                    <c:when test="${userRole == 'manager'}">
+                        <li class="menu-item"><a class="sub-btn">Manager tools</a>
+                        <ul class="sub-menu">
+                            <li class="sub-item"><a
+                                    href="${pageContext.request.contextPath}/my-travel?command=manageTour">Manage
+                                tours</a></li>
+                            <li class="sub-item"><a
+                                    href="${pageContext.request.contextPath}/my-travel?command=manageOrder">Manage
+                                orders</a></li>
+                            <li class="sub-item"><a
+                                    href="${pageContext.request.contextPath}/my-travel?command=manageDiscount">Manage
+                                discount</a></li>
+                        </ul>
                         </li>
-                    </c:if>
+                    </c:when>
+                    <c:when test="${userRole == 'admin'}">
+                        <li class="menu-item"><a class="sub-btn">Admin tools</a>
+                            <ul class="sub-menu">
+                                <li class="sub-item"><a
+                                        href="${pageContext.request.contextPath}/my-travel?command=tourEditor">Tours
+                                    editor</a></li>
+                                <li class="sub-item"><a
+                                        href="${pageContext.request.contextPath}/my-travel?command=manageOrder">Orders
+                                    editor</a></li>
+                                <li class="sub-item"><a
+                                        href="${pageContext.request.contextPath}/my-travel?command=userEditor">Users
+                                    editor</a></li>
+                            </ul>
+                        </li>
+                    </c:when>
+                </c:choose>
+            </c:if>
+
+            <li class="menu-item">
+                <a href="#">Language</a>
+                <img src="${pageContext.request.contextPath}/images/world-icon.png" width="18px" height="18px">
+                <ul class="sub-menu">
+                    <li class="sub-item"><a href="#">english</a></li>
+                    <li class="sub-item"><a href="#">українська</a></li>
                 </ul>
-                <ul class="navbar-nav">
+            </li>
+            <li class="menu-item"><img src="${pageContext.request.contextPath}/images/account-icon.png" alt="Account"
+                                       width="40"
+                                       height="40" class="account-btn">
+                <ul class="sub-menu">
+
                     <c:choose>
-                        <c:when test="${sessionScope.language=='en'}">
-
-                            <li class="nav-item">
-                                <a class="nav-link active"
-                                   href="${pageContext.request.contextPath}/online-shop?${pageContext.request.queryString}&language=en">
-                                    EN
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="navbar-brand">
-                                    <img src="static/images/flags/EN.png" width="30" height="20"/>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link"
-                                   href="${pageContext.request.contextPath}/online-shop?${pageContext.request.queryString}&language=ru">
-                                    RU
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="navbar-brand">
-                                    <img src="static/images/flags/RU.png" width="30" height="20"/>
-                                </a>
+                        <c:when test="${not empty user}">
+                            <c:if test="${userRole == 'user'}">
+                                <li class="sub-item"><a href="${pageContext.request.contextPath}/my-travel?command=userCabinet">My cabinet</a>
+                            </c:if>
+                            <c:if test="${userRole == 'manager'}">
+                                <li class="sub-item"><a href="${pageContext.request.contextPath}/my-travel?command=managerProfile">My profile</a>
+                            </c:if>
+                            <li class="sub-item"><a href="${pageContext.request.contextPath}/my-travel?command=logout">Logout</a>
                             </li>
                         </c:when>
-                        <c:when test="${sessionScope.language=='ru'}">
-
-                            <li class="nav-item">
-                                <a class="nav-link"
-                                   href="${pageContext.request.contextPath}/online-shop?${pageContext.request.queryString}&language=en">
-                                    EN
-                                </a>
-
+                        <c:otherwise>
+                            <li class="sub-item"><a href="${pageContext.request.contextPath}/my-travel?command=login">Login</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="navbar-brand">
-                                    <img src="static/images/flags/EN.png" width="30" height="20"/>
-                                </a>
+                            <li class="sub-item"><a
+                                    href="${pageContext.request.contextPath}/my-travel?command=register">Register</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link active"
-                                   href="${pageContext.request.contextPath}/online-shop?${pageContext.request.queryString}&language=ru">
-                                    RU
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="navbar-brand">
-                                    <img src="static/images/flags/RU.png" width="30" height="20"/>
-                                </a>
-                            </li>
-                        </c:when>
+                        </c:otherwise>
                     </c:choose>
-                    <c:choose>
-                        <c:when test="${sessionScope.user == null}">
-                            <li class="nav-item">
-                                <button class="btn btn-secondary my-2 my-sm-0" type="submit" name="command"
-                                        value="logIn">
-                                    <fmt:message bundle="${loc}" key="language.logIn"/>
-                                </button>
-                            </li>
-                        </c:when>
-                        <c:when test="${sessionScope.user != null}">
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" id="userDropdown" data-bs-toggle="dropdown" href="#"
-                                   role="button"
-                                   aria-haspopup="true" aria-expanded="false">
-                                        ${sessionScope.user.email}
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="userDropdown">
-                                    <a class="dropdown-item"
-                                       href="${pageContext.request.contextPath}/online-shop?command=profile">
-                                        <fmt:message bundle="${loc}" key="language.profile"/></a>
-                                    <a class="dropdown-item" href="${pageContext.request.contextPath}/online-shop?command=myOrders"><fmt:message bundle="${loc}"
-                                                                                   key="language.myOrders"/></a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item"
-                                       href="${pageContext.request.contextPath}/online-shop?command=logOut">
-                                        <fmt:message bundle="${loc}" key="language.logOut"/></a>
-                                </div>
-                            </li>
-                            <li class=" nav-item">
-                                <a class="nav-link"
-                                   href="${pageContext.request.contextPath}/online-shop?command=basket">
-                                    <button type="button" class="btn btn-primary">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-cart3" viewBox="0 0 16 16">
-                                            <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"></path>
-                                        </svg>
-                                    </button>
-                                </a>
-                            </li>
-                        </c:when>
-                    </c:choose>
+
                 </ul>
-            </div>
-        </nav>
-    </form>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-            crossorigin="anonymous"></script>
+            </li>
+        </ul>
+    </div>
+
 </header>
+
+</body>
+</html>

@@ -4,7 +4,6 @@
 <html>
 <head>
     <title>Log In | Online-shop</title>
-    <jsp:include page="fragment/headerLink.jspf"/>
 </head>
 <body>
 <fmt:setLocale value="${sessionScope.language}"/>

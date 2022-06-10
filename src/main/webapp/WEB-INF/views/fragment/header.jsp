@@ -28,12 +28,43 @@
         <ul class="menu">
             <li class="menu-item"><a href="${pageContext.request.contextPath}/my-travel?command=home">Home</a></li>
             <li class="menu-item">
-                <a class="sub-btn" href="${pageContext.request.contextPath}/my-travel?command=searchTour">Search
-                    tour</a>
+                <a class="sub-btn">Search tour</a>
                 <ul class="sub-menu">
-                    <li class="sub-item"><a href="#">Item 1</a></li>
-                    <li class="sub-item"><a href="#">Item 2</a></li>
-                    <li class="sub-item"><a href="#">Item 3</a></li>
+                    <li class="sub-item more">
+                        <a class="more-btn">Tour type</a>
+                        <ul class="more-menu">
+                            <li class="more-item"><a href="${pageContext.request.contextPath}/my-travel?command=tourType">Holidays</a></li>
+                            <li class="more-item"><a href="${pageContext.request.contextPath}/my-travel?command=tourType">Excursion</a></li>
+                            <li class="more-item"><a href="${pageContext.request.contextPath}/my-travel?command=tourType">Shopping</a></li>
+                        </ul>
+                    </li>
+                    <li class="sub-item more">
+                        <a class="more-btn">Tour price</a>
+                        <ul class="more-menu">
+                            <li class="more-item"><a href="${pageContext.request.contextPath}/my-travel?command=tourPrice">Expensive first</a></li>
+                            <li class="more-item"><a href="${pageContext.request.contextPath}/my-travel?command=tourPrice">Cheaper first</a></li>
+                        </ul>
+                    </li>
+                    <li class="sub-item more">
+                        <a class="more-btn">Person</a>
+                        <ul class="more-menu">
+                            <li class="more-item"><a href="${pageContext.request.contextPath}/my-travel?command=tourPersonNum">For one</a></li>
+                            <li class="more-item"><a href="${pageContext.request.contextPath}/my-travel?command=tourPersonNum">For two</a></li>
+                            <li class="more-item"><a href="${pageContext.request.contextPath}/my-travel?command=tourPersonNum">For family (3-5)</a></li>
+                            <li class="more-item"><a href="${pageContext.request.contextPath}/my-travel?command=tourPersonNum">For group (6< )</a></li>
+                        </ul>
+                    </li>
+                    <li class="sub-item more">
+                        <a class="more-btn">Hotel type</a>
+                        <ul class="more-menu">
+                            <li class="more-item"><a href="${pageContext.request.contextPath}/my-travel?command=hotelType">Apartment</a></li>
+                            <li class="more-item"><a href="${pageContext.request.contextPath}/my-travel?command=hotelType">Hostel</a></li>
+                            <li class="more-item"><a href="${pageContext.request.contextPath}/my-travel?command=hotelType">Tourist hotel</a></li>
+                            <li class="more-item"><a href="${pageContext.request.contextPath}/my-travel?command=hotelType">Comfort hotel</a></li>
+                            <li class="more-item"><a href="${pageContext.request.contextPath}/my-travel?command=hotelType">Premium hotel</a></li>
+                            <li class="more-item"><a href="${pageContext.request.contextPath}/my-travel?command=hotelType">Boutique hotel</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </li>
 
@@ -85,7 +116,6 @@
                                        width="40"
                                        height="40" class="account-btn">
                 <ul class="sub-menu">
-
                     <c:choose>
                         <c:when test="${not empty user}">
                             <c:if test="${userRole == 'user'}">
@@ -105,7 +135,6 @@
                             </li>
                         </c:otherwise>
                     </c:choose>
-
                 </ul>
             </li>
         </ul>

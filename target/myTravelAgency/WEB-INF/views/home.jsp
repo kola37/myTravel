@@ -9,7 +9,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <html>
-<%@ include file="/WEB-INF/views/fragment/header3.jsp" %>
+<%@ include file="/WEB-INF/views/fragment/header.jsp" %>
 
 <style>
 <%@ include file="/WEB-INF/styles/style.css" %>

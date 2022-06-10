@@ -1,109 +1,113 @@
-
 /***************************************************************
 Style for the HEADER fragment
 ***************************************************************/
-body{
+
+*{
     padding: 0;
     margin: 0;
-    overflow-x: hidden;
-    /*set background image*/
-    /*background-color: azure ;*/
-    /*background-image: url(images/background-img.png);*/
-    /*background-repeat: no-repeat;*/
-    /*background-size: cover;*/
-    /*background-position: center 100%;*/
+    /*overflow-x: hidden;*/
+    box-sizing: border-box;
+    /*font-family: Trattatello, sans-serif;*/
 }
-
 
 header{
+    z-index: 900;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: Trattatello, sans-serif;
     background-color: honeydew;
-    text-align: center;
-    padding: 20px;
-    box-shadow: 0 0 3px darkcyan;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    padding: 0 70px;
 }
 
-header ul{
+header .logo-img{
+   margin-left: -20px;
+}
+
+header .logo{
+    font-size: 32px;
+    text-transform: uppercase;
+    color: darkgreen;
+    text-decoration: none;
+    /*---   --*/
+    position: fixed;
+    margin-left: 100px;
+}
+
+header .navigation{
+    position: relative;
+    /*inline-size: 75px;*/
+}
+
+header .navigation .menu{
+    position: relative;
+    top: 10px;
     display: flex;
     justify-content: center;
+    list-style: none;
+    user-select: none;
+
 }
 
-header ul li{
-    position: relative;
-    display: inline;
-    padding-right: 45px;
-}
-
-
-header ul li a{
-    display: inline-block;
+.menu-item > a{
     color: darkslategrey;
     text-decoration: none;
-    /*font-size: large;*/
     text-transform: uppercase;
-    padding: 12px;
+    padding:12px;
 }
 
-header li a:hover{
+.menu-item a:hover{
     color: green;
+    transition: 0.3s;
 }
 
-/*Account button*/
-.account{
-    float: right;
-    position:center;
-    margin-top: -23px;
-    margin-right: 20px;
+.menu-item .account-btn{
+     margin-top: -10px;
+     margin-left: 40px;
 }
 
-.account:hover{
-   background-color: green;
-    border-radius: 50%;
+.menu-item .sub-menu{
+    position: absolute;
+    background-color: honeydew;
+    top: 52px;
+    line-height: 20px;
+    list-style: none;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    pointer-events: none;
+    transform: translateY(20px);
+    opacity: 0;
+    transition: 0.3s;
+    transition-property: transform, opacity;
 }
 
-.logo-img{
-    float: left;
-    position: center;
-    margin-top: -23px;
-    margin-left: -10px;
+.menu-item:hover .sub-menu{
+    pointer-events: all;
+    transform: translateY(0);
+    opacity: 1;
 }
 
-.active{
-    color: darkgreen;
-}
-
-/* Links inside the dropdown */
-/*.dropdown-content a {*/
-/*    color: black;*/
-/*    padding: 12px 16px;*/
-/*    text-decoration: none;*/
-/*    display: block;*/
-/*}*/
-header li ul{
-    /*position: absolute;*/
-    /*min-width: 150px;*/
-    /*display: none;*/
-
+.menu-item .sub-menu .sub-item{
     position: relative;
-    /*display: inline-block;*/
-
-    display: none;
+    padding: 7px 0;
+    cursor: pointer;
+    min-width: 140px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    text-align: center;
 }
 
-header li:hover ul{
-    display: block;
+.menu-item .sub-menu .sub-item a{
+    color: darkslategrey;
+    text-decoration: none;
+    text-transform: uppercase;
+    padding: 12px 20px;
 }
 
-header li ul li{
-    position: relative;
-    display: block;
-    /*border: 1px solid darkslategray;*/
-    /*display: none;*/
-    /*position: absolute;*/
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-    min-width: 160px;
-}
-
-header li ul li a{
-    display: block;
+.menu-item .sub-menu .sub-item a:hover {
+    color: green;
+    transition: 0.3s;
 }
