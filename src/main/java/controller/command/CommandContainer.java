@@ -1,7 +1,9 @@
 package controller.command;
 
 import controller.command.impl.DefaultCommand;
+import controller.command.impl.transitition.GoToHomeCommand;
 import controller.command.impl.LoginCommand;
+import controller.command.impl.transitition.GoToLoginCommand;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -20,7 +22,8 @@ public class CommandContainer {
     private static Map<String, Command> commands = new TreeMap<String, Command>();
 
     static {
-//        commands.put(CommandName.HOME_COMMAND, new GoToHomeCommand());
+        commands.put(CommandName.HOME_PAGE_COMMAND, new GoToHomeCommand());
+        commands.put(CommandName.LOGIN_PAGE_COMMAND, new GoToLoginCommand());
         commands.put(CommandName.LOGIN_COMMAND, new LoginCommand());
         commands.put(CommandName.DEFAULT_COMMAND, new DefaultCommand());
     }

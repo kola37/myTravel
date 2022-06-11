@@ -7,19 +7,25 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <html>
 
 <style>
     <%@include file="/WEB-INF/styles/header.css" %>
 </style>
 
+<head>
+    <title>
+        ${title}
+    </title>
+</head>
 
 <body>
 
 <header>
     <%--    Set user attributes--%>
-    <c:set var="user" value="u" scope="session"/>
-    <c:set var="userRole" value="user" scope="session"/>
+    <c:set var="user" value="${user}" scope="session"/>
+    <c:set var="userRole" value="${userRole}" scope="session"/>
 
     <img src="${pageContext.request.contextPath}/images/travel-icon.png" alt="Logo" class="logo-img" width="108"
          height="80">
@@ -128,7 +134,7 @@
                             </li>
                         </c:when>
                         <c:otherwise>
-                            <li class="sub-item"><a href="${pageContext.request.contextPath}/my-travel?command=login">Login</a>
+                            <li class="sub-item"><a href="${pageContext.request.contextPath}/my-travel?command=loginPage">Login</a>
                             </li>
                             <li class="sub-item"><a
                                     href="${pageContext.request.contextPath}/my-travel?command=register">Register</a>

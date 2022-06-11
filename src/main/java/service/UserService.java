@@ -18,11 +18,10 @@ public interface UserService extends Service<User>{
      * Method to authenticate user
      *
      * @param login    user's email
-     * @param password user's password
      * @return optional of User
      * @throws ServiceException
      */
-    Optional<User> login(String login, String password) throws ServiceException;
+    Optional<User> login(String login) throws ServiceException;
 
     /**
      * Method to register new user

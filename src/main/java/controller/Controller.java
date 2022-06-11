@@ -3,12 +3,13 @@ package controller;
 
 import controller.command.Command;
 import controller.command.CommandContainer;
+import controller.command.CommandResult;
+import controller.command.CommandResultType;
 import exception.CommandException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,9 +26,8 @@ public class Controller extends HttpServlet {
 
     private static final Logger LOG = LogManager.getLogger(Controller.class);
 
-    private static final String ERROR_PAGE = "/WEB-INF/views/error.jsp";
-    private static final String HOME_PAGE = "/WEB-INF/views/home.jsp";
     private static final String COMMAND = "command";
+
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -47,21 +47,42 @@ public class Controller extends HttpServlet {
         Command command = CommandContainer.getCommand(name);
         LOG.trace("The command is " + command);
 
-        String result = ERROR_PAGE;
-        try {
-//            if (name == null || "".equals(name)) {
-//                getServletContext().getRequestDispatcher(result).forward(req,resp);
-//            }else {
-                result = command.execute(req, resp);
+//        String result = PagePath.PAGE_ERROR;
+//        try {
+//            result = command.execute(req, resp);
+//            if (req.getMethod().equals(RequestMethodType.GET.name())){
+//                req.getRequestDispatcher(result).forward(req, resp);
+//                LOG.trace("Forward to address " + result);
+//            } else if (req.getMethod().equals(RequestMethodType.POST.name())) {
+//                resp.sendRedirect(result);
+////                resp.sendRedirect(req.getContextPath() + result);
+//                LOG.trace("Redirect to address " + result);
 //            }
+//        } catch (CommandException e) {
+//            req.setAttribute("errorMessage", e.getMessage());
+//        }
+
+        CommandResult result = new CommandResult(PagePath.PAGE_ERROR, CommandResultType.FORWARD);
+
+        try{
+            result = command.execute(req,resp);
+            dispatch(result, req, resp);
         } catch (CommandException e) {
             req.setAttribute("errorMessage", e.getMessage());
+            dispatch(result,req,resp);
         }
-        LOG.trace("Forward to address " + result);
-        LOG.debug("Controller finished");
 
-        req.getRequestDispatcher(result).forward(req, resp);
-//        getServletContext().getRequestDispatcher(result).forward(req,resp);
+        LOG.debug("Controller finished");
+    }
+
+    private void dispatch(CommandResult result, HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+        if (result.isRedirect()) {
+            resp.sendRedirect(req.getContextPath() + result.getPage());
+            LOG.trace("Redirected to: " + req.getContextPath() + result.getPage());
+        } else {
+            req.getRequestDispatcher(result.getPage()).forward(req, resp);
+            LOG.trace("Forward to: " + req.getContextPath() + result.getPage());
+        }
     }
 
 }

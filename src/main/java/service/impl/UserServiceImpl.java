@@ -27,8 +27,17 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public Optional<User> login(String login, String password) throws ServiceException {
-        return Optional.empty();
+    public Optional<User> login(String login) throws ServiceException {
+        Connection con = DBUtils.getInstance().getConnection();
+        try {
+            UserDAO userDAO = DAOFactory.getInstance().getUserDAO();
+            return userDAO.findByLogin(con, login);
+        } catch (DAOException e) {
+            LOG.error("Unable to login user!", e);
+            throw new ServiceException("Unable to login user", e);
+        }finally {
+            DBUtils.close(con);
+        }
     }
 
     @Override
@@ -57,6 +66,8 @@ public class UserServiceImpl implements UserService {
             DBUtils.close(con);
         }
     }
+
+
 
     private User createUser(String login, String password, String firstName, String lastName, String email, UserRole role){
         return new User.Builder()

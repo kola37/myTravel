@@ -1,0 +1,112 @@
+/***************************************************************
+Style for the LOGIN page
+***************************************************************/
+body {
+    margin-top: 90px;
+    background-color: honeydew;
+}
+/*--------------------
+Form
+--------------------*/
+
+
+.form fieldset {
+    border: none;
+    padding: 0;
+    margin: 20px 0;
+    position: relative;
+}
+
+.form fieldset input {
+    width: 100%;
+    height: 48px;
+    color: hsl(0, 0, 20);
+    padding: 15px 40px 15px 15px;
+    border-radius: 5px;
+    font-size: 14px;
+    outline: none!important;
+    border: 1px solid hsla(0, 0, 0, 0.3);
+    box-shadow: inset 0 1px 4px hsla(0, 0, 0, 0.2);
+    vertical-align: top;
+}
+
+
+
+.form button {
+    width: 100%;
+    outline: none!important;
+    background: linear-gradient(-5deg, hsl(86, 61%, 44%), hsl(86, 65%, 54%));
+    border: none;
+    text-transform: uppercase;
+    font-weight: bold;
+    /*box-shadow: 0 3px 0px rgba(86, 21%, 44%, 0.2);*/
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    text-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+}
+
+
+
+
+/*--------------------
+Signup
+--------------------*/
+.signup {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    width: 800px;
+    /*background: hsl(0, 0, 100);*/
+    border-radius: 10px;
+    /*box-shadow: 0 3px 25px hsla(0, 0, 0, 0.2);*/
+    overflow: hidden;
+    display: flex;
+}
+
+
+.login
+{
+    width: 50%;
+    padding: 30px 50px;
+    background: linear-gradient(134deg, hsl(44, 96%, 65%), hsl(34, 95%, 45%));
+    /*color: hsl(0, 0, 100);*/
+}
+
+h1 {
+    font-size: 30px;
+    margin-top: 10px;
+    margin-bottom: 40px;
+    /*text-shadow: 0 2px 3px hsla(0, 0, 0, 0.1);*/
+}
+
+
+
+h2 {
+    font-size: 16px;
+    font-weight: normal;
+    margin-top: 23px;
+    margin-bottom: 43px;
+    /*text-shadow: 0 2px 3px hsla(0, 0, 0, 0.1);*/
+}
+
+fieldset::after {
+    content: '\f007';
+    font-family: FontAwesome, sans-serif;
+    position: absolute;
+    right: 15px;
+    top: 17px;
+    z-index: 2;
+    width: 20px;
+    /*color: hsla(0, 0, 0, .2);*/
+    text-align: center;
+}
+
+fieldset.email::after {
+    content: '\f0e0';
+}
+
+fieldset.password::after {
+    content: '\f023';
+}
+

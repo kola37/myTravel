@@ -1,6 +1,7 @@
 package service;
 
 
+import service.impl.TourServiceImpl;
 import service.impl.UserServiceImpl;
 
 public class ServiceFactory {
@@ -17,8 +18,11 @@ public class ServiceFactory {
     private ServiceFactory() {
     }
 
-    public UserService getUserServiceImpl(){
+    public UserService getUserService(){
         return new UserServiceImpl();
+    }
+    public TourService getTourService(){
+        return new TourServiceImpl();
     }
 
 }

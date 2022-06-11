@@ -12,9 +12,7 @@
 <style>
     <%@include file="/WEB-INF/styles/error.css" %>
 </style>
-<head>
-    <title>Error | My Travel Agency</title>
-</head>
+<c:set var="title" value="Error | My Travel Agency"/>
 <body>
 
 <%@ include file="/WEB-INF/views/fragment/header.jsp" %>
