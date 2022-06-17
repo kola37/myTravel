@@ -26,7 +26,7 @@ public class DefaultCommand implements Command {
 
 
     @Override
-    public CommandResult execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException, CommandException {
+    public CommandResult execute(HttpServletRequest req, HttpServletResponse resp){
         LOG.debug("Command started!");
 
         String errorMessage = "No such command found!";

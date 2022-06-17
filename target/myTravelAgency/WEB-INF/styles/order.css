@@ -1,0 +1,107 @@
+/***************************************************************
+Style for the ORDER page
+***************************************************************/
+body {
+    margin-top: 90px;
+    background-color: honeydew;
+}
+
+.tour-order-box{
+    position: relative;
+    padding: 20px 50px;
+    /*background: linear-gradient(134deg, hsla(55, 96%, 65%, 0.32), hsl(64, 98%, 45%));*/
+    background: linear-gradient(134deg, hsla(55, 96%, 65%, 0.17), hsla(64, 98%, 45%, 0.38));
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    margin: 6% auto;
+    width: 580px;
+    /*height: 480px;*/
+    border-radius: 10px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    /*overflow: hidden;*/
+}
+
+.tour-order-box img{
+    display: block;
+    width: 100%;
+}
+
+.tour-order-box h3 {
+    font-size: 24px;
+    color: darkslategray;
+    margin: 10px 0 10px 0;
+    text-align: center;
+}
+
+.tour-order-box h2 {
+    font-size: 21px;
+    color: darkslategray;
+    margin: 10px 0 10px 0;
+    text-align: left;
+}
+
+.tour-order-box p {
+    font-size: 18px;
+    line-height: 1.3;
+    color: darkslategray;
+}
+
+.tour-order-btn{
+    position: relative;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 0 0;
+    padding: 10px 30px;
+    background-color: azure;
+    border: none;
+    border-radius: 5px;
+    color: darkslategray;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+.tour-order-btn:hover{
+    background: linear-gradient(-5deg, hsla(86, 61%, 44%, 0.85), hsla(86, 65%, 54%, 0.82));
+    color: azure;
+}
+
+.tour-order-btn >a{
+    text-decoration: none;
+    color: darkslategray;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.tour-order-btn >a:hover{
+    color: azure;
+}
+
+
+#orderForm{
+    display: none;
+}
+
+#alertMsg{
+    display: none;
+}
+
+
+/* The close button */
+.closeBtn {
+    margin-left: 15px;
+    color: green;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+/* When moving the mouse over the close button */
+.closeBtn:hover {
+    color: black;
+}

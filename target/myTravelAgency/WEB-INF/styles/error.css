@@ -3,7 +3,7 @@ Style for the ERROR page
 ***************************************************************/
 
 body{
-    margin-top: 100px;
+    margin-top: 120px;
 
 }
 
@@ -14,9 +14,10 @@ h1 {
 
 hr {
     alignment: center;
-    /*width: 80%;*/
 }
 
 h3 {
     text-align: center;
 }
+
+

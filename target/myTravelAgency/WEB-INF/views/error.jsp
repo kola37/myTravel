@@ -20,11 +20,16 @@
 <h1>ERROR</h1>
 <hr>
 
-<h3>Sorry, something went wrong!</h3>
-
-<%-- if we get this page using forward --%>
 <c:if test="${not empty errorMessage}">
     <h3>${errorMessage}</h3>
+
+<%--    <div class="alert-msg">--%>
+<%--        <h1 id="error-tittle">ERROR--%>
+<%--            <hr>--%>
+<%--        </h1>--%>
+<%--        <h2>${errorMessage}</h2>--%>
+<%--        <a href="${pageContext.request.contextPath}/my-travel?command=home" class="close"></a>--%>
+<%--    </div>--%>
 </c:if>
 
 

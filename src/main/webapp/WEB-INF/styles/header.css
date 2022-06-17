@@ -145,3 +145,9 @@ header .navigation .menu{
     color: green;
     transition: 0.3s;
 }
+
+.greeting-msg{
+    position: fixed;
+    left: 200px;
+    top: 50px;
+}

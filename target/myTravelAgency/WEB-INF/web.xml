@@ -6,7 +6,6 @@
                       http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
 
-
   <display-name>My Travel Agency Web Application</display-name>
 
   <!--Home page-->
@@ -101,6 +100,15 @@
     <error-code>404</error-code>
     <location>/WEB-INF/views/error.jsp</location>
   </error-page>
+
+  <!--  Set the session timeout and cookie max age-->
+  <!--  session will alive even browser was closed for specified time-->
+  <session-config>
+    <session-timeout>1800</session-timeout>
+    <cookie-config>
+      <max-age>1800</max-age>
+    </cookie-config>
+  </session-config>
 
 
 </web-app>

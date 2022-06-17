@@ -3,6 +3,7 @@ package entity;
 import entity.constant.OrderStatus;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.Objects;
 
@@ -23,7 +24,7 @@ public class Order implements Serializable {
     private int statusId;
     private Date orderDate;
     private int discount;
-    private double totalPrice;
+    private BigDecimal totalPrice;
 
     public Order() {
     }
@@ -76,11 +77,11 @@ public class Order implements Serializable {
         this.discount = discount;
     }
 
-    public double getTotalPrice() {
+    public BigDecimal getTotalPrice() {
         return totalPrice;
     }
 
-    public void setTotalPrice(double totalPrice) {
+    public void setTotalPrice(BigDecimal totalPrice) {
         this.totalPrice = totalPrice;
     }
 
@@ -89,7 +90,7 @@ public class Order implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Order order = (Order) o;
-        return id == order.id && userId == order.userId && tourId == order.tourId && statusId == order.statusId && discount == order.discount && Double.compare(order.totalPrice, totalPrice) == 0 && orderDate.equals(order.orderDate);
+        return id == order.id && userId == order.userId && tourId == order.tourId && statusId == order.statusId && discount == order.discount && order.totalPrice.equals(totalPrice) && orderDate.equals(order.orderDate);
     }
 
     @Override
@@ -153,7 +154,7 @@ public class Order implements Serializable {
             return this;
         }
 
-        public Builder withTotalPrice(double totalPrice) {
+        public Builder withTotalPrice(BigDecimal totalPrice) {
             order.totalPrice = totalPrice;
             return this;
         }

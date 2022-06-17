@@ -14,14 +14,12 @@ public class Tour implements Serializable {
     //use serialVersionUID for interoperability
     private static final long serialVersionUID = -6872678767830240136L;
 
-    private static final String YES = "yes";
-    private static final String NO = "no";
 
     private int id;
     private String name;
     private String description;
     private String image;
-    private double price;
+    private int price;
 //    private double discount;
 //    private double maxDiscount;
     private int tourTypeId;
@@ -65,11 +63,11 @@ public class Tour implements Serializable {
         this.image = image;
     }
 
-    public double getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 
@@ -134,7 +132,7 @@ public class Tour implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Tour tour = (Tour) o;
-        return id == tour.id && Double.compare(tour.price, price) == 0 && tourTypeId == tour.tourTypeId && numOfPersons == tour.numOfPersons && hotelId == tour.hotelId
+        return id == tour.id && tour.price == price && tourTypeId == tour.tourTypeId && numOfPersons == tour.numOfPersons && hotelId == tour.hotelId
                 && promotionId == tour.promotionId && isHot == tour.isHot && name.equals(tour.name) && description.equals(tour.description) && Objects.equals(image, tour.image);
     }
 
@@ -156,7 +154,7 @@ public class Tour implements Serializable {
                 ", person=" + numOfPersons +
                 ", hotelId=" + hotelId +
                 ", promotionId=" + promotionId +
-                ", isHot='" + (isHot ? YES : NO) + '\'' +
+                ", isHot='" + isHot +
                 '}';
     }
 
@@ -228,7 +226,7 @@ public class Tour implements Serializable {
             return this;
         }
 
-        public Builder isHotTour(boolean isHot){
+        public Builder isHot(boolean isHot){
             tour.isHot = isHot;
             return this;
         }

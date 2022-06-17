@@ -1,12 +1,13 @@
 package controller.command;
 
-import controller.command.impl.DefaultCommand;
+import controller.command.impl.*;
 import controller.command.impl.transitition.GoToHomeCommand;
-import controller.command.impl.LoginCommand;
 import controller.command.impl.transitition.GoToLoginCommand;
+import controller.command.impl.transitition.GoToOrderCommand;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -19,12 +20,16 @@ public class CommandContainer {
 
     private static final Logger LOG = LogManager.getLogger(CommandContainer.class);
 
-    private static Map<String, Command> commands = new TreeMap<String, Command>();
+    private static Map<String, Command> commands = new HashMap<>();
 
     static {
         commands.put(CommandName.HOME_PAGE_COMMAND, new GoToHomeCommand());
         commands.put(CommandName.LOGIN_PAGE_COMMAND, new GoToLoginCommand());
         commands.put(CommandName.LOGIN_COMMAND, new LoginCommand());
+        commands.put(CommandName.LOGOUT_COMMAND, new LogoutCommand());
+        commands.put(CommandName.REGISTER_COMMAND, new RegisterCommand());
+        commands.put(CommandName.ORDER_PAGE_COMMAND, new GoToOrderCommand());
+        commands.put(CommandName.CREATE_ORDER_COMMAND, new CreateOrderCommand());
         commands.put(CommandName.DEFAULT_COMMAND, new DefaultCommand());
     }
 

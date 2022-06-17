@@ -68,6 +68,7 @@ public class Hotel implements Serializable {
     }
 
 
+
     /**
      * Class to build a new Hotel object
      *
@@ -79,6 +80,11 @@ public class Hotel implements Serializable {
 
         public Builder() {
             hotel = new Hotel();
+        }
+
+        public Builder withId(int id) {
+            hotel.id = id;
+            return this;
         }
 
         public Builder withName(String name) {

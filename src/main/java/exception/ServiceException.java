@@ -19,4 +19,14 @@ public class ServiceException extends Exception{
     public ServiceException(String message, Throwable cause) {
         super(message, cause);
     }
+
+    /**
+     * Construct a new ServiceException object with the specified detail message and cause
+     * that provides info about service error
+     *
+     * @param message the detail message
+     */
+    public ServiceException(String message) {
+        super(message);
+    }
 }

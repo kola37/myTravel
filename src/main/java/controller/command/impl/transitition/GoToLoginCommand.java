@@ -21,7 +21,7 @@ public class GoToLoginCommand implements Command {
     private static final long serialVersionUID = -3756868751755278668L;
 
     @Override
-    public CommandResult execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException, CommandException {
+    public CommandResult execute(HttpServletRequest req, HttpServletResponse resp){
         return new CommandResult(PagePath.PAGE_LOGIN, CommandResultType.FORWARD);
     }
 }

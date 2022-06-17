@@ -13,16 +13,21 @@ import java.util.Optional;
 
 import static util.DBManager.close;
 
-
+/**
+ * Class UserDAOIMpl implements UserDAO interface
+ * and provides a several methods that performs CRUD operations on User objects
+ *
+ * @author Anatolii Koliaka
+ */
 public class UserDAOImpl implements UserDAO {
 
     private static final Logger LOG = LogManager.getLogger(UserDAOImpl.class);
 
-    private static final String SQL_INSERT_USER = "INSERT INTO users VALUES (DEFAULT, ?, ?, ?, ?, ?, ?)";
+    private static final String SQL_INSERT_USER = "INSERT INTO users VALUES (DEFAULT, ?, ?, ?, ?, ?, ?,DEFAULT)";
     private static final String SQL_FIND_ALL_USERS = "SELECT * FROM users";
     private static final String SQL_FIND_USER_BY_ID = "SELECT * FROM users WHERE id = ?";
     private static final String SQL_FIND_USER_BY_LOGIN = "SELECT * FROM users WHERE login = ?";
-    private static final String SQL_UPDATE_USER = "UPDATE users SET login = ?, password = ?, first_name = ?, last_name = ?, email = ?, role = ?, WHERE id = ?";
+    private static final String SQL_UPDATE_USER = "UPDATE users SET login = ?, password = ?, first_name = ?, last_name = ?, email = ?, role = ? WHERE id = ?";
     private static final String SQL_DELETE_USER = "DELETE FROM users WHERE id = ?";
 
     @Override
@@ -35,7 +40,7 @@ public class UserDAOImpl implements UserDAO {
             pstmt.setInt(1, id);
             rs = pstmt.executeQuery();
             if (rs.next()) {
-               return Optional.of(extractUser(rs));
+                return Optional.of(extractUser(rs));
             }
         } catch (SQLException e) {
             LOG.error("Cannot find user in database! ", e);
@@ -170,9 +175,8 @@ public class UserDAOImpl implements UserDAO {
     }
 
 
-
     private static User extractUser(ResultSet rs) throws SQLException {
-        User user = new User.Builder()
+        return new User.Builder()
                 .withId(rs.getInt("id"))
                 .withLogin(rs.getString("login"))
                 .withPassword(rs.getString("password"))
@@ -182,7 +186,6 @@ public class UserDAOImpl implements UserDAO {
                 .withRoleId(rs.getInt("role_id"))
                 .withBlockedStatus(rs.getBoolean("is_blocked"))
                 .build();
-        return user;
     }
 
 }

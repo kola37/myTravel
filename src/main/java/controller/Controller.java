@@ -41,26 +41,11 @@ public class Controller extends HttpServlet {
 
     private void process(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        LOG.debug("Controller started");
+        LOG.debug("Controller started!");
         String name = req.getParameter(COMMAND);
         LOG.trace("Request parameter: command name is " + name);
         Command command = CommandContainer.getCommand(name);
         LOG.trace("The command is " + command);
-
-//        String result = PagePath.PAGE_ERROR;
-//        try {
-//            result = command.execute(req, resp);
-//            if (req.getMethod().equals(RequestMethodType.GET.name())){
-//                req.getRequestDispatcher(result).forward(req, resp);
-//                LOG.trace("Forward to address " + result);
-//            } else if (req.getMethod().equals(RequestMethodType.POST.name())) {
-//                resp.sendRedirect(result);
-////                resp.sendRedirect(req.getContextPath() + result);
-//                LOG.trace("Redirect to address " + result);
-//            }
-//        } catch (CommandException e) {
-//            req.setAttribute("errorMessage", e.getMessage());
-//        }
 
         CommandResult result = new CommandResult(PagePath.PAGE_ERROR, CommandResultType.FORWARD);
 
@@ -72,7 +57,7 @@ public class Controller extends HttpServlet {
             dispatch(result,req,resp);
         }
 
-        LOG.debug("Controller finished");
+        LOG.debug("Controller finished!");
     }
 
     private void dispatch(CommandResult result, HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {

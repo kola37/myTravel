@@ -34,6 +34,9 @@ public class LoginCommand implements Command {
     private static final String ATTR_ERROR_MESSAGE = "errorMessage";
     private static final String ATTR_USER = "user";
     private static final String ATTR_USER_ROLE = "userRole";
+    private static final String ATTR_USER_LOGIN = "userLogin";
+    private static final String COMMAND_PREVIOUS = "commandPrevious";
+//    private static final String COMMAND = "my-travel?command=";
 
 
     @Override
@@ -42,19 +45,19 @@ public class LoginCommand implements Command {
 
         HttpSession session = req.getSession();
 
+        if(!session.isNew() && session.getAttribute(ATTR_USER) != null){
+            throw new CommandException("Hi, " + session.getAttribute(ATTR_USER_LOGIN) + "! You are already logged in!");
+        }
+
         String login = req.getParameter(PARAMETER_LOGIN);
         String password = req.getParameter(PARAMETER_PASSWORD);
-
-        if (login == null || password == null || login.isEmpty() || password.isEmpty()) {
-            throw new CommandException("Please, enter login and password to authorize!");
-        }
 
         CommandResult result = new CommandResult(PagePath.PAGE_ERROR,CommandResultType.FORWARD);
 
         UserService userService = ServiceFactory.getInstance().getUserService();
 
         try {
-            Optional<User> optionalUser = userService.login(login);
+            Optional<User> optionalUser = userService.login(login, password);
             if (optionalUser.isEmpty() || !optionalUser.get().getPassword().equals(password)) {
                 throw new CommandException("Entered login or password is invalid!");
             }
@@ -65,10 +68,22 @@ public class LoginCommand implements Command {
             session.setAttribute(ATTR_USER, user);
             LOG.trace("Set the session attribute 'user': " + user);
 
+            session.setAttribute(ATTR_USER_LOGIN, user.getLogin());
+            LOG.trace("Set the session attribute 'userLogin': " + user.getLogin());
+
             session.setAttribute(ATTR_USER_ROLE, role.getName());
             LOG.trace("Set the session attribute 'userRole': " + role.getName());
 
-            result = new CommandResult(PagePath.PAGE_LOGIN_SUCCESS, CommandResultType.REDIRECT);
+
+            String command = (String) session.getAttribute(COMMAND_PREVIOUS);
+            if (command != null){
+                session.removeAttribute(COMMAND_PREVIOUS);
+                //redirect to page user came from before authorization
+                result = new CommandResult(PagePath.PAGE_LOGIN_SUCCESS
+                        + command, CommandResultType.REDIRECT);
+            }else{
+                result = new CommandResult(PagePath.PAGE_LOGIN_SUCCESS, CommandResultType.REDIRECT);
+            }
 
         } catch (ServiceException e) {
             req.setAttribute(ATTR_ERROR_MESSAGE, e.getMessage());

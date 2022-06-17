@@ -18,10 +18,12 @@ public interface UserService extends Service<User>{
      * Method to authenticate user
      *
      * @param login    user's email
-     * @return optional of User
+     * @param password  user's password
+     * @return an Optional of User if present
+     * an empty Optional otherwise
      * @throws ServiceException
      */
-    Optional<User> login(String login) throws ServiceException;
+    Optional<User> login(String login, String password) throws ServiceException;
 
     /**
      * Method to register new user
@@ -32,9 +34,10 @@ public interface UserService extends Service<User>{
      * @param lastName  user's lastName
      * @param email     user's email
      * @param role     user's role
-     * @return true if registration is successful, false otherwise
+     * @return an Optional of User if present
+     * an empty Optional otherwise
      * @throws ServiceException
      */
-    boolean register(String login, String password, String firstName, String lastName, String email, UserRole role) throws ServiceException;
+    Optional<User> register(String login, String password, String firstName, String lastName, String email, String role) throws ServiceException;
 
 }

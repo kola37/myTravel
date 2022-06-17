@@ -18,5 +18,5 @@ public interface Command extends Serializable {
      * @return CommandResult of page with routing type
      */
     CommandResult execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException, CommandException;
-
+    ///////!!!!!!!! Check for need of IOException, ServletException !!!!!!!/////////////
 }
