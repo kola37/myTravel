@@ -4,6 +4,7 @@ import entity.User;
 import entity.constant.UserRole;
 import exception.ServiceException;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -40,4 +41,25 @@ public interface UserService extends Service<User>{
      */
     Optional<User> register(String login, String password, String firstName, String lastName, String email, String role) throws ServiceException;
 
+    /**
+     * Method to edit user information
+     *
+     * @param login     user's login
+     * @param password  user's password
+     * @param firstName user's firstName
+     * @param lastName  user's lastName
+     * @param email     user's email
+     * @param role     user's role
+     * @return an Optional of User if present
+     * an empty Optional otherwise
+     * @throws ServiceException
+     */
+    Optional<User> editUserInfo(int id, String login, String password, String firstName, String lastName, String email, String role) throws ServiceException;
+
+    /**
+     * Method to retrieve all users from database
+     * @return List of users
+     * @throws ServiceException
+     */
+    List<User> retreiveAllUsers() throws ServiceException;
 }

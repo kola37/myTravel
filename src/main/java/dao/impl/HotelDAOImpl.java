@@ -2,20 +2,16 @@ package dao.impl;
 
 import dao.HotelDAO;
 import entity.Hotel;
-import entity.Tour;
 import exception.DAOException;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 
-
-import java.math.BigDecimal;
-import java.math.MathContext;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static util.DBManager.close;
+import static util.DBUtils.close;
 
 
 /**
@@ -83,14 +79,25 @@ public class HotelDAOImpl implements HotelDAO {
         return Optional.empty();
     }
 
-//    @Override
-//    public List<Hotel> findAllFromTours(Connection con) throws DAOException {
-//        return findByQuery(con, SQL_FIND_ALL_HOTEL_FROM_TOURS);
-//    }
-
     @Override
     public List<Hotel> findAll(Connection con) throws DAOException {
-        return findByQuery(con, SQL_FIND_ALL_HOTEL);
+        List<Hotel> hotels = new ArrayList<>();
+        Statement stmt = null;
+        ResultSet rs = null;
+        try {
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(SQL_FIND_ALL_HOTEL);
+            while (rs.next()) {
+                hotels.add(extractHotel(rs));
+            }
+        } catch (SQLException e) {
+            LOG.error("Cannot find hotel in database! ", e);
+            throw new DAOException("Cannot find hotel in database! ", e);
+        } finally {
+            close(rs);
+            close(stmt);
+        }
+        return hotels;
     }
 
     @Override
@@ -156,26 +163,6 @@ public class HotelDAOImpl implements HotelDAO {
         } finally {
             close(pstmt);
         }
-    }
-
-    private List<Hotel> findByQuery(Connection con, String query) throws DAOException {
-        List<Hotel> hotels = new ArrayList<>();
-        Statement stmt = null;
-        ResultSet rs = null;
-        try {
-            stmt = con.createStatement();
-            rs = stmt.executeQuery(query);
-            while (rs.next()) {
-                hotels.add(extractHotel(rs));
-            }
-        } catch (SQLException e) {
-            LOG.error("Cannot find hotel in database! ", e);
-            throw new DAOException("Cannot find hotel in database! ", e);
-        } finally {
-            close(rs);
-            close(stmt);
-        }
-        return hotels;
     }
 
     private static Hotel extractHotel(ResultSet rs) throws SQLException {

@@ -2,13 +2,11 @@ package service;
 
 import entity.Order;
 import entity.Promotion;
-import entity.Tour;
 import exception.ServiceException;
 
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * OrderService interface that extends interface Service
@@ -21,7 +19,7 @@ public interface OrderService {
     /**
      * Method to add new order
      *
-     * @param userIdString user's ID String value
+     * @param userIdString user's ID
      * @param tourIdString tour's ID String value
      * @param status order's status String value
      * @param orderDate order's date of creation
@@ -30,15 +28,48 @@ public interface OrderService {
      * @return true if order was successfully added, false otherwise
      * @throws ServiceException
      */
-    boolean addNewOrder(String userIdString, String tourIdString, String status, Date orderDate, String discountString, String totalPriceString) throws ServiceException;
+    boolean addNewOrder(int userId, String tourIdString, String status, Date orderDate, String discountString, String totalPriceString) throws ServiceException;
 
     /**
-     * Method to retrieve orders by User's id and order status
+     * Method to retrieve User orders by User's id and order status
      *
      * @return list of Orders
      * @throws ServiceException
      */
     List<Order> retrieveUserOrdersByUserIdAndStatus(int userId, int statusId) throws ServiceException;
+
+    /**
+     * Method to retrieve User orders by User's id
+     *
+     * @return list of Orders
+     * @throws ServiceException
+     */
+    List<Order> retrieveUserOrdersByUserId(int userId) throws ServiceException;
+
+    /**
+     * Method to retrieve all orders
+     *
+     * @return List of orders
+     * @throws ServiceException
+     */
+    List<Order> retrieveAllOrders() throws ServiceException;
+
+    /**
+     * Method to delete order from database using order id like argument
+     * @param orderId order's id
+     * @return true if order successfully deleted from database, false otherwise
+     * @throws ServiceException
+     */
+    boolean deleteOrder(int orderId) throws ServiceException;
+
+    /**
+     * Method to update order status from database using order id like argument
+     * @param orderId order's id
+     * @param statusId order's status id
+     * @return true if order successfully deleted from database, false otherwise
+     * @throws ServiceException
+     */
+    boolean updateOrderStatus(int orderId, int statusId) throws ServiceException;
 
     BigDecimal calculateTotalPrice(int price, int discount) throws ServiceException;
 

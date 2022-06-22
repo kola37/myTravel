@@ -24,7 +24,7 @@ public class OrderDAOImpl implements OrderDAO {
 
     private static final Logger LOG = LogManager.getLogger(OrderDAOImpl.class);
 
-    private static final String SQL_INSERT_ORDER = "INSERT INTO orders VALUES (DEFAULT, ?, ?, ?, ?, DEFAULT, ?)";
+    private static final String SQL_INSERT_ORDER = "INSERT INTO orders VALUES (DEFAULT, ?, ?, ?, ?, ?, ?)";
     private static final String SQL_FIND_ALL_ORDERS = "SELECT * FROM orders";
     private static final String SQL_FIND_ORDER_BY_ID = "SELECT * FROM orders WHERE id = ?";
     private static final String SQL_FIND_ORDERS_BY_USER_ID = "SELECT * FROM orders WHERE user_id = ?";
@@ -127,6 +127,7 @@ public class OrderDAOImpl implements OrderDAO {
 
     @Override
     public int insert(Connection con, Order order) throws DAOException {
+        Date sqlDate = new Date(order.getOrderDate().getTime());
 
         int result = -1;
 
@@ -138,7 +139,7 @@ public class OrderDAOImpl implements OrderDAO {
             pstmt.setInt(k++, order.getUserId());
             pstmt.setInt(k++, order.getTourId());
             pstmt.setInt(k++, order.getStatusId());
-            pstmt.setDate(k++, (Date) order.getOrderDate());
+            pstmt.setDate(k++, sqlDate);
             pstmt.setInt(k++,order.getDiscount());
             pstmt.setBigDecimal(k, order.getTotalPrice());
 
@@ -183,7 +184,8 @@ public class OrderDAOImpl implements OrderDAO {
         try {
             pstmt = con.prepareStatement(SQL_UPDATE_ORDER_STATUS);
             int k = 1;
-            pstmt.setInt(k, order.getStatusId());
+            pstmt.setInt(k++, order.getStatusId());
+            pstmt.setInt(k, order.getId());
 
             return pstmt.executeUpdate() > 0;
 

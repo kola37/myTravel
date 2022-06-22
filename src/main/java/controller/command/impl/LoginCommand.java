@@ -36,7 +36,6 @@ public class LoginCommand implements Command {
     private static final String ATTR_USER_ROLE = "userRole";
     private static final String ATTR_USER_LOGIN = "userLogin";
     private static final String COMMAND_PREVIOUS = "commandPrevious";
-//    private static final String COMMAND = "my-travel?command=";
 
 
     @Override
@@ -62,6 +61,10 @@ public class LoginCommand implements Command {
                 throw new CommandException("Entered login or password is invalid!");
             }
             User user = optionalUser.get();
+            if (user.isBlocked()){
+                LOG.trace("User is blocked and have no access to account: " + user);
+                throw new CommandException("Unfortunately, your account has been blocked!");
+            }
             UserRole role = UserRole.getRole(user.getRoleId());
             LOG.trace("Found user in DB: " + user);
 

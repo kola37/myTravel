@@ -9,6 +9,7 @@ import entity.Promotion;
 import entity.Tour;
 import entity.User;
 import entity.constant.OrderStatus;
+import entity.constant.UserRole;
 import exception.CommandException;
 import exception.ServiceException;
 import org.apache.logging.log4j.LogManager;
@@ -35,7 +36,7 @@ public class GoToOrderCommand implements Command {
 
     private static final long serialVersionUID = -8453815537654921260L;
 
-    private static final Logger LOG = LogManager.getLogger(GoToHomeCommand.class);
+    private static final Logger LOG = LogManager.getLogger(GoToOrderCommand.class);
 
     private static final String ATTR_ERROR_MESSAGE = "errorMessage";
     private static final String ATTR_USER = "user";
@@ -48,12 +49,18 @@ public class GoToOrderCommand implements Command {
         LOG.debug("Command started!");
 
         HttpSession session = req.getSession();
+        User user = (User) req.getSession().getAttribute(ATTR_USER);
 
-        if (session.getAttribute(ATTR_USER) == null) {
+        if (user == null) {
             throw new CommandException("Please sign up to continue!");
         }
 
-        User user = (User) req.getSession().getAttribute(ATTR_USER);
+        if(user.getRoleId() != UserRole.USER.getIndex()){
+            throw new CommandException("Registered users only can make an order! Please, sign up with user role!");
+        }
+
+        CommandResult result = new CommandResult(PagePath.PAGE_ERROR, CommandResultType.FORWARD);
+
         try {
             TourService tourService = ServiceFactory.getInstance().getTourService();
             int tourId = Integer.parseInt(req.getParameter(ATTR_TOUR_ID));
@@ -77,13 +84,12 @@ public class GoToOrderCommand implements Command {
 
             req.setAttribute(ATTR_USER, user);
             req.setAttribute(ATTR_TOUR, tourOptional.get());
+            result = new CommandResult(PagePath.PAGE_ORDER, CommandResultType.FORWARD);
 
         } catch (ServiceException | NumberFormatException e) {
             req.setAttribute(ATTR_ERROR_MESSAGE, e.getMessage());
         }
-
-
         LOG.debug("Command finished!");
-        return new CommandResult(PagePath.PAGE_ORDER, CommandResultType.FORWARD);
+        return result;
     }
 }

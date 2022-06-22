@@ -1,0 +1,184 @@
+
+/***************************************************************
+Style for the USER CABINET page
+***************************************************************/
+body{
+    margin-top: 90px;
+    background-color: honeydew;
+}
+
+/************************************************
+ Information message
+************************************************/
+.info-msg {
+    position: relative;
+    margin-left: 50px;
+    padding: 5px;
+    color: darkslategray;
+}
+
+.info-msg hr {
+    border-bottom-color: darkgreen;
+    border-width: 2px;
+    width: 36%;
+    margin-top: 8px;
+}
+
+/************************************************
+ *********    Title of table         ********
+************************************************/
+.tittle-container{
+    position:relative;
+    max-width: 500px;
+    background-color: seagreen;
+    border-bottom: 2px solid green;
+    margin-left: 50%;
+    color: azure;
+}
+.tittle-item{
+    display: flex;
+    position: relative;
+    justify-content:space-evenly;
+    list-style: none;
+    padding: 12px 30px 12px 12px;
+    margin-top: 20px;
+}
+/*when use <a> inside <h2>*/
+
+/*.tittle-item a{*/
+/*    color: azure;*/
+/*    text-decoration: none;*/
+/*}*/
+/*.tittle-item a:hover{*/
+/*    color: lightgray;*/
+/*}*/
+
+/************************************************
+ *********    Table         ********
+************************************************/
+.container {
+    position: relative;
+    max-width: 1000px;
+    margin: 20px auto;
+    display:flex;
+    min-height:100vh;
+}
+
+.table {
+    width:100%;
+    height: 100%;
+    border:2px solid green;
+}
+
+.table-header {
+    padding: 12px;
+    display:flex;
+    width:100%;
+    background: mediumseagreen;
+    color: azure;
+}
+.header-item {
+    text-transform:uppercase;
+}
+
+.table-data, .header-item {
+    flex: 1 1 20%;
+    text-align:center;
+    font-weight: bold;
+}
+.table-data #deleteBtn:hover, .table-data #editBtn:hover{
+    width: 25px;
+    height: 25px;
+}
+
+.table-row {
+    display: flex;
+    width: 100%;
+    padding: 12px;
+}
+
+.table-row:nth-of-type(odd) {
+    background:aliceblue;
+}
+
+/************************************************
+ *********    User info         ********
+************************************************/
+
+.form-box{
+    position: relative;
+    padding: 20px 50px;
+    background: linear-gradient(134deg, hsla(55, 96%, 65%, 0.17), hsla(64, 98%, 45%, 0.38));
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    margin: 3% auto;
+    width: 380px;
+    height: 480px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.form-box h2{
+    color: darkslategray;
+}
+.form-box h3{
+    line-height: 1.5;
+    text-align: center;
+    color: darkslategray;
+}
+.form-box hr{
+    margin-bottom: 8px;
+}
+
+
+.input-group{
+    top: 70px;
+    width: 280px;
+    transition: 0.3s;
+    position: absolute;
+}
+
+.input-field{
+    width: 100%;
+    height: 40px;
+    padding: 15px 40px 15px 15px;
+    border-radius: 8px;
+    font-size: 16px;
+    vertical-align: top;
+    margin: 5px 0;
+    outline: none;
+}
+
+.submit-btn{
+    width: 100%;
+    height: 36px;
+    margin: 8px 0;
+    background: linear-gradient(-5deg, hsla(86, 61%, 44%, 0.85), hsla(86, 65%, 54%, 0.82));
+    border: none;
+    border-radius: 8px;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 20px;
+    color: honeydew;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    text-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+}
+
+.submit-btn:hover {
+    color: green;
+    transition: 0.3s;
+}
+
+#editable{
+    display: none;
+}
+
+/************************************************
+ *********    Order status selector      ********
+ used in orderEditor.jsp
+************************************************/
+
+/*.table-data .order-status{*/
+/*    display: none;*/
+/*}*/
+#label-select{
+    display: none;
+}

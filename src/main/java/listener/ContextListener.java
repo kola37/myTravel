@@ -1,7 +1,16 @@
 package listener;
 
+import controller.PagePath;
+import controller.command.CommandName;
+import entity.Hotel;
+import entity.Tour;
+import exception.CommandException;
+import exception.ServiceException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import service.HotelService;
+import service.ServiceFactory;
+import service.TourService;
 import util.DBUtils;
 
 import javax.servlet.ServletContext;
@@ -10,9 +19,14 @@ import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @WebListener
 public class ContextListener implements ServletContextListener {
+
+    private static final String ATTR_TOURS_LIST = "tours";
+    private static final String ATTR_HOTELS_LIST = "hotels";
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
@@ -22,13 +36,31 @@ public class ContextListener implements ServletContextListener {
 
         final Logger LOG = LogManager.getLogger(ContextListener.class);
         LOG.debug("path = " + path);
-
         try {
             Connection con = DBUtils.getInstance().getConnection();
+
+            //try to retrieve data from DB for welcome page
+            TourService tourService = ServiceFactory.getInstance().getTourService();
+            List<Tour> tours = tourService.retrieveAllTours();
+
+            HotelService hotelService = ServiceFactory.getInstance().getHotelService();
+            List<Hotel> hotelsTemp = hotelService.retrieveAllHotels();
+
+            //Filter only hotels that assigned to tours
+            List<Hotel> hotels = hotelsTemp.stream()
+                    .filter(hotel -> tours.stream().map(Tour::getHotelId)
+                            .collect(Collectors.toList())
+                            .contains(hotel.getId()))
+                    .collect(Collectors.toList());
+            ctx.setAttribute(ATTR_TOURS_LIST, tours);
+            ctx.setAttribute(ATTR_HOTELS_LIST, hotels);
+
             con.close();
-        } catch (SQLException ex) {
-            LOG.error("Cannot obtain a connection from DB!", ex);
-            throw new IllegalStateException("Cannot obtain a connection from DB!", ex);
+        } catch (SQLException e) {
+            LOG.error("Cannot obtain a connection from DB!", e);
+            throw new IllegalStateException("Cannot obtain a connection from DB!", e);
+        } catch (ServiceException e) {
+            LOG.error("Cannot retrieve a data from DB!", e);
         }
     }
 }

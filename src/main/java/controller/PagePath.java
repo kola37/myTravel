@@ -15,10 +15,14 @@ public class PagePath {
     public static final String PAGE_ERROR = "/WEB-INF/views/error.jsp";
     public static final String PAGE_HOME = "/WEB-INF/views/home.jsp";
     public static final String PAGE_LOGIN = "/WEB-INF/views/loginRegister.jsp";
+    public static final String PAGE_TOUR = "/WEB-INF/views/tour.jsp";
     public static final String PAGE_ORDER = "/WEB-INF/views/order.jsp";
+    public static final String PAGE_USER_CABINET = "/WEB-INF/views/userCabinet.jsp";
+    public static final String PAGE_ADMIN_ORDER_EDITOR = "/WEB-INF/views/orderEditor.jsp";
     public static final String PAGE_LOGIN_SUCCESS = "/";
     public static final String PAGE_LOGOUT_SUCCESS = "/";
     public static final String PAGE_REGISTER_SUCCESS = "/";
+    public static final String PAGE_ORDER_CONFIRMED = "/";
 
     // commands
 //    public static final String COMMAND_LOGIN_SUCCESS = "my-travel?command=home";

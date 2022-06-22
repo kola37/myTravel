@@ -38,5 +38,4 @@ public interface OrderDAO extends DAO<Order> {
      */
     List<Order> findOrdersByUserIdAndStatusId(Connection con, int userId, int statusId) throws DAOException;
 
-
 }

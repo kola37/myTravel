@@ -52,4 +52,12 @@ public interface TourService extends Service<Tour> {
      * @throws ServiceException
      */
     Optional<Tour> retrieveTourById(int tourId) throws ServiceException;
+
+    /**
+     * Method to search tours by tour type.
+     * This method of sorting is default
+     * @param tours List to sort
+     * @return sorted List of tours
+     */
+    List<Tour> searchTourByType(List<Tour> tours, TourType type);
 }

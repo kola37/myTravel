@@ -33,6 +33,11 @@ body {
     text-align: center;
 }
 
+.tour-order-box hr{
+    border-bottom-color: darkgreen;
+    border-width: 2px;
+}
+
 .tour-order-box h2 {
     font-size: 21px;
     color: darkslategray;
@@ -77,11 +82,6 @@ body {
 
 .tour-order-btn >a:hover{
     color: azure;
-}
-
-
-#orderForm{
-    display: none;
 }
 
 #alertMsg{

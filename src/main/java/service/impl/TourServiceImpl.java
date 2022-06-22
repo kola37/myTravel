@@ -14,8 +14,10 @@ import service.TourService;
 import util.DBUtils;
 
 import java.sql.Connection;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * Class-service that handle all business logic related with Tour and DAO
@@ -91,6 +93,14 @@ public class TourServiceImpl implements TourService {
             LOG.error("Unable to retrieve tour by id!");
             throw new ServiceException("Unable to retrieve tour by id!", e);
         }
+    }
+
+    @Override
+    public List<Tour> searchTourByType(List<Tour> tours, TourType type){
+        return tours.stream()
+                .filter(tour -> tour.getTourTypeId() == type.getIndex())
+//                .sorted(Comparator.comparing(Tour::isHot).reversed())
+                .collect(Collectors.toList());
     }
 
     private Tour createTour(String name, String description, String imagePath, int price, int tourTypeId, int numOfPersons

@@ -18,10 +18,12 @@
 
 <body>
 
+
+<%--Alert message for already logged in users--%>
 <c:if test="${sessionScope.user != null}">
-    <div class="alert-msg">
+    <div class="tour-order-box" id="alertMsg">
+        <a class="closeBtn" id="closeAlert" href=${pageContext.request.contextPath}/my-travel?command=home>×</a>
         <h2>Hi, ${sessionScope.userLogin}! You are already logged in!</h2>
-        <a href="${pageContext.request.contextPath}/my-travel?command=home" class="close"></a>
     </div>
 </c:if>
 <c:if test="${sessionScope.user == null}">

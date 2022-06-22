@@ -9,8 +9,10 @@ import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static util.DBManager.close;
 
@@ -24,7 +26,7 @@ public class TourDAOImpl implements TourDAO {
 
     private static final Logger LOG = LogManager.getLogger(TourDAOImpl.class);
 
-    private static final String SQL_INSERT_TOUR = "INSERT INTO tours VALUES (DEFAULT, ?, ?, ?, ?, ?, DEFAULT, ?, ?, DEFAULT)";
+    private static final String SQL_INSERT_TOUR = "INSERT INTO tours VALUES (DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     private static final String SQL_FIND_ALL_TOURS = "SELECT * FROM tours";
     private static final String SQL_FIND_TOUR_BY_ID = "SELECT * FROM tours WHERE id = ?";
     private static final String SQL_FIND_TOUR_BY_NAME = "SELECT * FROM tours WHERE name = ?";
@@ -76,6 +78,12 @@ public class TourDAOImpl implements TourDAO {
         return Optional.empty();
     }
 
+    /**
+     * Method to find all tours in database and return a sorted List of tours with parameter tour.isHOT() on top of the list
+     * @param con Connection object to provide a connection with a specific database
+     * @return List of tours
+     * @throws DAOException
+     */
     @Override
     public List<Tour> findAll(Connection con) throws DAOException {
         List<Tour> tours = new ArrayList<>();
@@ -94,7 +102,8 @@ public class TourDAOImpl implements TourDAO {
             close(rs);
             close(stmt);
         }
-        return tours;
+        //hot tours is always on top
+        return tours.stream().sorted(Comparator.comparing(Tour::isHot).reversed()).collect(Collectors.toList());
     }
 
     @Override

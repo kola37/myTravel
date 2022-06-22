@@ -13,8 +13,11 @@
 <c:set var="title" value="Home | My Travel Agency"/>
 <c:set var="tours" value="${tours}"/>
 <c:set var="hotels" value="${hotels}"/>
+<c:set var="user" value="${user}" scope="session"/>
 <c:set var="userRole" value="${userRole}" scope="session"/>
 <c:set var="userLogin" value="${userLogin}" scope="session"/>
+<c:set var="message" value="${message}" scope="session"/>
+<c:set var="paramMessage" value="${paramMessage}"/>
 
 
 <%@ include file="/WEB-INF/views/fragment/header.jsp" %>
@@ -24,12 +27,14 @@
 
 <body>
 
+<%--Greeting for users--%>
 <c:if test="${userRole == 'user'}">
     <div class="info-msg">
         <h3>Hello, ${userLogin}!</h3>
         <hr>
     </div>
 </c:if>
+
 <%--Message for admin amd manager--%>
 <c:if test="${userRole == 'admin' || userRole == 'manager'}">
     <div class="info-msg">
@@ -38,36 +43,31 @@
     </div>
 </c:if>
 
+<%--Searching parameters--%>
+<c:if test="${not empty paramMessage}">
+    <div class="info-msg" id="search-param">
+        <h3>Searching parameter: ${paramMessage}, found ${tours.size()} tour(s)
+            <a class="closeBtn" id="search-param-close"
+           href="${pageContext.request.contextPath}/my-travel?command=home">×</a></h3>
+        <hr>
+    </div>
+</c:if>
 
-<%--<c:forEach var="tour" items="${tours}">--%>
-<%--    <tr>--%>
-<%--        <td>${tour.name}</td>--%>
-<%--        <td>${tour.description}</td>--%>
-<%--        <td>${tour.price}</td>--%>
-<%--    </tr>--%>
-<%--</c:forEach>--%>
+<%--Information message after order confirmed or user edited--%>
+<c:if test="${not empty message}">
+    <div class="tour-order-box" id="alertMsg">
+        <span class="closeBtn" id="closeAlert">×</span>
+        <h2>${message}</h2>
+        <c:remove var="message"/>
+    </div>
+</c:if>
 
 <%--Create tour card--%>
 <c:forEach var="tour" items="${tours}">
-
-
     <div class="tour-container">
         <div class="tour-wrapper">
 
-
-                <%--            <div class="tour-item">--%>
-                <%--                <div class="tour-photo">--%>
-                <%--                    <img src="${pageContext.request.contextPath}/images/bora-bora.png" alt="image">--%>
-                <%--                </div>--%>
-                <%--                    &lt;%&ndash;                    <p><c:out value="${tour.description}"/></p>&ndash;%&gt;--%>
-                <%--                    &lt;%&ndash;                    <p><c:out value="${tour.price}"/></p>&ndash;%&gt;--%>
-                <%--                    &lt;%&ndash;                    <div class="tour-btn-wrapper"> </div>&ndash;%&gt;--%>
-                <%--                    &lt;%&ndash;                    <button class="tour-btn">See details</button>&ndash;%&gt;--%>
-                <%--                    &lt;%&ndash;                    <button class="tour-btn">Order tour</button>&ndash;%&gt;--%>
-                <%--            </div>--%>
-
-
-            <figure class="image-block">
+            <div class="tour-block">
                 <h1><c:out value="${tour.name}"/></h1>
                 <img src="<c:out value="${pageContext.request.contextPath}${tour.image}"/>" alt="image"/>
 
@@ -77,34 +77,29 @@
                     </div>
                 </c:if>
 
-                <figcaption>
+                <div class="info-block">
                     <h3>More Info</h3>
                     <p>Type: ${TourType.getType(tour.tourTypeId).getName()}</p>
                     <p>Hotel: ${hotels.stream().filter(hotel -> hotel.getId()==tour.hotelId).toList().get(0).name}</p>
                     <p>Person: ${tour.numOfPersons}</p>
                     <p>Price: ${tour.price} $</p>
-                        <%--                    <input type="hidden" name="id" value="${tour.id}"/>--%>
                     <li class="more-info-btn">
-                        <a href="${pageContext.request.contextPath}/my-travel?command=orderPage&tourId=${tour.id}">More
-                            info</a>
+                        <a href="${pageContext.request.contextPath}/my-travel?command=tourPage&tourId=${tour.id}">More info</a>
                     </li>
-                </figcaption>
-            </figure>
-
-
+                </div>
+            </div>
         </div>
-
-
     </div>
-
 </c:forEach>
 
+<script>
+    let alertMsg = document.getElementById("alertMsg")
+    let closeAlert = document.getElementById("closeAlert")
 
-<%--<div class="alert">--%>
-<%--    <span class="closebtn" onclick="this.parentElement.style.display='none';">×</span>--%>
-<%--    <strong>Danger!</strong> Indicates a dangerous or potentially negative action.--%>
-<%--</div>--%>
-
+    closeAlert.addEventListener("click", () => {
+        alertMsg.style.display = "none"
+    })
+</script>
 
 </body>
 </html>

@@ -1,15 +1,12 @@
 package controller.command;
 
 import controller.command.impl.*;
-import controller.command.impl.transitition.GoToHomeCommand;
-import controller.command.impl.transitition.GoToLoginCommand;
-import controller.command.impl.transitition.GoToOrderCommand;
+import controller.command.impl.transitition.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.TreeMap;
 
 /**
  * Class-container to hold Command objects
@@ -28,8 +25,15 @@ public class CommandContainer {
         commands.put(CommandName.LOGIN_COMMAND, new LoginCommand());
         commands.put(CommandName.LOGOUT_COMMAND, new LogoutCommand());
         commands.put(CommandName.REGISTER_COMMAND, new RegisterCommand());
+        commands.put(CommandName.EDIT_USER_COMMAND, new EditUserCommand());
+        commands.put(CommandName.TOUR_PAGE_COMMAND, new GoToTourCommand());
         commands.put(CommandName.ORDER_PAGE_COMMAND, new GoToOrderCommand());
-        commands.put(CommandName.CREATE_ORDER_COMMAND, new CreateOrderCommand());
+        commands.put(CommandName.CONFIRM_ORDER_COMMAND, new ConfirmOrderCommand());
+        commands.put(CommandName.USER_CABINET_PAGE_COMMAND, new GoToUserCabinetCommand());
+        commands.put(CommandName.SEARCH_TOUR_COMMAND, new SearchTourCommand());
+        commands.put(CommandName.ORDER_EDITOR_PAGE_COMMAND, new GoToOrderEditorCommand());
+        commands.put(CommandName.DELETE_ORDER_COMMAND, new DeleteOrderCommand());
+        commands.put(CommandName.UPDATE_ORDER_COMMAND, new UpdateOrderCommand());
         commands.put(CommandName.DEFAULT_COMMAND, new DefaultCommand());
     }
 

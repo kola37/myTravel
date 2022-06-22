@@ -103,39 +103,44 @@ body {
     left: 450px;
 }
 
-.alert-msg {
-    width: 50%;
-    height: 10%;
-    text-align: center;
-    padding: 15px;
-    border: 3px solid coral;
-    border-radius: 10px;
-    color: darkslategray;
-    background-color: azure;
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    margin: auto;
-}
-
-.alert-msg .close {
-    background-image: url("images/close-icon.png");
-    top: -50px;
-    right: -8px;
-    width: 48px;
-    height: 48px;
-    position: absolute;
-}
 
 /***************************************************************
-Style for the ERROR page   !!!UNUSED NOW!!!
+Style for alert message
 ***************************************************************/
-#error-tittle{
-    position:absolute;
-    width: 100%;
-    top: -120px;
-    right: 0;
-    color: red;
+
+.tour-order-box{
+    position: relative;
+    padding: 20px 50px;
+    background: linear-gradient(134deg, hsla(55, 96%, 65%, 0.17), hsla(64, 98%, 45%, 0.38));
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    margin: 6% auto;
+    width: 580px;
+    border-radius: 10px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.tour-order-box h2 {
+    font-size: 21px;
+    color: darkslategray;
+    margin: 10px 0 10px 0;
+    text-align: center;
+}
+
+/* The close button */
+.closeBtn {
+    margin-left: 15px;
+    color: green;
+    font-weight: bold;
+    float: right;
+    font-size: 24px;
+    line-height: 20px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+/* When moving the mouse over the close button */
+.closeBtn:hover {
+    color: black;
 }

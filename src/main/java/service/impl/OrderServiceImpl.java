@@ -2,10 +2,8 @@ package service.impl;
 
 import dao.DAOFactory;
 import dao.OrderDAO;
-import dao.TourDAO;
 import entity.Order;
 import entity.Promotion;
-import entity.Tour;
 import entity.constant.OrderStatus;
 import exception.DAOException;
 import exception.ServiceException;
@@ -32,11 +30,10 @@ public class OrderServiceImpl implements OrderService {
     private static final Logger LOG = LogManager.getLogger(OrderServiceImpl.class);
 
     @Override
-    public boolean addNewOrder(String userIdString, String tourIdString, String status, Date orderDate, String discountString, String totalPriceString) throws ServiceException {
+    public boolean addNewOrder(int userId, String tourIdString, String status, Date orderDate, String discountString, String totalPriceString) throws ServiceException {
 
         Connection con = DBUtils.getInstance().getConnection();
         try {
-            int userId = Integer.parseInt(userIdString);
             int tourId = Integer.parseInt(tourIdString);
             int statusId = OrderStatus.valueOf(status.toUpperCase()).getIndex();
             int discount = Integer.parseInt(discountString);
@@ -48,7 +45,7 @@ public class OrderServiceImpl implements OrderService {
             orderDAO.insert(con, order);
             LOG.trace("New tour created successfully!");
             return true;
-        } catch (DAOException e) {
+        } catch (DAOException | NumberFormatException e) {
             LOG.error("Failed to create a new order!", e);
             throw new ServiceException("Failed to create a new order!", e);
         }finally {
@@ -67,6 +64,68 @@ public class OrderServiceImpl implements OrderService {
             LOG.error("Unable to retrieve user orders by user id and order status id!");
             throw new ServiceException("Unable to retrieve user orders by user id and order status id!", e);
         }
+    }
+
+    @Override
+    public List<Order> retrieveUserOrdersByUserId(int userId) throws ServiceException {
+        Connection con = DBUtils.getInstance().getConnection();
+        try {
+            OrderDAO orderDAO = DAOFactory.getInstance().getOrderDAO();
+            List<Order> result = orderDAO.findOrdersByUserId(con, userId);
+            return result;
+        } catch (DAOException e) {
+            LOG.error("Unable to retrieve user orders by user id!");
+            throw new ServiceException("Unable to retrieve user orders by user id!", e);
+        }
+    }
+
+    @Override
+    public List<Order> retrieveAllOrders() throws ServiceException {
+        Connection con = DBUtils.getInstance().getConnection();
+        try {
+            OrderDAO orderDAO = DAOFactory.getInstance().getOrderDAO();
+            List<Order> result = orderDAO.findAll(con);
+            return result;
+        } catch (DAOException e) {
+            LOG.error("Unable to retrieve all orders!");
+            throw new ServiceException("Unable to retrieve all orders!", e);
+        } finally {
+            DBUtils.close(con);
+        }
+    }
+
+    @Override
+    public boolean deleteOrder(int orderId) throws ServiceException {
+        Connection con = DBUtils.getInstance().getConnection();
+        try {
+            OrderDAO orderDAO = DAOFactory.getInstance().getOrderDAO();
+            return  orderDAO.remove(con, orderId);
+        } catch (DAOException e) {
+            LOG.error("Unable to delete order from DB!");
+            throw new ServiceException("Unable to delete order from DB!", e);
+        } finally {
+            DBUtils.close(con);
+        }
+    }
+
+    @Override
+    public boolean updateOrderStatus(int orderId, int statusId) throws ServiceException {
+        Connection con = DBUtils.getInstance().getConnection();
+        try {
+            OrderDAO orderDAO = DAOFactory.getInstance().getOrderDAO();
+            Optional<Order> optOrder = orderDAO.findById(con, orderId);
+            if (optOrder.isPresent()){
+                Order order = optOrder.get();
+                order.setStatusId(statusId);
+                return  orderDAO.update(con, order);
+            }
+        } catch (DAOException e) {
+            LOG.error("Unable to update order from DB!");
+            throw new ServiceException("Unable to update order from DB!", e);
+        } finally {
+            DBUtils.close(con);
+        }
+        return false;
     }
 
     @Override

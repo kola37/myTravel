@@ -46,13 +46,13 @@
                         <a class="more-btn">Tour type</a>
                         <ul class="more-menu">
                             <li class="more-item"><a
-                                    href="${pageContext.request.contextPath}/my-travel?command=tourType">Holidays</a>
+                                    href="${pageContext.request.contextPath}/my-travel?command=searchTour&type=holidays">Holidays</a>
                             </li>
                             <li class="more-item"><a
-                                    href="${pageContext.request.contextPath}/my-travel?command=tourType">Excursion</a>
+                                    href="${pageContext.request.contextPath}/my-travel?command=searchTour&type=excursion">Excursion</a>
                             </li>
                             <li class="more-item"><a
-                                    href="${pageContext.request.contextPath}/my-travel?command=tourType">Shopping</a>
+                                    href="${pageContext.request.contextPath}/my-travel?command=searchTour&type=shopping">Shopping</a>
                             </li>
                         </ul>
                     </li>
@@ -60,10 +60,10 @@
                         <a class="more-btn">Tour price</a>
                         <ul class="more-menu">
                             <li class="more-item"><a
-                                    href="${pageContext.request.contextPath}/my-travel?command=tourPrice">Expensive
+                                    href="${pageContext.request.contextPath}/my-travel?command=searchTour&price=desc">Expensive
                                 first</a></li>
                             <li class="more-item"><a
-                                    href="${pageContext.request.contextPath}/my-travel?command=tourPrice">Cheaper
+                                    href="${pageContext.request.contextPath}/my-travel?command=searchTour&price=asc">Cheaper
                                 first</a></li>
                         </ul>
                     </li>
@@ -71,16 +71,16 @@
                         <a class="more-btn">Person</a>
                         <ul class="more-menu">
                             <li class="more-item"><a
-                                    href="${pageContext.request.contextPath}/my-travel?command=tourPersonNum">For
+                                    href="${pageContext.request.contextPath}/my-travel?command=searchTour&person=one">For
                                 one</a></li>
                             <li class="more-item"><a
-                                    href="${pageContext.request.contextPath}/my-travel?command=tourPersonNum">For
+                                    href="${pageContext.request.contextPath}/my-travel?command=searchTour&person=two">For
                                 two</a></li>
                             <li class="more-item"><a
-                                    href="${pageContext.request.contextPath}/my-travel?command=tourPersonNum">For family
+                                    href="${pageContext.request.contextPath}/my-travel?command=searchTour&person=family">For family
                                 (3-5)</a></li>
                             <li class="more-item"><a
-                                    href="${pageContext.request.contextPath}/my-travel?command=tourPersonNum">For group
+                                    href="${pageContext.request.contextPath}/my-travel?command=searchTour&person=group">For group
                                 (6< )</a></li>
                         </ul>
                     </li>
@@ -88,22 +88,22 @@
                         <a class="more-btn">Hotel type</a>
                         <ul class="more-menu">
                             <li class="more-item"><a
-                                    href="${pageContext.request.contextPath}/my-travel?command=hotelType">Apartment</a>
+                                    href="${pageContext.request.contextPath}/my-travel?command=searchTour&hotel=apartment">Apartment</a>
                             </li>
                             <li class="more-item"><a
-                                    href="${pageContext.request.contextPath}/my-travel?command=hotelType">Hostel</a>
+                                    href="${pageContext.request.contextPath}/my-travel?command=searchTour&hotel=hostel">Hostel</a>
                             </li>
                             <li class="more-item"><a
-                                    href="${pageContext.request.contextPath}/my-travel?command=hotelType">Tourist
+                                    href="${pageContext.request.contextPath}/my-travel?command=searchTour&hotel=tourist">Tourist
                                 hotel</a></li>
                             <li class="more-item"><a
-                                    href="${pageContext.request.contextPath}/my-travel?command=hotelType">Comfort
+                                    href="${pageContext.request.contextPath}/my-travel?command=searchTour&hotel=comfort">Comfort
                                 hotel</a></li>
                             <li class="more-item"><a
-                                    href="${pageContext.request.contextPath}/my-travel?command=hotelType">Premium
+                                    href="${pageContext.request.contextPath}/my-travel?command=searchTour&hotel=premium">Premium
                                 hotel</a></li>
                             <li class="more-item"><a
-                                    href="${pageContext.request.contextPath}/my-travel?command=hotelType">Boutique
+                                    href="${pageContext.request.contextPath}/my-travel?command=searchTour&hotel=boutique">Boutique
                                 hotel</a></li>
                         </ul>
                     </li>
@@ -135,7 +135,7 @@
                                         href="${pageContext.request.contextPath}/my-travel?command=tourEditor">Tour
                                     editor</a></li>
                                 <li class="sub-item"><a
-                                        href="${pageContext.request.contextPath}/my-travel?command=manageOrder">Order
+                                        href="${pageContext.request.contextPath}/my-travel?command=orderEditor">Order
                                     editor</a></li>
                                 <li class="sub-item"><a
                                         href="${pageContext.request.contextPath}/my-travel?command=userEditor">User
@@ -164,7 +164,19 @@
                     <c:choose>
                         <c:when test="${not empty user}">
                             <c:if test="${userRole == 'user'}">
-                                <li class="sub-item"><a href="${pageContext.request.contextPath}/my-travel?command=userCabinet">My cabinet</a>
+<%--                                <li class="sub-item"><a href="${pageContext.request.contextPath}/my-travel?command=userCabinet">My cabinet</a>--%>
+
+                            <li class="sub-item more">
+                                <a class="more-btn">My Cabinet</a>
+                                <ul class="more-menu">
+                                    <li class="more-item"><a
+                                            href="${pageContext.request.contextPath}/my-travel?command=userCabinet&menu=myOrders">My orders</a>
+                                    </li>
+                                    <li class="more-item"><a
+                                            href="${pageContext.request.contextPath}/my-travel?command=userCabinet&menu=myInfo">My info</a>
+                                    </li>
+                                </ul>
+                            </li>
                             </c:if>
                             <c:if test="${userRole == 'manager'}">
                                 <li class="sub-item"><a href="${pageContext.request.contextPath}/my-travel?command=managerProfile">My profile</a>

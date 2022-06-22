@@ -47,6 +47,7 @@ public class GoToHomeCommand implements Command {
         try {
             TourService tourService = ServiceFactory.getInstance().getTourService();
             List<Tour> tours = tourService.retrieveAllTours();
+
             HotelService hotelService = ServiceFactory.getInstance().getHotelService();
             List<Hotel> hotelsTemp = hotelService.retrieveAllHotels();
 
@@ -59,7 +60,6 @@ public class GoToHomeCommand implements Command {
 
             req.getSession().setAttribute(ATTR_TOURS_LIST, tours);
             req.getSession().setAttribute(ATTR_HOTELS_LIST, hotels);
-//            req.setAttribute(ATTR_TOURS_LIST,tours);
 
             result = new CommandResult(PagePath.PAGE_HOME, CommandResultType.FORWARD);
         } catch (ServiceException e) {
