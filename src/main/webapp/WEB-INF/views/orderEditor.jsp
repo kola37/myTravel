@@ -11,6 +11,8 @@
 
 <html>
 <c:set var="title" value="Order editor | My Travel Agency"/>
+<c:set var="userRole" value="${userRole}" scope="session"/>
+<c:set var="userLogin" value="${userLogin}" scope="session"/>
 <c:set var="orders" value="${orders}"/>
 <c:set var="users" value="${users}"/>
 
@@ -31,8 +33,6 @@
 <div class="tittle-container">
     <div class="tittle-item">
         <h2>Orders</h2>
-        <%--        <h2>Some more</h2>--%>
-        <%--        <h2><a href="${pageContext.request.contextPath}/my-travel?command=loginPage">Some more</a></h2>--%>
     </div>
 </div>
 
@@ -105,12 +105,6 @@
 
         nonSelectable.style.display = "none"
         selectable.style.display = "block"
-
-        // function myFunction() {
-        //     document.getElementById(clicked_id).selectedValue = nonSelectable.value;
-        // }
-
-        // alert(nonSelectable.innerHTML.valueOf())
     }
 
     function changeStatus(clicked_id) {
@@ -126,7 +120,7 @@
         let statusSelector = document.getElementById(clicked_id)
         let value = statusSelector.options[statusSelector.selectedIndex].value
 
-        let orderData = {orderId: clicked_id, orderStatus: value}
+        // let orderData = {orderId: clicked_id, orderStatus: value}
         let options = {
             method: "POST"
         }

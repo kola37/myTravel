@@ -27,6 +27,7 @@
 /Users/anatolii/IdeaProjects/myTravelAgency/src/main/java/service/TourService.java
 /Users/anatolii/IdeaProjects/myTravelAgency/src/main/java/dao/impl/HotelDAOImpl.java
 /Users/anatolii/IdeaProjects/myTravelAgency/src/main/java/controller/command/impl/DeleteOrderCommand.java
+/Users/anatolii/IdeaProjects/myTravelAgency/src/main/java/controller/command/impl/AdminUpdateUserCommand.java
 /Users/anatolii/IdeaProjects/myTravelAgency/src/main/java/service/ServiceFactory.java
 /Users/anatolii/IdeaProjects/myTravelAgency/src/main/java/dao/impl/UserDAOImpl.java
 /Users/anatolii/IdeaProjects/myTravelAgency/src/main/java/controller/command/impl/transitition/GoToUserCabinetCommand.java
@@ -35,7 +36,6 @@
 /Users/anatolii/IdeaProjects/myTravelAgency/src/main/java/dao/impl/TourDAOImpl.java
 /Users/anatolii/IdeaProjects/myTravelAgency/src/main/java/filter/EncodingFilter.java
 /Users/anatolii/IdeaProjects/myTravelAgency/src/main/java/controller/command/impl/CreateNewTourCommand.java
-/Users/anatolii/IdeaProjects/myTravelAgency/src/main/java/controller/command/impl/UpdateTourCommand.java
 /Users/anatolii/IdeaProjects/myTravelAgency/src/main/java/service/validator/impl/NameValidatorImpl.java
 /Users/anatolii/IdeaProjects/myTravelAgency/src/main/java/service/impl/TourServiceImpl.java
 /Users/anatolii/IdeaProjects/myTravelAgency/src/main/java/exception/CommandException.java
@@ -58,6 +58,7 @@
 /Users/anatolii/IdeaProjects/myTravelAgency/src/main/java/controller/command/CommandResult.java
 /Users/anatolii/IdeaProjects/myTravelAgency/src/main/java/controller/command/impl/DeleteTourCommand.java
 /Users/anatolii/IdeaProjects/myTravelAgency/src/main/java/Main2.java
+/Users/anatolii/IdeaProjects/myTravelAgency/src/main/java/controller/command/impl/ManagerUpdateTourCommand.java
 /Users/anatolii/IdeaProjects/myTravelAgency/src/main/java/controller/Controller.java
 /Users/anatolii/IdeaProjects/myTravelAgency/src/main/java/controller/command/impl/RegisterCommand.java
 /Users/anatolii/IdeaProjects/myTravelAgency/src/main/java/service/impl/HotelServiceImpl.java

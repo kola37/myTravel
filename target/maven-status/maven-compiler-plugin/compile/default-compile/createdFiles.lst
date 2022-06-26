@@ -26,6 +26,7 @@ controller/command/impl/transitition/GoToUserCabinetCommand.class
 controller/command/impl/CreateNewTourCommand.class
 entity/Order.class
 controller/command/impl/transitition/GoToLoginCommand.class
+controller/command/impl/ManagerUpdateTourCommand.class
 controller/Controller.class
 controller/command/CommandResultType.class
 controller/command/impl/UpdateOrderCommand.class
@@ -46,7 +47,7 @@ exception/ServiceException.class
 dao/HotelDAO.class
 controller/command/impl/transitition/GoToTourEditorCommand.class
 exception/CommandException.class
-controller/command/impl/UpdateTourCommand.class
+controller/command/impl/AdminUpdateUserCommand.class
 entity/Order$Builder.class
 service/validator/impl/EmailValidatorImpl.class
 entity/constant/UserRole.class

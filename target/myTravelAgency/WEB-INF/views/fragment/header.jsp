@@ -71,10 +71,12 @@
                                     href="${pageContext.request.contextPath}/my-travel?command=searchTour&person=two">For
                                 two</a></li>
                             <li class="more-item"><a
-                                    href="${pageContext.request.contextPath}/my-travel?command=searchTour&person=family">For family
+                                    href="${pageContext.request.contextPath}/my-travel?command=searchTour&person=family">For
+                                family
                                 (3-5)</a></li>
                             <li class="more-item"><a
-                                    href="${pageContext.request.contextPath}/my-travel?command=searchTour&person=group">For group
+                                    href="${pageContext.request.contextPath}/my-travel?command=searchTour&person=group">For
+                                group
                                 (6< )</a></li>
                         </ul>
                     </li>
@@ -129,10 +131,10 @@
                                         href="${pageContext.request.contextPath}/my-travel?command=orderEditor">Order
                                     editor</a></li>
                                 <li class="sub-item"><a
-                                        href="${pageContext.request.contextPath}/my-travel?command=userEditor">User
+                                        href="${pageContext.request.contextPath}/my-travel?command=userEditor&role=user">User
                                     editor</a></li>
                                 <li class="sub-item"><a
-                                        href="${pageContext.request.contextPath}/my-travel?command=userEditor">Manager
+                                        href="${pageContext.request.contextPath}/my-travel?command=userEditor&role=manager">Manager
                                     editor</a></li>
                             </ul>
                         </li>
@@ -155,22 +157,20 @@
                     <c:choose>
                         <c:when test="${not empty user}">
                             <c:if test="${userRole == 'user'}">
-<%--                                <li class="sub-item"><a href="${pageContext.request.contextPath}/my-travel?command=userCabinet">My cabinet</a>--%>
-
-                            <li class="sub-item more">
-                                <a class="more-btn">My Cabinet</a>
-                                <ul class="more-menu">
-                                    <li class="more-item"><a
-                                            href="${pageContext.request.contextPath}/my-travel?command=userCabinet&menu=myOrders">My orders</a>
-                                    </li>
-                                    <li class="more-item"><a
-                                            href="${pageContext.request.contextPath}/my-travel?command=userCabinet&menu=myInfo">My info</a>
-                                    </li>
-                                </ul>
-                            </li>
+                                <li class="sub-item more">
+                                    <a class="more-btn">My Cabinet</a>
+                                    <ul class="more-menu">
+                                        <li class="more-item"><a
+                                                href="${pageContext.request.contextPath}/my-travel?command=userCabinet&menu=myOrders">My orders</a>
+                                        </li>
+                                        <li class="more-item"><a
+                                                href="${pageContext.request.contextPath}/my-travel?command=userCabinet&menu=myInfo">My info</a>
+                                        </li>
+                                    </ul>
+                                </li>
                             </c:if>
                             <c:if test="${userRole == 'manager'}">
-                                <li class="sub-item"><a href="${pageContext.request.contextPath}/my-travel?command=managerProfile">My profile</a>
+                                <li class="sub-item"><a href="${pageContext.request.contextPath}/my-travel?command=userCabinet&menu=myInfo">My profile</a>
                             </c:if>
                             <li class="sub-item"><a href="${pageContext.request.contextPath}/my-travel?command=logout">Logout</a>
                             </li>

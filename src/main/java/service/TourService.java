@@ -1,12 +1,8 @@
 package service;
 
-import entity.Hotel;
-import entity.Promotion;
 import entity.Tour;
-import entity.constant.TourType;
 import exception.ServiceException;
 
-import java.util.List;
 import java.util.Optional;
 
 /**

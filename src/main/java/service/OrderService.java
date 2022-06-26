@@ -1,7 +1,6 @@
 package service;
 
 import entity.Order;
-import entity.Promotion;
 import exception.ServiceException;
 
 import java.math.BigDecimal;

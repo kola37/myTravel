@@ -1,9 +1,11 @@
 package service.impl;
 
 import dao.DAOFactory;
+import dao.OrderDAO;
 import dao.TourDAO;
 import dao.UserDAO;
 import dao.impl.UserDAOImpl;
+import entity.Order;
 import entity.Tour;
 import entity.User;
 import entity.constant.TourType;
@@ -135,6 +137,29 @@ public class UserServiceImpl implements UserService {
         } finally {
             DBUtils.close(con);
         }
+    }
+
+    @Override
+    public boolean updateUserIsBlocked(String userIdString, String isBlockedString) throws ServiceException {
+        Connection con = DBUtils.getInstance().getConnection();
+        try {
+            int userId = Integer.parseInt(userIdString);
+            boolean isBlocked = Boolean.parseBoolean(isBlockedString);
+
+            UserDAO userDAO = DAOFactory.getInstance().getUserDAO();
+            Optional<User> optUser = userDAO.findById(con, userId);
+            if (optUser.isPresent()){
+                User user = optUser.get();
+                user.setBlocked(isBlocked);
+                return  userDAO.update(con, user);
+            }
+        } catch (DAOException | NumberFormatException e) {
+            LOG.error("Unable to update user in DB!");
+            throw new ServiceException("Unable to update user in DB!", e);
+        } finally {
+            DBUtils.close(con);
+        }
+        return false;
     }
 
     @Override

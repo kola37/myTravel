@@ -17,7 +17,7 @@
 <c:set var="userRole" value="${userRole}" scope="session"/>
 <c:set var="userLogin" value="${userLogin}" scope="session"/>
 <c:set var="message" value="${message}" scope="session"/>
-<c:set var="paramMessage" value="${paramMessage}"/>
+<c:set var="searchParamMessage" value="${paramMessage}"/>
 
 
 <%@ include file="/WEB-INF/views/fragment/header.jsp" %>
@@ -44,9 +44,9 @@
 </c:if>
 
 <%--Searching parameters--%>
-<c:if test="${not empty paramMessage}">
+<c:if test="${not empty searchParamMessage}">
     <div class="info-msg" id="search-param">
-        <h3>Searching parameter: ${paramMessage}, found ${tours.size()} tour(s)
+        <h3>Searching parameter: ${searchParamMessage}, found ${tours.size()} tour(s)
             <a class="closeBtn" id="search-param-close"
            href="${pageContext.request.contextPath}/my-travel?command=home">×</a></h3>
         <hr>

@@ -5,6 +5,7 @@ import controller.command.Command;
 import controller.command.CommandResult;
 import controller.command.CommandResultType;
 import entity.User;
+import entity.constant.UserRole;
 import exception.CommandException;
 import exception.ServiceException;
 import org.apache.logging.log4j.LogManager;
@@ -48,12 +49,13 @@ public class EditUserCommand implements Command {
         LOG.debug("Command started!");
 
         HttpSession session = req.getSession();
-
-//        if (!session.isNew() && session.getAttribute(ATTR_USER) != null) {
-//            throw new CommandException("Hi, " + session.getAttribute(ATTR_USER_LOGIN) + "! You are already logged in!");
-//        }
-
         User editableUser = (User) session.getAttribute(ATTR_USER);
+
+        if (editableUser == null || editableUser.getRoleId() == UserRole.ADMIN.getIndex()) {
+            LOG.error("Users with role 'user' and 'manager' only can edit user info!");
+            throw new CommandException("Please, login with user or manager account to continue!");
+        }
+
         String login = req.getParameter(PARAMETER_LOGIN);
         String password = req.getParameter(PARAMETER_PASSWORD);
         String firstName = req.getParameter(PARAMETER_FIRST_NAME);

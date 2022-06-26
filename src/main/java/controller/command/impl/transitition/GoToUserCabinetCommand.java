@@ -33,7 +33,6 @@ public class GoToUserCabinetCommand implements Command {
 
     private static final Logger LOG = LogManager.getLogger(GoToUserCabinetCommand.class);
 
-
     private static final String ATTR_ERROR_MESSAGE = "errorMessage";
     private static final String ATTR_USER = "user";
     private static final String ATTR_USER_ORDERS = "userOrders";
@@ -46,18 +45,18 @@ public class GoToUserCabinetCommand implements Command {
         LOG.debug("Command started!");
 
         HttpSession session = req.getSession();
-        User user = (User) req.getSession().getAttribute(ATTR_USER);
+        User user = (User) session.getAttribute(ATTR_USER);
 
-        if (user == null || user.getRoleId() != UserRole.USER.getIndex()) {
-            LOG.error("User cabinet allowed for users with role 'user' only!");
-            throw new CommandException("Please, login with user account to continue!");
+        if (user == null || user.getRoleId() == UserRole.ADMIN.getIndex()) {
+            LOG.error("User cabinet allowed for users with role 'user' and 'manager' only!");
+            throw new CommandException("Please, login with user or manager account to continue!");
         }
 
         CommandResult result = new CommandResult(PagePath.PAGE_ERROR, CommandResultType.FORWARD);
         String menuChapter = req.getParameter(ATTR_MENU_CHAPTER);
 
         try {
-            if(menuChapter != null && menuChapter.equals(MENU_CHAPTER_MY_ORDERS)) {
+            if(menuChapter != null && menuChapter.equals(MENU_CHAPTER_MY_ORDERS) && user.getRoleId() == UserRole.USER.getIndex()) {
                 OrderService orderService = ServiceFactory.getInstance().getOrderService();
                 List<Order> userOrders = orderService.retrieveUserOrdersByUserId(user.getId());
                 req.setAttribute(ATTR_USER_ORDERS, userOrders);

@@ -27,7 +27,7 @@ public class UserDAOImpl implements UserDAO {
     private static final String SQL_FIND_ALL_USERS = "SELECT * FROM users";
     private static final String SQL_FIND_USER_BY_ID = "SELECT * FROM users WHERE id = ?";
     private static final String SQL_FIND_USER_BY_LOGIN = "SELECT * FROM users WHERE login = ?";
-    private static final String SQL_UPDATE_USER = "UPDATE users SET login = ?, password = ?, first_name = ?, last_name = ?, email = ?, role_id = ? WHERE id = ?";
+    private static final String SQL_UPDATE_USER = "UPDATE users SET login = ?, password = ?, first_name = ?, last_name = ?, email = ?, role_id = ?, is_blocked = ? WHERE id = ?";
     private static final String SQL_DELETE_USER = "DELETE FROM users WHERE id = ?";
 
     @Override
@@ -162,6 +162,7 @@ public class UserDAOImpl implements UserDAO {
             pstmt.setString(k++, user.getLastName());
             pstmt.setString(k++, user.getEmail());
             pstmt.setInt(k++, user.getRoleId());
+            pstmt.setBoolean(k++, user.isBlocked());
             pstmt.setInt(k, user.getId());
 
             return pstmt.executeUpdate() > 0;

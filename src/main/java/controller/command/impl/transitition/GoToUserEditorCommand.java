@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Go to user editor admin page command
@@ -37,6 +38,8 @@ public class GoToUserEditorCommand implements Command {
     private static final String ATTR_USER = "user";
     private static final String ATTR_USERS = "users";
     private static final String ATTR_ORDERS = "orders";
+    private static final String ATTR_TABLE_TITTLE = "tableTittle";
+    private static final String PARAMETER_USER_ROLE = "role";
 
     @Override
     public CommandResult execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException, CommandException {
@@ -49,12 +52,24 @@ public class GoToUserEditorCommand implements Command {
             throw new CommandException("Please sign up with admin role to continue!");
         }
 
+        String userRoleString = req.getParameter(PARAMETER_USER_ROLE);
+
         CommandResult result = new CommandResult(PagePath.PAGE_ERROR, CommandResultType.FORWARD);
 
         try {
             UserService userService = ServiceFactory.getInstance().getUserService();
-            List<User> users = userService.retrieveAll();
-            req.setAttribute(ATTR_USERS, users);
+            List<User> usersAll = userService.retrieveAll();
+
+            if(userRoleString != null && !userRoleString.isEmpty()){
+                int roleId = UserRole.valueOf(userRoleString.toUpperCase()).getIndex();
+                List<User> usersFiltered = getAllUsersByRole(usersAll, roleId);
+                req.setAttribute(ATTR_TABLE_TITTLE, userRoleString);
+                req.setAttribute(ATTR_USERS, usersFiltered);
+                LOG.debug("List of users with role " + userRoleString + " retrieved from DB!" );
+            }else{
+                req.setAttribute(ATTR_USERS, usersAll);
+                LOG.debug("All users retrieved from DB!");
+            }
 
             OrderService orderService = ServiceFactory.getInstance().getOrderService();
             List<Order> orders = orderService.retrieveAll();
@@ -66,5 +81,9 @@ public class GoToUserEditorCommand implements Command {
         }
         LOG.debug("Command finished!");
         return result;
+    }
+
+    private List<User> getAllUsersByRole(List<User> users, int roleId){
+        return users.stream().filter(user -> user.getRoleId() == roleId).collect(Collectors.toList());
     }
 }

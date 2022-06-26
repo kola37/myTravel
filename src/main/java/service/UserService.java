@@ -56,4 +56,12 @@ public interface UserService extends Service<User>{
      */
     Optional<User> editUserInfo(int id, String login, String password, String firstName, String lastName, String email, String role) throws ServiceException;
 
+    /**
+     * Method to update user isBlocked status in database using user id like argument
+     * @param userIdString user's id String value
+     * @param isBlockedString order's status id
+     * @return true if user successfully updated, false otherwise
+     * @throws ServiceException
+     */
+    boolean updateUserIsBlocked(String userIdString, String isBlockedString) throws ServiceException;
 }

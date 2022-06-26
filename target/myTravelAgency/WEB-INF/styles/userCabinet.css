@@ -40,11 +40,13 @@ body{
     position: relative;
     justify-content:space-evenly;
     list-style: none;
+    text-transform: uppercase;
+    font-size: small;
     padding: 12px 30px 12px 12px;
     margin-top: 20px;
 }
-/*when use <a> inside <h2>*/
 
+/*when use <a> inside <h2>*/
 .tittle-item a{
     float: right;
     color: azure;

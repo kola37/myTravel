@@ -8,11 +8,14 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="entity.constant.OrderStatus" %>
+<%@ page import="entity.constant.UserRole" %>
 <%--<%@ taglib prefix="tet" uri="my-travel/tourEntityTag" %>--%>
 
 <html>
 <c:set var="title" value="My cabinet | My Travel Agency"/>
 <c:set var="user" value="${user}" scope="session"/>
+<c:set var="userRole" value="${userRole}" scope="session"/>
+<c:set var="userLogin" value="${userLogin}" scope="session"/>
 <c:set var="orders" value="${userOrders}"/>
 <c:set var="menu" value="${menu}" scope="request"/>
 
@@ -22,8 +25,8 @@
 </style>
 <body>
 
-<%--Greeting for users--%>
-<c:if test="${user != null && userRole == 'user'}">
+<%--Greeting for users and managers--%>
+<c:if test="${userRole == 'user' || userRole == 'manager'}">
     <div class="info-msg">
         <h3>Hello, ${userLogin}!</h3>
         <hr>
@@ -35,8 +38,6 @@
     <div class="tittle-container">
         <div class="tittle-item">
             <h2>My orders</h2>
-                <%--        <h2>Some more</h2>--%>
-                <%--        <h2><a href="${pageContext.request.contextPath}/my-travel?command=loginPage">Some more</a></h2>--%>
         </div>
     </div>
 
@@ -83,7 +84,6 @@
                 <h3>${user.login}</h3>
                 <hr>
             </div>
-
             <div>
                 <p>First name:</p>
                 <h3>${user.firstName}</h3>
@@ -102,8 +102,8 @@
             <button type="button" class="submit-btn" id="showEditable">Edit</button>
         </div>
 
-        <form id="editable" class="input-group"
-              action="${pageContext.request.contextPath}/my-travel?command=editUser" method="post">
+        <form id="editable" class="input-group" action="${pageContext.request.contextPath}/my-travel?command=editUser"
+              method="post">
             <label>
                 <p>Login:</p>
                 <input class="input-field" type="text" placeholder="login" name="login" value="${user.login}" required
@@ -112,8 +112,7 @@
             <label>
                 <p>Password:</p>
                 <input class="input-field" type="password" placeholder="password" name="password"
-                       value="${user.password}" required
-                       maxlength="15">
+                       value="${user.password}" required maxlength="15">
             </label>
             <label>
                 <p>First name:</p>
@@ -132,8 +131,7 @@
                        value="${user.email}" required maxlength="40">
             </label>
             <label>
-                    <%--        Set default role for new user--%>
-                <input class="input-field" type="hidden" name="role" value="user" required>
+                <input class="input-field" type="hidden" name="role" value="${userRole}" required>
             </label>
             <button type="submit" class="submit-btn">Save</button>
         </form>
