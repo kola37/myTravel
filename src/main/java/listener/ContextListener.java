@@ -41,17 +41,11 @@ public class ContextListener implements ServletContextListener {
 
             //try to retrieve data from DB for welcome page
             TourService tourService = ServiceFactory.getInstance().getTourService();
-            List<Tour> tours = tourService.retrieveAllTours();
+            List<Tour> tours = tourService.retrieveAll();
 
             HotelService hotelService = ServiceFactory.getInstance().getHotelService();
-            List<Hotel> hotelsTemp = hotelService.retrieveAllHotels();
+            List<Hotel> hotels = hotelService.retrieveAll();
 
-            //Filter only hotels that assigned to tours
-            List<Hotel> hotels = hotelsTemp.stream()
-                    .filter(hotel -> tours.stream().map(Tour::getHotelId)
-                            .collect(Collectors.toList())
-                            .contains(hotel.getId()))
-                    .collect(Collectors.toList());
             ctx.setAttribute(ATTR_TOURS_LIST, tours);
             ctx.setAttribute(ATTR_HOTELS_LIST, hotels);
 

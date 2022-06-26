@@ -3,7 +3,6 @@ package service.impl;
 import dao.DAOFactory;
 import dao.OrderDAO;
 import entity.Order;
-import entity.Promotion;
 import entity.constant.OrderStatus;
 import exception.DAOException;
 import exception.ServiceException;
@@ -79,8 +78,8 @@ public class OrderServiceImpl implements OrderService {
         }
     }
 
-    @Override
-    public List<Order> retrieveAllOrders() throws ServiceException {
+
+    public List<Order> retrieveAll() throws ServiceException {
         Connection con = DBUtils.getInstance().getConnection();
         try {
             OrderDAO orderDAO = DAOFactory.getInstance().getOrderDAO();
@@ -134,9 +133,9 @@ public class OrderServiceImpl implements OrderService {
         return new BigDecimal(temp).setScale(2, RoundingMode.HALF_UP);
     }
 
-    public int calculateDiscountAmount(int numOfPaidOrders, Promotion promotion){
-        int discountAmount = promotion.getDiscountRate() * numOfPaidOrders;
-        return Math.min(discountAmount, promotion.getMaxDiscount());
+    public int calculateDiscountAmount(int numOfPaidOrders, int discountRate, int maxDiscount){
+        int discountAmount = discountRate * numOfPaidOrders;
+        return Math.min(discountAmount, maxDiscount);
     }
 
     private Order createOrder(int userId, int tourId, int statusId, Date orderDate, int discount, BigDecimal totalPrice) {

@@ -26,12 +26,12 @@ public class TourDAOImpl implements TourDAO {
 
     private static final Logger LOG = LogManager.getLogger(TourDAOImpl.class);
 
-    private static final String SQL_INSERT_TOUR = "INSERT INTO tours VALUES (DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    private static final String SQL_INSERT_TOUR = "INSERT INTO tours VALUES (DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     private static final String SQL_FIND_ALL_TOURS = "SELECT * FROM tours";
     private static final String SQL_FIND_TOUR_BY_ID = "SELECT * FROM tours WHERE id = ?";
     private static final String SQL_FIND_TOUR_BY_NAME = "SELECT * FROM tours WHERE name = ?";
     private static final String SQL_UPDATE_TOUR = "UPDATE tours SET name = ?, description = ?, image = ?, price = ?, tour_type_id = ?" +
-            ", num_of_persons = ?, hotel_id = ?, promotion_id= ?, is_hot = ? WHERE id = ?";
+            ", num_of_persons = ?, hotel_id = ?, discount_rate= ?, max_discount= ?, is_hot = ? WHERE id = ?";
     private static final String SQL_DELETE_TOUR = "DELETE FROM tours WHERE id = ?";
 
     @Override
@@ -80,6 +80,7 @@ public class TourDAOImpl implements TourDAO {
 
     /**
      * Method to find all tours in database and return a sorted List of tours with parameter tour.isHOT() on top of the list
+     *
      * @param con Connection object to provide a connection with a specific database
      * @return List of tours
      * @throws DAOException
@@ -114,6 +115,7 @@ public class TourDAOImpl implements TourDAO {
         ResultSet rs = null;
         try {
             pstmt = con.prepareStatement(SQL_INSERT_TOUR, Statement.RETURN_GENERATED_KEYS);
+
             int k = 1;
             pstmt.setString(k++, tour.getName());
             pstmt.setString(k++, tour.getDescription());
@@ -122,7 +124,8 @@ public class TourDAOImpl implements TourDAO {
             pstmt.setInt(k++, tour.getTourTypeId());
             pstmt.setInt(k++, tour.getNumOfPersons());
             pstmt.setInt(k++, tour.getHotelId());
-            pstmt.setInt(k++, tour.getPromotionId());
+            pstmt.setInt(k++, tour.getDiscountRate());
+            pstmt.setInt(k++, tour.getMaxDiscount());
             pstmt.setBoolean(k, tour.isHot());
 
             if (pstmt.executeUpdate() > 0) {
@@ -172,7 +175,8 @@ public class TourDAOImpl implements TourDAO {
             pstmt.setInt(k++, tour.getTourTypeId());
             pstmt.setInt(k++, tour.getNumOfPersons());
             pstmt.setInt(k++, tour.getHotelId());
-            pstmt.setInt(k++, tour.getPromotionId());
+            pstmt.setInt(k++, tour.getDiscountRate());
+            pstmt.setInt(k++, tour.getMaxDiscount());
             pstmt.setBoolean(k++, tour.isHot());
             pstmt.setInt(k, tour.getId());
 
@@ -196,7 +200,8 @@ public class TourDAOImpl implements TourDAO {
                 .withTourTypeId(rs.getInt("tour_type_id"))
                 .withNumOfPersons(rs.getInt("num_of_persons"))
                 .withHotelId(rs.getInt("hotel_id"))
-                .withPromotionId(rs.getInt("promotion_id"))
+                .withDiscountRate(rs.getInt("discount_rate"))
+                .withMaxDiscount(rs.getInt("max_discount"))
                 .isHot(rs.getBoolean("is_hot"))
                 .build();
     }

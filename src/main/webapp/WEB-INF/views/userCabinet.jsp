@@ -78,37 +78,27 @@
             <h2>My info:</h2>
         </div>
         <div id="readable" class="input-group">
-            <label>
+            <div>
                 <p>Login:</p>
                 <h3>${user.login}</h3>
                 <hr>
-<%--                <input class="input-field" type="text" name="login" value="${user.login}" readonly--%>
-<%--                placeholder="login">--%>
-            </label>
-<%--            <label>--%>
-<%--                <p>Password:</p>--%>
-<%--                <h3 typeof="input password">${user.password.length()}</h3>--%>
-<%--                <hr>--%>
-<%--&lt;%&ndash;                <input class="input-field" type="password" name="password" value="${user.password}" readonly>&ndash;%&gt;--%>
-<%--            </label>--%>
-            <label>
+            </div>
+
+            <div>
                 <p>First name:</p>
                 <h3>${user.firstName}</h3>
                 <hr>
-<%--                <input class="input-field" type="text" name="firstName" value="${user.firstName}" readonly>--%>
-            </label>
-            <label>
+            </div>
+            <div>
                 <p>Last name:</p>
                 <h3>${user.lastName}</h3>
                 <hr>
-<%--                <input class="input-field" type="text" name="lastName" value="${user.lastName}" readonly>--%>
-            </label>
-            <label>
+            </div>
+            <div>
                 <p>Email:</p>
                 <h3>${user.email}</h3>
                 <hr>
-<%--                <input class="input-field" type="email" name="email" value="${user.email}" readonly>--%>
-            </label>
+            </div>
             <button type="button" class="submit-btn" id="showEditable">Edit</button>
         </div>
 

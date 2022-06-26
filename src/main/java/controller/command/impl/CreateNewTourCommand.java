@@ -34,7 +34,8 @@ public class CreateNewTourCommand implements Command {
     private static final String PARAMETER_TOUR_TYPE = "tourType";
     private static final String PARAMETER_NUM_OF_PERSONS = "person";
     private static final String PARAMETER_HOTEL_ID = "hotelId";
-    private static final String PARAMETER_PROMOTION_ID = "promotionId";
+    private static final String PARAMETER_DISCOUNT_RATE = "discountRate";
+    private static final String PARAMETER_MAX_DISCOUNT = "maxDiscount";
     private static final String PARAMETER_IS_HOT_TOUR = "isHot";
     private static final String ATTR_ERROR_MESSAGE = "errorMessage";
     private static final String ATTR_USER_ROLE = "userRole";
@@ -57,18 +58,19 @@ public class CreateNewTourCommand implements Command {
         String tourTypeString = req.getParameter(PARAMETER_TOUR_TYPE);
         String personString = req.getParameter(PARAMETER_NUM_OF_PERSONS);
         String hotelIdString = req.getParameter(PARAMETER_HOTEL_ID);
-        String promotionIdString = req.getParameter(PARAMETER_PROMOTION_ID);
+        String discountRateString = req.getParameter(PARAMETER_DISCOUNT_RATE);
+        String maxDiscountString = req.getParameter(PARAMETER_MAX_DISCOUNT);
         String isHot = req.getParameter(PARAMETER_IS_HOT_TOUR);
 
         CommandResult result = new CommandResult(PagePath.PAGE_ERROR, CommandResultType.FORWARD);
 
         try {
             TourService tourService = ServiceFactory.getInstance().getTourService();
-            tourService.createNewTour(name, description, imagePath, priceString, tourTypeString, personString, hotelIdString, promotionIdString, isHot);
+            tourService.createNewTour(name, description, imagePath, priceString, tourTypeString, personString, hotelIdString, discountRateString,maxDiscountString, isHot);
 
             LOG.trace("New tour successfully created!");
 
-            result = new CommandResult(PagePath.PAGE_REGISTER_SUCCESS, CommandResultType.REDIRECT);
+            result = new CommandResult(PagePath.PAGE_ADMIN_TOUR_EDITOR, CommandResultType.REDIRECT);
 
         } catch (ServiceException e) {
             req.setAttribute(ATTR_ERROR_MESSAGE, e.getMessage());

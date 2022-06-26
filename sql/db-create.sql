@@ -73,13 +73,13 @@ CREATE TABLE tours (
     price INTEGER NOT NULL,
     tour_type_id INTEGER NOT NULL,
     num_of_persons INTEGER NOT NULL DEFAULT 0,
-    hotel_id INTEGER,
-    promotion_id INTEGER,
+    hotel_id INTEGER NOT NULL,
+    discount_rate INTEGER DEFAULT 0,
+    max_discount INTEGER DEFAULT 0,
     is_hot BOOLEAN NOT NULL DEFAULT false,
     PRIMARY KEY (id),
     FOREIGN KEY (tour_type_id) REFERENCES tour_types(id) ON DELETE CASCADE ON UPDATE RESTRICT,
-    FOREIGN KEY (hotel_id) REFERENCES hotels(id) ON DELETE CASCADE,
-    FOREIGN KEY (promotion_id) REFERENCES promotions(id) ON DELETE CASCADE
+    FOREIGN KEY (hotel_id) REFERENCES hotels(id) ON DELETE CASCADE
 );
 
 ----------------------------------------------------------------

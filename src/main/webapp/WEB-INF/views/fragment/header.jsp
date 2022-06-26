@@ -26,18 +26,12 @@
     <%--    Set user attributes--%>
     <c:set var="user" value="${user}" scope="session"/>
     <c:set var="userRole" value="${userRole}" scope="session"/>
-<%--    <c:set var="userLogin" value="${userLogin}" scope="session"/>--%>
 
     <img src="${pageContext.request.contextPath}/images/travel-icon.png" alt="Logo" class="logo-img" width="108"
          height="80">
     <p class="logo">My travel</p>
     <div class="navigation">
         <ul class="menu">
-<%--            <li class="greeting-msg">--%>
-<%--                <c:if test="${not empty sessionScope.userLogin}">--%>
-<%--                    <h4>Hi, ${sessionScope.userLogin}!</h4>--%>
-<%--                </c:if>--%>
-<%--            </li>--%>
             <li class="menu-item"><a href="${pageContext.request.contextPath}/my-travel?command=home">Home</a></li>
             <li class="menu-item">
                 <a class="sub-btn">Search tour</a>
@@ -117,14 +111,11 @@
                         <li class="menu-item"><a class="sub-btn">Manager tools</a>
                             <ul class="sub-menu">
                                 <li class="sub-item"><a
-                                        href="${pageContext.request.contextPath}/my-travel?command=manageTour">Manage
+                                        href="${pageContext.request.contextPath}/my-travel?command=tourEditor">Manage
                                     tours</a></li>
                                 <li class="sub-item"><a
                                         href="${pageContext.request.contextPath}/my-travel?command=orderEditor">Manage
                                     orders</a></li>
-                                <li class="sub-item"><a
-                                        href="${pageContext.request.contextPath}/my-travel?command=manageDiscount">Manage
-                                    discount</a></li>
                             </ul>
                         </li>
                     </c:when>

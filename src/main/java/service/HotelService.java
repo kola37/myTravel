@@ -5,6 +5,7 @@ import entity.Tour;
 import exception.ServiceException;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * HotelService interface that extends interface Service
@@ -25,11 +26,13 @@ public interface HotelService extends Service<Hotel> {
     boolean addNewHotel(String name, String hotelType) throws ServiceException;
 
     /**
-     * Method to retrieve all hotels
+     * Method to retrieve hotel by hotel's name
      *
-     * @return List of hotels
+     * @return an Optional of THotel if present
+     *      * an empty Optional otherwise
      * @throws ServiceException
      */
-    List<Hotel> retrieveAllHotels() throws ServiceException;
+    Optional<Hotel> retrieveHotelByName(String hotelName) throws ServiceException;
+
 
 }

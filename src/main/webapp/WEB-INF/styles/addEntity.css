@@ -1,0 +1,227 @@
+/***************************************************************
+Style for the add entity page
+***************************************************************/
+body{
+    margin-top: 90px;
+    background-color: honeydew;
+}
+
+/************************************************
+ Information message
+************************************************/
+.info-msg {
+    position: relative;
+    margin-left: 50px;
+    padding: 5px;
+    color: darkslategray;
+}
+
+.info-msg hr {
+    border-bottom-color: darkgreen;
+    border-width: 2px;
+    width: 36%;
+    margin-top: 8px;
+}
+
+
+/************************************************
+ *********    User info         ********
+************************************************/
+
+.form-box{
+    position: relative;
+    padding: 20px 50px;
+    background: linear-gradient(134deg, hsla(55, 96%, 65%, 0.17), hsla(64, 98%, 45%, 0.38));
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    margin: 3% auto;
+    width: 70%;
+    height: 780px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.form-box h2{
+    color: darkslategray;
+}
+.form-box h3{
+    line-height: 1.5;
+    text-align: center;
+    color: darkslategray;
+}
+.form-box hr{
+    margin-bottom: 8px;
+}
+/*.form-box label{*/
+/*    position: center;*/
+/*}*/
+
+
+.input-group{
+    top: 70px;
+    /*width: border-box;*/
+    width: 80%;
+    margin-right: 50px;
+    transition: 0.3s;
+    position: absolute;
+}
+
+.input-field {
+    width: 100%;
+    height: 40px;
+    padding: 15px 40px 15px 15px;
+    border-radius: 8px;
+    font-size: 16px;
+    vertical-align: top;
+    margin: 5px 0;
+    outline: none;
+}
+
+#hotel-selector, #type-selector, #hot-selector{
+    padding-bottom: initial;
+    padding-top: initial;
+}
+.submit-btn{
+    width: 100%;
+    height: 36px;
+    margin: 8px 0;
+    background: linear-gradient(-5deg, hsla(86, 61%, 44%, 0.85), hsla(86, 65%, 54%, 0.82));
+    border: none;
+    border-radius: 8px;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 20px;
+    color: honeydew;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    text-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+}
+
+.submit-btn:hover {
+    color: green;
+    transition: 0.3s;
+}
+
+/************************************************
+ *********   style for editors page      ********
+ used in tourEditor.jsp, orderEditor.jsp
+************************************************/
+
+.table-data #deleteBtn:hover, .table-data #editBtn:hover{
+    width: 25px;
+    height: 25px;
+}
+
+/************************************************
+ *********   style Tour editor page      ********
+ used in tourEditor.jsp
+************************************************/
+#tour-img{
+    width:border-box;
+    height:48px;
+}
+#description{
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/*Style for slider button*/
+.switch {
+    position: relative;
+    /*display: inline-block;*/
+    display: inline-flex;
+    width: 60px;
+    height: 32px;
+    margin-left: 10px;
+    margin-right: 40px;
+}
+.slider-div{
+display: table-row;
+    /*display: inline-flex;*/
+    align-items: center;
+    padding-top: 12px ;
+    margin-bottom: 10px;
+}
+.slider-plus-image-div{
+    display: flex;
+}
+
+.switch #hot-switch {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+#hot-switch:checked + .slider{
+    background-color: limegreen;
+}
+
+#hot-switch:focus + .slider{
+    box-shadow: 0 0 1px #2196F3;
+}
+
+#hot-switch:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 24px;
+    width: 24px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider.round {
+    border-radius: 32px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+/************************************************
+*********   style addTour page      ********
+used in addTour.jsp
+************************************************/
+
+.image-div{
+    /*position: relative;*/
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-position: center;
+    background-size: cover;
+    border: 1px solid green;
+    width: 196px;
+    height: 128px;
+    overflow: hidden;
+    margin-left: 180px;
+    margin-top: 12px;
+}
+
+.image-div #image-img{
+    max-width:100%;
+    min-height:100%;
+}
+#image-input{
+    margin-top: 148px;
+    margin-left: -196px;
+}

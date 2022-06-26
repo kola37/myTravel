@@ -46,6 +46,7 @@ public class UpdateOrderCommand implements Command {
         try {
             int orderId = Integer.parseInt(orderIdString);
             int statusId = Integer.parseInt(statusIdString);
+
             OrderService orderService = ServiceFactory.getInstance().getOrderService();
             boolean isUpdated = orderService.updateOrderStatus(orderId, statusId);
             if(isUpdated){

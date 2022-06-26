@@ -56,10 +56,4 @@ public interface UserService extends Service<User>{
      */
     Optional<User> editUserInfo(int id, String login, String password, String firstName, String lastName, String email, String role) throws ServiceException;
 
-    /**
-     * Method to retrieve all users from database
-     * @return List of users
-     * @throws ServiceException
-     */
-    List<User> retreiveAllUsers() throws ServiceException;
 }

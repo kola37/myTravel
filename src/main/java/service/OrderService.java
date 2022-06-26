@@ -14,12 +14,12 @@ import java.util.List;
  *
  * @author Anatolii Koliaka
  */
-public interface OrderService {
+public interface OrderService extends Service<Order>{
 
     /**
      * Method to add new order
      *
-     * @param userIdString user's ID
+     * @param userId user's ID
      * @param tourIdString tour's ID String value
      * @param status order's status String value
      * @param orderDate order's date of creation
@@ -47,14 +47,6 @@ public interface OrderService {
     List<Order> retrieveUserOrdersByUserId(int userId) throws ServiceException;
 
     /**
-     * Method to retrieve all orders
-     *
-     * @return List of orders
-     * @throws ServiceException
-     */
-    List<Order> retrieveAllOrders() throws ServiceException;
-
-    /**
      * Method to delete order from database using order id like argument
      * @param orderId order's id
      * @return true if order successfully deleted from database, false otherwise
@@ -66,12 +58,12 @@ public interface OrderService {
      * Method to update order status from database using order id like argument
      * @param orderId order's id
      * @param statusId order's status id
-     * @return true if order successfully deleted from database, false otherwise
+     * @return true if order successfully updated, false otherwise
      * @throws ServiceException
      */
     boolean updateOrderStatus(int orderId, int statusId) throws ServiceException;
 
     BigDecimal calculateTotalPrice(int price, int discount) throws ServiceException;
 
-    int calculateDiscountAmount(int numOfPaidOrders, Promotion promotion) throws ServiceException;
+    int calculateDiscountAmount(int numOfPaidOrders, int discountRate, int maxDiscount) throws ServiceException;
 }

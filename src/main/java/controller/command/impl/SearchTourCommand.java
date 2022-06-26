@@ -49,7 +49,7 @@ public class SearchTourCommand implements Command {
 
         try {
             TourService tourService = ServiceFactory.getInstance().getTourService();
-            List<Tour> toursNotSorted = tourService.retrieveAllTours();
+            List<Tour> toursNotSorted = tourService.retrieveAll();
             List<Tour> sortedTours;
 
             if (req.getParameter(PARAM_SEARCH_BY_TOUR_TYPE) != null) {

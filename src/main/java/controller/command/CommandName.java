@@ -13,6 +13,9 @@ public class CommandName {
     public static final String SEARCH_TOUR_COMMAND = "searchTour";
     public static final String DELETE_ORDER_COMMAND = "deleteOrder";
     public static final String UPDATE_ORDER_COMMAND = "updateOrder";
+    public static final String DELETE_TOUR_COMMAND = "deleteTour";
+    public static final String UPDATE_TOUR_COMMAND = "updateTour";
+    public static final String NEW_TOUR_COMMAND = "newTour";
 
 
 
@@ -23,6 +26,9 @@ public class CommandName {
     public static final String ORDER_PAGE_COMMAND = "orderPage";
     public static final String USER_CABINET_PAGE_COMMAND = "userCabinet";
     public static final String ORDER_EDITOR_PAGE_COMMAND = "orderEditor";
+    public static final String TOUR_EDITOR_PAGE_COMMAND = "tourEditor";
+    public static final String USER_EDITOR_PAGE_COMMAND = "userEditor";
+    public static final String ADD_TOUR_PAGE_COMMAND = "addTour";
 
 
 

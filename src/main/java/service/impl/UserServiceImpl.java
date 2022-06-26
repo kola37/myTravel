@@ -138,7 +138,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> retreiveAllUsers() throws ServiceException {
+    public List<User> retrieveAll() throws ServiceException {
         Connection con = DBUtils.getInstance().getConnection();
         try {
             UserDAO userDAO = DAOFactory.getInstance().getUserDAO();
@@ -182,7 +182,7 @@ public class UserServiceImpl implements UserService {
      * @return true if supposed login exist and assigned to another user, false otherwise
      * @throws DAOException
      */
-    private boolean isLoginExist(Connection con, UserDAO dao, User user) throws DAOException {
+    private static boolean isLoginExist(Connection con, UserDAO dao, User user) throws DAOException {
         Optional<User> userWithLogin = dao.findByLogin(con, user.getLogin());
         return (userWithLogin.isPresent() && userWithLogin.get().getId() != user.getId());
     }

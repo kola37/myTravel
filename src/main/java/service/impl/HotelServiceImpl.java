@@ -13,6 +13,7 @@ import util.DBUtils;
 
 import java.sql.Connection;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Class-service that handle all business logic related with Hotel and DAO
@@ -56,7 +57,7 @@ public class HotelServiceImpl implements HotelService {
     }
 
     @Override
-    public List<Hotel> retrieveAllHotels() throws ServiceException {
+    public List<Hotel> retrieveAll() throws ServiceException {
         Connection con = DBUtils.getInstance().getConnection();
         try {
             HotelDAO hotelDAO = DAOFactory.getInstance().getHotelDAO();
@@ -66,6 +67,20 @@ public class HotelServiceImpl implements HotelService {
         } catch (DAOException e) {
             LOG.error("Unable to retrieve all hotels!");
             throw new ServiceException("Unable to retrieve all hotels!", e);
+        } finally {
+            DBUtils.close(con);
+        }
+    }
+
+    @Override
+    public Optional<Hotel> retrieveHotelByName(String hotelName) throws ServiceException {
+        Connection con = DBUtils.getInstance().getConnection();
+        try {
+            HotelDAO hotelDAO = DAOFactory.getInstance().getHotelDAO();
+            return hotelDAO.findByName(con, hotelName);
+        } catch (DAOException e) {
+            LOG.error("Cannot find hotel in DB!", e);
+            throw new ServiceException("Cannot find hotel in DB!", e);
         } finally {
             DBUtils.close(con);
         }

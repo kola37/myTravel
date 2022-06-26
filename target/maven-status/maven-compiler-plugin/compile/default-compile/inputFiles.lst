@@ -1,5 +1,7 @@
 /Users/anatolii/IdeaProjects/myTravelAgency/src/main/java/controller/command/impl/transitition/GoToOrderEditorCommand.java
 /Users/anatolii/IdeaProjects/myTravelAgency/src/main/java/controller/command/CommandResultType.java
+/Users/anatolii/IdeaProjects/myTravelAgency/src/main/java/controller/command/impl/transitition/GoToTourEditorCommand.java
+/Users/anatolii/IdeaProjects/myTravelAgency/src/main/java/controller/command/impl/NewTourCommand.java
 /Users/anatolii/IdeaProjects/myTravelAgency/src/main/java/tag/TourEntityTagHandler.java
 /Users/anatolii/IdeaProjects/myTravelAgency/src/main/java/entity/constant/HotelType.java
 /Users/anatolii/IdeaProjects/myTravelAgency/src/main/java/controller/command/Command.java
@@ -21,6 +23,7 @@
 /Users/anatolii/IdeaProjects/myTravelAgency/src/main/java/entity/UserOrder.java
 /Users/anatolii/IdeaProjects/myTravelAgency/src/main/java/service/validator/impl/EmailValidatorImpl.java
 /Users/anatolii/IdeaProjects/myTravelAgency/src/main/java/entity/Promotion.java
+/Users/anatolii/IdeaProjects/myTravelAgency/src/main/java/controller/command/impl/transitition/GoToUserEditorCommand.java
 /Users/anatolii/IdeaProjects/myTravelAgency/src/main/java/service/TourService.java
 /Users/anatolii/IdeaProjects/myTravelAgency/src/main/java/dao/impl/HotelDAOImpl.java
 /Users/anatolii/IdeaProjects/myTravelAgency/src/main/java/controller/command/impl/DeleteOrderCommand.java
@@ -32,6 +35,7 @@
 /Users/anatolii/IdeaProjects/myTravelAgency/src/main/java/dao/impl/TourDAOImpl.java
 /Users/anatolii/IdeaProjects/myTravelAgency/src/main/java/filter/EncodingFilter.java
 /Users/anatolii/IdeaProjects/myTravelAgency/src/main/java/controller/command/impl/CreateNewTourCommand.java
+/Users/anatolii/IdeaProjects/myTravelAgency/src/main/java/controller/command/impl/UpdateTourCommand.java
 /Users/anatolii/IdeaProjects/myTravelAgency/src/main/java/service/validator/impl/NameValidatorImpl.java
 /Users/anatolii/IdeaProjects/myTravelAgency/src/main/java/service/impl/TourServiceImpl.java
 /Users/anatolii/IdeaProjects/myTravelAgency/src/main/java/exception/CommandException.java
@@ -52,12 +56,14 @@
 /Users/anatolii/IdeaProjects/myTravelAgency/src/main/java/service/HotelService.java
 /Users/anatolii/IdeaProjects/myTravelAgency/src/main/java/service/UserService.java
 /Users/anatolii/IdeaProjects/myTravelAgency/src/main/java/controller/command/CommandResult.java
+/Users/anatolii/IdeaProjects/myTravelAgency/src/main/java/controller/command/impl/DeleteTourCommand.java
 /Users/anatolii/IdeaProjects/myTravelAgency/src/main/java/Main2.java
 /Users/anatolii/IdeaProjects/myTravelAgency/src/main/java/controller/Controller.java
 /Users/anatolii/IdeaProjects/myTravelAgency/src/main/java/controller/command/impl/RegisterCommand.java
 /Users/anatolii/IdeaProjects/myTravelAgency/src/main/java/service/impl/HotelServiceImpl.java
 /Users/anatolii/IdeaProjects/myTravelAgency/src/main/java/service/Service.java
 /Users/anatolii/IdeaProjects/myTravelAgency/src/main/java/entity/constant/OrderStatus.java
+/Users/anatolii/IdeaProjects/myTravelAgency/src/main/java/controller/command/impl/transitition/GoToAddTourCommand.java
 /Users/anatolii/IdeaProjects/myTravelAgency/src/main/java/dao/UserDAO.java
 /Users/anatolii/IdeaProjects/myTravelAgency/src/main/java/controller/command/impl/transitition/GoToLoginCommand.java
 /Users/anatolii/IdeaProjects/myTravelAgency/src/main/java/controller/command/impl/transitition/GoToHomeCommand.java

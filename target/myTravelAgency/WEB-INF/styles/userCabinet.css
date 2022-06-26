@@ -29,7 +29,7 @@ body{
 ************************************************/
 .tittle-container{
     position:relative;
-    max-width: 500px;
+    max-width: 48%;
     background-color: seagreen;
     border-bottom: 2px solid green;
     margin-left: 50%;
@@ -45,20 +45,21 @@ body{
 }
 /*when use <a> inside <h2>*/
 
-/*.tittle-item a{*/
-/*    color: azure;*/
-/*    text-decoration: none;*/
-/*}*/
-/*.tittle-item a:hover{*/
-/*    color: lightgray;*/
-/*}*/
+.tittle-item a{
+    float: right;
+    color: azure;
+    text-decoration: none;
+}
+.tittle-item a:hover{
+    color: lightgray;
+}
 
 /************************************************
  *********    Table         ********
 ************************************************/
 .container {
     position: relative;
-    max-width: 1000px;
+    max-width: 96%;
     margin: 20px auto;
     display:flex;
     min-height:100vh;
@@ -84,11 +85,11 @@ body{
 .table-data, .header-item {
     flex: 1 1 20%;
     text-align:center;
-    font-weight: bold;
+    font-weight: lighter;
+    overflow-x: hidden;
 }
-.table-data #deleteBtn:hover, .table-data #editBtn:hover{
-    width: 25px;
-    height: 25px;
+.table-data:hover{
+    overflow: visible;
 }
 
 .table-row {
@@ -172,13 +173,30 @@ body{
 }
 
 /************************************************
- *********    Order status selector      ********
- used in orderEditor.jsp
+ *********   style for editors page      ********
+ used in tourEditor.jsp, orderEditor.jsp
 ************************************************/
 
-/*.table-data .order-status{*/
-/*    display: none;*/
-/*}*/
-#label-select{
-    display: none;
+.table-data #deleteBtn:hover, .table-data #editBtn:hover, .table-data #saveBtn:hover{
+    width: 25px;
+    height: 25px;
+}
+
+/************************************************
+ *********   style Tour editor page      ********
+ used in tourEditor.jsp
+************************************************/
+#tour-img{
+ width:border-box;
+    height:48px;
+}
+#description{
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+#description:hover{
+    display: flex;
 }

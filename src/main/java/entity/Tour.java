@@ -20,12 +20,12 @@ public class Tour implements Serializable {
     private String description;
     private String image;
     private int price;
-//    private double discount;
-//    private double maxDiscount;
+    private int discountRate;
+    private int maxDiscount;
     private int tourTypeId;
     private int numOfPersons;
     private int hotelId;
-    private int promotionId;
+//    private int promotionId;
     private boolean isHot;
 
     public Tour() {
@@ -71,21 +71,21 @@ public class Tour implements Serializable {
         this.price = price;
     }
 
-//    public double getDiscount() {
-//        return discount;
-//    }
-//
-//    public void setDiscount(double discount) {
-//        this.discount = discount;
-//    }
-//
-//    public double getMaxDiscount() {
-//        return maxDiscount;
-//    }
-//
-//    public void setMaxDiscount(double maxDiscount) {
-//        this.maxDiscount = maxDiscount;
-//    }
+    public int getDiscountRate() {
+        return discountRate;
+    }
+
+    public void setDiscountRate(int discountRate) {
+        this.discountRate = discountRate;
+    }
+
+    public int getMaxDiscount() {
+        return maxDiscount;
+    }
+
+    public void setMaxDiscount(int maxDiscount) {
+        this.maxDiscount = maxDiscount;
+    }
 
     public int getTourTypeId() {
         return tourTypeId;
@@ -111,13 +111,13 @@ public class Tour implements Serializable {
         this.hotelId = hotelId;
     }
 
-    public int getPromotionId() {
-        return promotionId;
-    }
-
-    public void setPromotionId(int promotionId) {
-        this.promotionId = promotionId;
-    }
+//    public int getPromotionId() {
+//        return promotionId;
+//    }
+//
+//    public void setPromotionId(int promotionId) {
+//        this.promotionId = promotionId;
+//    }
 
     public boolean isHot() {
         return isHot;
@@ -133,12 +133,12 @@ public class Tour implements Serializable {
         if (o == null || getClass() != o.getClass()) return false;
         Tour tour = (Tour) o;
         return id == tour.id && tour.price == price && tourTypeId == tour.tourTypeId && numOfPersons == tour.numOfPersons && hotelId == tour.hotelId
-                && promotionId == tour.promotionId && isHot == tour.isHot && name.equals(tour.name) && description.equals(tour.description) && Objects.equals(image, tour.image);
+                && isHot == tour.isHot && name.equals(tour.name) && description.equals(tour.description) && Objects.equals(image, tour.image);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, description, image, price, tourTypeId, numOfPersons, hotelId, promotionId, isHot);
+        return Objects.hash(id, name, description, image, price, tourTypeId, numOfPersons, hotelId, isHot);
     }
 
     @Override
@@ -148,12 +148,12 @@ public class Tour implements Serializable {
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", price=" + price +
-//                ", discount=" + discount +
-//                ", maxDiscount=" + maxDiscount +
+                ", discountRate=" + discountRate +
+                ", maxDiscount=" + maxDiscount +
                 ", tourTypeId=" + tourTypeId +
                 ", person=" + numOfPersons +
                 ", hotelId=" + hotelId +
-                ", promotionId=" + promotionId +
+//                ", promotionId=" + promotionId +
                 ", isHot='" + isHot +
                 '}';
     }
@@ -196,15 +196,15 @@ public class Tour implements Serializable {
             return this;
         }
 
-//        public Builder withDiscount(int discount){
-//            tour.discount = discount;
-//            return this;
-//        }
-//
-//        public Builder withMaxDiscount(int maxDiscount){
-//            tour.maxDiscount = maxDiscount;
-//            return this;
-//        }
+        public Builder withDiscountRate(int discountRate){
+            tour.discountRate = discountRate;
+            return this;
+        }
+
+        public Builder withMaxDiscount(int maxDiscount){
+            tour.maxDiscount = maxDiscount;
+            return this;
+        }
 
         public Builder withTourTypeId(int tourTypeId){
             tour.tourTypeId = tourTypeId;
@@ -221,10 +221,10 @@ public class Tour implements Serializable {
             return this;
         }
 
-        public Builder withPromotionId(int promotionId){
-            tour.promotionId = promotionId;
-            return this;
-        }
+//        public Builder withPromotionId(int promotionId){
+//            tour.promotionId = promotionId;
+//            return this;
+//        }
 
         public Builder isHot(boolean isHot){
             tour.isHot = isHot;

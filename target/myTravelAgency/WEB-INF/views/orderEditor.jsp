@@ -103,7 +103,6 @@
         let nonSelectable = document.getElementById("nonSelectable" + clicked_id)
         let selectable = document.getElementById("selectable" + clicked_id)
 
-        // let selector = document.getElementById("selector"+clicked_id)
         nonSelectable.style.display = "none"
         selectable.style.display = "block"
 
@@ -124,21 +123,14 @@
             return
         }
 
-
         let statusSelector = document.getElementById(clicked_id)
         let value = statusSelector.options[statusSelector.selectedIndex].value
 
         let orderData = {orderId: clicked_id, orderStatus: value}
         let options = {
-            method: "POST",
-            // headers: {
-            //     'Accept': 'application/json',
-            //     'Content-Type': 'application/json'
-            // },
-            // body: JSON.stringify(orderData)
+            method: "POST"
         }
         fetch("${pageContext.request.contextPath}/my-travel?command=updateOrder&orderId=" + clicked_id +"&statusId=" + value, options)
-            // .then(response => response.json())
             .then(response => {
                 window.location.href = "${pageContext.request.contextPath}/my-travel?command=orderEditor"
             })

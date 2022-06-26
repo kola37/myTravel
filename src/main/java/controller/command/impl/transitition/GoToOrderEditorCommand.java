@@ -53,11 +53,11 @@ public class GoToOrderEditorCommand implements Command {
 
         try {
             UserService  userService = ServiceFactory.getInstance().getUserService();
-            List<User> users = userService.retreiveAllUsers();
+            List<User> users = userService.retrieveAll();
             req.setAttribute(ATTR_USERS, users);
 
             OrderService orderService = ServiceFactory.getInstance().getOrderService();
-            List<Order> orders = orderService.retrieveAllOrders();
+            List<Order> orders = orderService.retrieveAll();
             req.setAttribute(ATTR_ORDERS, orders);
 
             result = new CommandResult(PagePath.PAGE_ADMIN_ORDER_EDITOR, CommandResultType.FORWARD);

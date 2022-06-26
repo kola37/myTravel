@@ -3,6 +3,7 @@ entity/Hotel.class
 controller/command/impl/EditUserCommand.class
 service/validator/Validator.class
 controller/command/impl/DefaultCommand.class
+controller/command/impl/transitition/GoToAddTourCommand.class
 controller/command/impl/transitition/GoToHomeCommand.class
 dao/DAO.class
 controller/command/impl/transitition/GoToOrderEditorCommand.class
@@ -43,10 +44,13 @@ Main.class
 service/validator/AbstractValidator.class
 exception/ServiceException.class
 dao/HotelDAO.class
+controller/command/impl/transitition/GoToTourEditorCommand.class
 exception/CommandException.class
+controller/command/impl/UpdateTourCommand.class
 entity/Order$Builder.class
 service/validator/impl/EmailValidatorImpl.class
 entity/constant/UserRole.class
+controller/command/impl/transitition/GoToUserEditorCommand.class
 util/DBUtils.class
 controller/command/impl/ConfirmOrderCommand.class
 service/validator/impl/NameValidatorImpl.class
@@ -57,10 +61,12 @@ entity/User.class
 service/Service.class
 entity/Tour.class
 entity/UserOrder.class
+controller/command/impl/NewTourCommand.class
 controller/command/impl/transitition/GoToTourCommand.class
 service/impl/TourServiceImpl.class
 exception/DBException.class
 dao/impl/OrderDAOImpl.class
+controller/command/impl/DeleteTourCommand.class
 entity/Tour$Builder.class
 dao/UserDAO.class
 service/UserService.class

@@ -10,16 +10,18 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Controller class
+ * Controller class with @MultipartConfig annotation to accept uploading images
  *
  * @author Anatolii Koliaka
  */
+@MultipartConfig
 public class Controller extends HttpServlet {
 
     private static final long serialVersionUID = -1951358628804251994L;

@@ -5,7 +5,6 @@ import controller.command.Command;
 import controller.command.CommandResult;
 import controller.command.CommandResultType;
 import entity.Order;
-import entity.Promotion;
 import entity.Tour;
 import entity.User;
 import entity.constant.OrderStatus;
@@ -72,15 +71,12 @@ public class GoToOrderCommand implements Command {
 
             OrderService orderService = ServiceFactory.getInstance().getOrderService();
             List<Order> userOrders = orderService.retrieveUserOrdersByUserIdAndStatus(user.getId(), OrderStatus.PAID.getIndex());
-            ///////////////////временно//////////////////
-            Promotion promo = new Promotion();
-            promo.setDiscountRate(2);
-            promo.setMaxDiscount(15);
-            int discount = orderService.calculateDiscountAmount(userOrders.size(),promo);
+
+            Tour tour = tourOptional.get();
+            int discount = orderService.calculateDiscountAmount(userOrders.size(),tour.getDiscountRate(), tour.getMaxDiscount());
             BigDecimal totalPrice =  orderService.calculateTotalPrice(tourOptional.get().getPrice(), discount);
             req.setAttribute("discount",discount);
             req.setAttribute("totalPrice", totalPrice);
-            ///////////////////временно//////////////////
 
             req.setAttribute(ATTR_USER, user);
             req.setAttribute(ATTR_TOUR, tourOptional.get());
