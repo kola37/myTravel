@@ -7,8 +7,8 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="entity.constant.OrderStatus" %>
-<%@ page import="entity.constant.UserRole" %>
 <%--<%@ taglib prefix="tet" uri="my-travel/tourEntityTag" %>--%>
 
 <html>
@@ -28,7 +28,7 @@
 <%--Greeting for users and managers--%>
 <c:if test="${userRole == 'user' || userRole == 'manager'}">
     <div class="info-msg">
-        <h3>Hello, ${userLogin}!</h3>
+        <h3><fmt:message key="home_jsp.greeting.user.hello"/> ${userLogin}!</h3>
         <hr>
     </div>
 </c:if>
@@ -37,7 +37,7 @@
 <c:if test="${menu == 'myOrders'}">
     <div class="tittle-container">
         <div class="tittle-item">
-            <h2>My orders</h2>
+            <h2><fmt:message key="user_cabinet_jsp.orders.container.tittle"/></h2>
         </div>
     </div>
 
@@ -45,14 +45,14 @@
         <div class="table">
 
             <div class="table-header">
-                <div class="header-item">№</div>
-                <div class="header-item">Date</div>
-                <div class="header-item">Tour</div>
-                <div class="header-item">Hotel</div>
-                <div class="header-item">Person</div>
-                <div class="header-item">Discount</div>
-                <div class="header-item">Total</div>
-                <div class="header-item">Status</div>
+                <div class="header-item"><fmt:message key="user_cabinet_jsp.orders.container.column.id"/></div>
+                <div class="header-item"><fmt:message key="user_cabinet_jsp.orders.container.column.date"/></div>
+                <div class="header-item"><fmt:message key="user_cabinet_jsp.orders.container.column.tour"/></div>
+                <div class="header-item"><fmt:message key="user_cabinet_jsp.orders.container.column.hotel"/></div>
+                <div class="header-item"><fmt:message key="user_cabinet_jsp.orders.container.column.person"/></div>
+                <div class="header-item"><fmt:message key="user_cabinet_jsp.orders.container.column.discount"/></div>
+                <div class="header-item"><fmt:message key="user_cabinet_jsp.orders.container.column.total"/></div>
+                <div class="header-item"><fmt:message key="user_cabinet_jsp.orders.container.column.status"/></div>
             </div>
             <div class="table-content">
                 <c:forEach var="order" items="${orders}">
@@ -76,64 +76,64 @@
 <c:if test="${menu == 'myInfo'}">
     <div class="form-box">
         <div>
-            <h2>My info:</h2>
+            <h2><fmt:message key="user_cabinet_jsp.my_info.form.tittle"/></h2>
         </div>
         <div id="readable" class="input-group">
             <div>
-                <p>Login:</p>
+                <p><fmt:message key="user_cabinet_jsp.my_info.form.field.login"/></p>
                 <h3>${user.login}</h3>
                 <hr>
             </div>
             <div>
-                <p>First name:</p>
+                <p><fmt:message key="user_cabinet_jsp.my_info.form.field.first_name"/></p>
                 <h3>${user.firstName}</h3>
                 <hr>
             </div>
             <div>
-                <p>Last name:</p>
+                <p><fmt:message key="user_cabinet_jsp.my_info.form.field.last_name"/></p>
                 <h3>${user.lastName}</h3>
                 <hr>
             </div>
             <div>
-                <p>Email:</p>
+                <p><fmt:message key="user_cabinet_jsp.my_info.form.field.email"/></p>
                 <h3>${user.email}</h3>
                 <hr>
             </div>
-            <button type="button" class="submit-btn" id="showEditable">Edit</button>
+            <button type="button" class="submit-btn" id="showEditable"><fmt:message key="user_cabinet_jsp.my_info.form.btn.edit"/></button>
         </div>
 
         <form id="editable" class="input-group" action="${pageContext.request.contextPath}/my-travel?command=editUser"
               method="post">
             <label>
-                <p>Login:</p>
-                <input class="input-field" type="text" placeholder="login" name="login" value="${user.login}" required
+                <p><fmt:message key="user_cabinet_jsp.my_info.form.field.login"/></p>
+                <input class="input-field" type="text" placeholder="<fmt:message key="login_register_jsp.form.placeholder.login"/>" name="login" value="${user.login}" required
                        maxlength="15">
             </label>
             <label>
-                <p>Password:</p>
-                <input class="input-field" type="password" placeholder="password" name="password"
+                <p><fmt:message key="user_cabinet_jsp.my_info.form.field.password"/></p>
+                <input class="input-field" type="password" placeholder="<fmt:message key="login_register_jsp.form.placeholder.password"/>" name="password"
                        value="${user.password}" required maxlength="15">
             </label>
             <label>
-                <p>First name:</p>
-                <input class="input-field" type="text" placeholder="first name" name="firstName"
+                <p><fmt:message key="user_cabinet_jsp.my_info.form.field.first_name"/></p>
+                <input class="input-field" type="text" placeholder="<fmt:message key="login_register_jsp.form.placeholder.first_name"/>" name="firstName"
                        value="${user.firstName}" required
                        maxlength="20">
             </label>
             <label>
-                <p>Last name:</p>
-                <input class="input-field" type="text" placeholder="last name" name="lastName"
+                <p><fmt:message key="user_cabinet_jsp.my_info.form.field.last_name"/></p>
+                <input class="input-field" type="text" placeholder="<fmt:message key="login_register_jsp.form.placeholder.last_name"/>" name="lastName"
                        value="${user.lastName}" required maxlength="20">
             </label>
             <label>
-                <p>Email:</p>
-                <input class="input-field" type="email" placeholder="email" name="email"
+                <p><fmt:message key="user_cabinet_jsp.my_info.form.field.email"/></p>
+                <input class="input-field" type="email" placeholder="<fmt:message key="login_register_jsp.form.placeholder.email"/>" name="email"
                        value="${user.email}" required maxlength="40">
             </label>
             <label>
                 <input class="input-field" type="hidden" name="role" value="${userRole}" required>
             </label>
-            <button type="submit" class="submit-btn">Save</button>
+            <button type="submit" class="submit-btn"><fmt:message key="user_cabinet_jsp.my_info.form.btn.save"/></button>
         </form>
     </div>
 </c:if>

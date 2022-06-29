@@ -85,7 +85,6 @@ public class RegisterCommand implements Command {
                 LOG.trace("Set the session attribute 'userRole': " + role);
 
                 result = new CommandResult(PagePath.PAGE_REGISTER_SUCCESS, CommandResultType.REDIRECT);
-
             }
         } catch (ServiceException e) {
             req.setAttribute(ATTR_ERROR_MESSAGE, e.getMessage());

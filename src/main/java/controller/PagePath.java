@@ -28,8 +28,4 @@ public class PagePath {
     public static final String PAGE_ORDER_CONFIRMED = "/";
     public static final String PAGE_SUCCESS = "/";
 
-    // commands
-//    public static final String COMMAND_LOGIN_SUCCESS = "my-travel?command=home";
-//    public static final String COMMAND_LIST_ORDERS = "/controller?command=listOrders";
-//    public static final String COMMAND_LIST_MENU = "/controller?command=listMenu";
 }

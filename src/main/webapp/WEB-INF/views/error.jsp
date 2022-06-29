@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <html>
 <style>
@@ -18,7 +19,7 @@
 
 <%@ include file="/WEB-INF/views/fragment/header.jsp" %>
 
-<h1>ERROR</h1>
+<h1><fmt:message key="error_jsp.h1.error"/></h1>
 <hr>
 <%-- this way to obtain standart information about an exception that comes from command classes --%>
 <c:if test="${not empty errorMessage}">
@@ -30,7 +31,7 @@
 <c:set var="message" value="${requestScope['javax.servlet.error.message']}"/>
 
 <c:if test="${not empty code}">
-    <h3>Error code: ${code}</h3>
+    <h3><fmt:message key="error_jsp.h3.error_code"/> ${code}</h3>
 </c:if>
 
 <c:if test="${not empty message}">

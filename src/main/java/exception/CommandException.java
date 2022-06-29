@@ -1,5 +1,10 @@
 package exception;
 
+/**
+ * An exception that provides information about commands error or other errors
+ *
+ * @author Anatolii Koliaka
+ */
 public class CommandException extends Exception {
 
     private static final long serialVersionUID = 2451299462251261776L;

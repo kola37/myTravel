@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import static util.DBManager.close;
+import static util.DBUtils.close;
 
 /**
  * Class TourDAOIMpl implements TourDAO interface

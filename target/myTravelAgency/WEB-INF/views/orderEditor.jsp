@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="entity.constant.OrderStatus" %>
 
 <html>
@@ -25,14 +26,15 @@
 <%--Message for admin amd manager--%>
 <c:if test="${userRole == 'admin' || userRole == 'manager'}">
     <div class="info-msg">
-        <h3>Hello, ${userLogin}! This is ${userRole} version of site!</h3>
+        <h3><fmt:message key="home_jsp.greeting.user.hello"/> ${userLogin}! <fmt:message key="home_jsp.greeting.admin.hello.begin"/>
+                ${userRole} <fmt:message key="home_jsp.greeting.admin.hello.end"/></h3>
         <hr>
     </div>
 </c:if>
 
 <div class="tittle-container">
     <div class="tittle-item">
-        <h2>Orders</h2>
+        <h2><fmt:message key="order_editor_jsp.container.tittle"/></h2>
     </div>
 </div>
 
@@ -40,16 +42,16 @@
     <div class="table">
 
         <div class="table-header">
-            <div class="header-item">Order#</div>
-            <div class="header-item">Date</div>
-            <div class="header-item">Tour</div>
-            <div class="header-item">Hotel</div>
-            <div class="header-item">Client</div>
-            <div class="header-item">Discount</div>
-            <div class="header-item">Total</div>
-            <div class="header-item">Status</div>
-            <div class="header-item">Edit</div>
-            <div class="header-item">Delete</div>
+            <div class="header-item"><fmt:message key="order_editor_jsp.container.column.order"/></div>
+            <div class="header-item"><fmt:message key="order_editor_jsp.container.column.date"/></div>
+            <div class="header-item"><fmt:message key="order_editor_jsp.container.column.tour"/></div>
+            <div class="header-item"><fmt:message key="order_editor_jsp.container.column.hotel"/></div>
+            <div class="header-item"><fmt:message key="order_editor_jsp.container.column.client"/></div>
+            <div class="header-item"><fmt:message key="order_editor_jsp.container.column.discount"/></div>
+            <div class="header-item"><fmt:message key="order_editor_jsp.container.column.total"/></div>
+            <div class="header-item"><fmt:message key="order_editor_jsp.container.column.status"/></div>
+            <div class="header-item"><fmt:message key="order_editor_jsp.container.column.edit"/></div>
+            <div class="header-item"><fmt:message key="order_editor_jsp.container.column.delete"/></div>
         </div>
         <div class="table-content">
             <c:forEach var="order" items="${orders}">
@@ -65,7 +67,7 @@
                     <div class="table-data" id="selectable${order.id}" style="display: none">
                         <label>
                             <select name="order_status" id="${order.id}" onchange="changeStatus(this.id)">
-                                <option disabled selected>choose status</option>
+                                <option disabled selected><fmt:message key="order_editor_jsp.container.select.choose_status"/></option>
                                 <option value="1">${OrderStatus.getStatus(1).name()}</option>
                                 <option value="2">${OrderStatus.getStatus(2).name()}</option>
                                 <option value="3">${OrderStatus.getStatus(3).name()}</option>
@@ -89,7 +91,7 @@
 
 <script>
     function deleteOrder(clicked_id) {
-        const confirmed = confirm("Delete order #" + clicked_id + "?");
+        const confirmed = confirm("<fmt:message key="order_editor_jsp.alert.msg.delete"/>" + clicked_id + "?");
         if (!confirmed) return;
         fetch("${pageContext.request.contextPath}/my-travel?command=deleteOrder&orderId=" + clicked_id, {
             method: 'POST',
@@ -110,7 +112,7 @@
     function changeStatus(clicked_id) {
         let nonSelectable = document.getElementById("nonSelectable" + clicked_id)
         let selectable = document.getElementById("selectable" + clicked_id)
-        const confirmed = confirm("Save changes in order #" + clicked_id + "?");
+        const confirmed = confirm("<fmt:message key="order_editor_jsp.alert.msg.save_changes"/>" + clicked_id + "?");
         if (!confirmed) {
             nonSelectable.style.display = "block"
             selectable.style.display = "none"
@@ -120,7 +122,6 @@
         let statusSelector = document.getElementById(clicked_id)
         let value = statusSelector.options[statusSelector.selectedIndex].value
 
-        // let orderData = {orderId: clicked_id, orderStatus: value}
         let options = {
             method: "POST"
         }
@@ -128,17 +129,6 @@
             .then(response => {
                 window.location.href = "${pageContext.request.contextPath}/my-travel?command=orderEditor"
             })
-
-        <%--fetch("${pageContext.request.contextPath}/my-travel?command=updateOrder", {--%>
-        <%--    method: "POST",--%>
-        <%--    headers: {--%>
-        <%--        Accept: "application/json",--%>
-        <%--        "Content-Type": "application/json; charset=UTF-8",--%>
-        <%--    },--%>
-        <%--    body: JSON.stringify({ orderId: clicked_id }),--%>
-        <%--}).then(response => {--%>
-        <%--    window.location.href = "${pageContext.request.contextPath}/my-travel?command=orderEditor"--%>
-        <%--});--%>
     }
 </script>
 

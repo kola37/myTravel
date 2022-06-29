@@ -7,11 +7,13 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="entity.constant.TourType" %>
 
 <html>
 <c:set var="title" value="Add tour | My Travel Agency"/>
 <c:set var="tour" value="${tour}"/>
+<c:set var="commandNext" value="/my-travel?command=tourEditor" scope="request"/>
 
 <%@ include file="/WEB-INF/views/fragment/header.jsp" %>
 <style>
@@ -28,7 +30,7 @@
 
 <div class="form-box">
     <div>
-        <h2>Tour info:</h2>
+        <h2><fmt:message key="addTour_jsp.input.tittle.tittle"/></h2>
     </div>
     <%--***********************************************************************--%>
     <%-- For uploading images need to set form enctype to "multipart/form-data"--%>
@@ -36,27 +38,27 @@
     <form class="input-group"
           action="${pageContext.request.contextPath}/my-travel?command=newTour" method="post"
           enctype="multipart/form-data">
-        <p>Name:</p>
+        <p><fmt:message key="addTour_jsp.input.tittle.name"/></p>
         <label>
-            <input class="input-field" type="text" placeholder="name" name="name" required maxlength="50"
+            <input class="input-field" type="text" placeholder="<fmt:message key="addTour_jsp.input.placeholder.name"/>" name="name" required maxlength="50"
                    value="${tour.name}">
         </label>
-        <p>Description:</p>
+        <p><fmt:message key="addTour_jsp.input.tittle.description"/></p>
         <label>
-            <input class="input-field" type="text" placeholder="description" name="description"
+            <input class="input-field" type="text" placeholder="<fmt:message key="addTour_jsp.input.placeholder.description"/>" name="description"
                    maxlength="500" value="${tour.description}">
         </label>
-        <p>Price:</p>
+        <p><fmt:message key="addTour_jsp.input.tittle.price"/></p>
         <label>
-            <input class="input-field" type="number" placeholder="price" name="price" min="0" required
+            <input class="input-field" type="number" placeholder="<fmt:message key="addTour_jsp.input.placeholder.price"/>" name="price" min="0" required
                    value="${tour.price}">
         </label>
-        <p>Person:</p>
+        <p><fmt:message key="addTour_jsp.input.tittle.person"/></p>
         <label>
-            <input class="input-field" type="number" placeholder="person" name="numOfPersons" min="0" required
+            <input class="input-field" type="number" placeholder="<fmt:message key="addTour_jsp.input.placeholder.person"/>" name="numOfPersons" min="0" required
                    value="${tour.numOfPersons}">
         </label>
-        <p>Type:</p>
+        <p><fmt:message key="addTour_jsp.input.tittle.type"/></p>
         <label>
             <select class="input-field" id="type-selector" required name="tourType">
                 <option value="${TourType.HOLIDAYS.name()}" selected>${TourType.HOLIDAYS.name()}</option>
@@ -64,7 +66,7 @@
                 <option value="${TourType.SHOPPING.name()}">${TourType.SHOPPING.name()}</option>
             </select>
         </label>
-        <p>Hotel:</p>
+        <p><fmt:message key="addTour_jsp.input.tittle.hotel"/></p>
         <label>
             <select class="input-field" id="hotel-selector" name="hotelName">
                 <c:forEach var="hotel" items="${hotels}">
@@ -76,16 +78,16 @@
         <div class="slider-plus-image-div">
             <div class="slider-div">
                 <label>
-                    <input class="input-field" type="number" placeholder="discount rate" min="0" max="100"
+                    <input class="input-field" type="number" placeholder="<fmt:message key="addTour_jsp.input.placeholder.disc_rate"/>" min="0" max="100"
                            name="discountRate"
                            value="${tour.discountRate}">
                 </label>
                 <label>
-                    <input class="input-field" type="number" min="0" max="100" placeholder="max discount"
+                    <input class="input-field" type="number" min="0" max="100" placeholder="<fmt:message key="addTour_jsp.input.placeholder.max_disc"/>"
                            name="maxDiscount"
                            value="${tour.maxDiscount}">
                 </label>
-                <p>Tour is hot:</p>
+                <p><fmt:message key="addTour_jsp.input.tittle.hot_tour"/></p>
                 <label class="switch">
                     <%--When new tour is creating show swith--%>
                     <c:if test="${empty tour}">
@@ -103,7 +105,7 @@
             </div>
             <label>
                 <input type="hidden" name="tourId" value="${tour.id}">
-                <input type="hidden" name="commandNext" value="/my-travel?command=tourEditor">
+                <input type="hidden" name="commandNext" value="${commandNext}">
             </label>
 
             <%--Container with tour image--%>
@@ -118,7 +120,7 @@
             </div>
             <input id="image-input" type="file" name="file" accept="image/png, image/jpg">
         </div>
-        <button type="submit" class="submit-btn">Save</button>
+        <button type="submit" class="submit-btn"><fmt:message key="addTour_jsp.input.submit.btn.save"/></button>
     </form>
 </div>
 
@@ -133,7 +135,6 @@
     const image_input = document.getElementById("image-input");
     const imgContainer = document.getElementById("image-img");
     image_input.addEventListener("change", function () {
-        ;
         const file = this.files[0];
         const reader = new FileReader();
         reader.addEventListener("load", function () {

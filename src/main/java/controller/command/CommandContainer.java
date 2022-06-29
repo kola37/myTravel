@@ -37,7 +37,8 @@ public class CommandContainer {
         commands.put(CommandName.TOUR_EDITOR_PAGE_COMMAND, new GoToTourEditorCommand());
         commands.put(CommandName.DELETE_TOUR_COMMAND, new DeleteTourCommand());
         commands.put(CommandName.ADD_TOUR_PAGE_COMMAND, new GoToAddTourCommand());
-        commands.put(CommandName.NEW_TOUR_COMMAND, new NewTourCommand());
+        commands.put(CommandName.ADMIN_ADD_NEW_TOUR_COMMAND, new AdminAddNewTourCommand());
+        commands.put(CommandName.ADMIN_ADD_NEW_MANAGER_COMMAND, new AdminAddNewManagerCommand());
         commands.put(CommandName.UPDATE_TOUR_COMMAND, new ManagerUpdateTourCommand());
         commands.put(CommandName.USER_EDITOR_PAGE_COMMAND, new GoToUserEditorCommand());
         commands.put(CommandName.ADMIN_UPDATE_USER_COMMAND, new AdminUpdateUserCommand());

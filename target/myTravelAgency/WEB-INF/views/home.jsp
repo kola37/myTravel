@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="entity.constant.TourType" %>
 
 <html>
@@ -30,7 +31,7 @@
 <%--Greeting for users--%>
 <c:if test="${userRole == 'user'}">
     <div class="info-msg">
-        <h3>Hello, ${userLogin}!</h3>
+        <h3><fmt:message key="home_jsp.greeting.user.hello"/> ${userLogin}!</h3>
         <hr>
     </div>
 </c:if>
@@ -38,7 +39,8 @@
 <%--Message for admin amd manager--%>
 <c:if test="${userRole == 'admin' || userRole == 'manager'}">
     <div class="info-msg">
-        <h3>Hello, ${userLogin}! This is ${userRole} version of site!</h3>
+        <h3><fmt:message key="home_jsp.greeting.user.hello"/> ${userLogin}! <fmt:message key="home_jsp.greeting.admin.hello.begin"/>
+                ${userRole} <fmt:message key="home_jsp.greeting.admin.hello.end"/></h3>
         <hr>
     </div>
 </c:if>
@@ -46,7 +48,8 @@
 <%--Searching parameters--%>
 <c:if test="${not empty searchParamMessage}">
     <div class="info-msg" id="search-param">
-        <h3>Searching parameter: ${searchParamMessage}, found ${tours.size()} tour(s)
+        <h3><fmt:message key="home_jsp.searching_tour_param.msg.begin"/> ${searchParamMessage}
+            <fmt:message key="home_jsp.searching_tour_param.msg.middle"/> ${tours.size()} <fmt:message key="home_jsp.searching_tour_param.msg.end"/>
             <a class="closeBtn" id="search-param-close"
            href="${pageContext.request.contextPath}/my-travel?command=home">×</a></h3>
         <hr>
@@ -78,13 +81,13 @@
                 </c:if>
 
                 <div class="info-block">
-                    <h3>More Info</h3>
-                    <p>Type: ${TourType.getType(tour.tourTypeId).getName()}</p>
-                    <p>Hotel: ${hotels.stream().filter(hotel -> hotel.getId()==tour.hotelId).toList().get(0).name}</p>
-                    <p>Person: ${tour.numOfPersons}</p>
-                    <p>Price: ${tour.price} $</p>
+                    <h3><fmt:message key="home_jsp.tour_container.info_block.more_info"/></h3>
+                    <p><fmt:message key="home_jsp.tour_container.info_block.type"/> ${TourType.getType(tour.tourTypeId).getName()}</p>
+                    <p><fmt:message key="home_jsp.tour_container.info_block.hotel"/> ${hotels.stream().filter(hotel -> hotel.getId()==tour.hotelId).toList().get(0).name}</p>
+                    <p><fmt:message key="home_jsp.tour_container.info_block.person"/> ${tour.numOfPersons}</p>
+                    <p><fmt:message key="home_jsp.tour_container.info_block.price"/> ${tour.price} $</p>
                     <li class="more-info-btn">
-                        <a href="${pageContext.request.contextPath}/my-travel?command=tourPage&tourId=${tour.id}">More info</a>
+                        <a href="${pageContext.request.contextPath}/my-travel?command=tourPage&tourId=${tour.id}"><fmt:message key="home_jsp.tour_container.info_block.link.more_info"/></a>
                     </li>
                 </div>
             </div>

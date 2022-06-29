@@ -109,15 +109,15 @@ CREATE TABLE orders (
     FOREIGN KEY (status_id) REFERENCES statuses(id) ON DELETE CASCADE ON UPDATE RESTRICT
 );
 
-----------------------------------------------------------------
-------------- Table PROMOTIONS
-----------------------------------------------------------------
-CREATE TABLE promotions(
-	id INTEGER AUTO_INCREMENT,
-	discount_rate INTEGER NOT NULL DEFAULT 0,
-	max_discount INTEGER NOT NULL DEFAULT 0,
-	PRIMARY KEY (id)
-);
+-- ----------------------------------------------------------------
+-- ------------- Table PROMOTIONS
+-- ----------------------------------------------------------------
+-- CREATE TABLE promotions(
+-- 	id INTEGER AUTO_INCREMENT,
+-- 	discount_rate INTEGER NOT NULL DEFAULT 0,
+-- 	max_discount INTEGER NOT NULL DEFAULT 0,
+-- 	PRIMARY KEY (id)
+-- );
 
 ---------------------------------------------------------------
 ------------- Table USERS_ORDERS

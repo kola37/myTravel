@@ -7,8 +7,20 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 
 <html>
+<%----**************************************************************************----%>
+<%----------------locale "uk" seted as default in web.xml file----------------------%>
+<%----when session has attribute currentLocale change default locale to requested---%>
+<%----**************************************************************************----%>
+<c:if test="${not empty sessionScope.currentLocale}">
+    <%-- set the locale --%>
+    <fmt:setLocale value="${sessionScope.locale}"/>
+    <%-- load the bundle (by locale) --%>
+    <fmt:setBundle basename="language"/>
+</c:if>
 
 <style>
     <%@include file="/WEB-INF/styles/header.css" %>
@@ -32,75 +44,80 @@
     <p class="logo">My travel</p>
     <div class="navigation">
         <ul class="menu">
-            <li class="menu-item"><a href="${pageContext.request.contextPath}/my-travel?command=home">Home</a></li>
+            <li class="menu-item"><a href="${pageContext.request.contextPath}/my-travel?command=home"><fmt:message key="header_jsp.menu.link.home"/></a></li>
             <li class="menu-item">
-                <a class="sub-btn">Search tour</a>
+                <a class="sub-btn"><fmt:message key="header_jsp.menu.btn.search_tour"/></a>
                 <ul class="sub-menu">
                     <li class="sub-item more">
-                        <a class="more-btn">Tour type</a>
+                        <a class="more-btn"><fmt:message key="header_jsp.menu.btn.tour_type"/></a>
                         <ul class="more-menu">
                             <li class="more-item"><a
-                                    href="${pageContext.request.contextPath}/my-travel?command=searchTour&type=holidays">Holidays</a>
+                                    href="${pageContext.request.contextPath}/my-travel?command=searchTour&type=holidays">
+                                <fmt:message key="header_jsp.menu.btn.tour_type.link.holidays"/></a>
                             </li>
                             <li class="more-item"><a
-                                    href="${pageContext.request.contextPath}/my-travel?command=searchTour&type=excursion">Excursion</a>
+                                    href="${pageContext.request.contextPath}/my-travel?command=searchTour&type=excursion">
+                                <fmt:message key="header_jsp.menu.btn.tour_type.link.excursion"/>
+                            </a>
                             </li>
                             <li class="more-item"><a
-                                    href="${pageContext.request.contextPath}/my-travel?command=searchTour&type=shopping">Shopping</a>
+                                    href="${pageContext.request.contextPath}/my-travel?command=searchTour&type=shopping">
+                                <fmt:message key="header_jsp.menu.btn.tour_type.link.shopping"/>
+                            </a>
                             </li>
                         </ul>
                     </li>
                     <li class="sub-item more">
-                        <a class="more-btn">Tour price</a>
+                        <a class="more-btn"><fmt:message key="header_jsp.menu.btn.tour_price"/></a>
                         <ul class="more-menu">
                             <li class="more-item"><a
-                                    href="${pageContext.request.contextPath}/my-travel?command=searchTour&price=desc">Expensive
-                                first</a></li>
+                                    href="${pageContext.request.contextPath}/my-travel?command=searchTour&price=desc">
+                                <fmt:message key="header_jsp.menu.btn.tour_price.link.desc"/></a></li>
                             <li class="more-item"><a
-                                    href="${pageContext.request.contextPath}/my-travel?command=searchTour&price=asc">Cheaper
-                                first</a></li>
+                                    href="${pageContext.request.contextPath}/my-travel?command=searchTour&price=asc">
+                                <fmt:message key="header_jsp.menu.btn.tour_price.link.asc"/></a></li>
                         </ul>
                     </li>
                     <li class="sub-item more">
-                        <a class="more-btn">Person</a>
+                        <a class="more-btn"><fmt:message key="header_jsp.menu.btn.person"/></a>
                         <ul class="more-menu">
                             <li class="more-item"><a
-                                    href="${pageContext.request.contextPath}/my-travel?command=searchTour&person=one">For
-                                one</a></li>
+                                    href="${pageContext.request.contextPath}/my-travel?command=searchTour&person=one">
+                                <fmt:message key="header_jsp.menu.btn.person.link.for_one"/></a></li>
                             <li class="more-item"><a
-                                    href="${pageContext.request.contextPath}/my-travel?command=searchTour&person=two">For
-                                two</a></li>
+                                    href="${pageContext.request.contextPath}/my-travel?command=searchTour&person=two">
+                                <fmt:message key="header_jsp.menu.btn.person.link.for_two"/></a></li>
                             <li class="more-item"><a
-                                    href="${pageContext.request.contextPath}/my-travel?command=searchTour&person=family">For
-                                family
-                                (3-5)</a></li>
+                                    href="${pageContext.request.contextPath}/my-travel?command=searchTour&person=family">
+                                <fmt:message key="header_jsp.menu.btn.person.link.for_family"/></a></li>
                             <li class="more-item"><a
-                                    href="${pageContext.request.contextPath}/my-travel?command=searchTour&person=group">For
-                                group
-                                (6< )</a></li>
+                                    href="${pageContext.request.contextPath}/my-travel?command=searchTour&person=group">
+                                <fmt:message key="header_jsp.menu.btn.person.link.for_group"/></a></li>
                         </ul>
                     </li>
                     <li class="sub-item more">
-                        <a class="more-btn">Hotel type</a>
+                        <a class="more-btn"><fmt:message key="header_jsp.menu.btn.hotel_type"/></a>
                         <ul class="more-menu">
                             <li class="more-item"><a
-                                    href="${pageContext.request.contextPath}/my-travel?command=searchTour&hotel=apartment">Apartment</a>
+                                    href="${pageContext.request.contextPath}/my-travel?command=searchTour&hotel=apartment">
+                                <fmt:message key="header_jsp.menu.btn.hotel_type.link.apartment"/></a>
                             </li>
                             <li class="more-item"><a
-                                    href="${pageContext.request.contextPath}/my-travel?command=searchTour&hotel=hostel">Hostel</a>
+                                    href="${pageContext.request.contextPath}/my-travel?command=searchTour&hotel=hostel">
+                                <fmt:message key="header_jsp.menu.btn.hotel_type.link.hostel"/></a>
                             </li>
                             <li class="more-item"><a
-                                    href="${pageContext.request.contextPath}/my-travel?command=searchTour&hotel=tourist">Tourist
-                                hotel</a></li>
+                                    href="${pageContext.request.contextPath}/my-travel?command=searchTour&hotel=tourist">
+                                <fmt:message key="header_jsp.menu.btn.hotel_type.link.tourist"/></a></li>
                             <li class="more-item"><a
-                                    href="${pageContext.request.contextPath}/my-travel?command=searchTour&hotel=comfort">Comfort
-                                hotel</a></li>
+                                    href="${pageContext.request.contextPath}/my-travel?command=searchTour&hotel=comfort">
+                                <fmt:message key="header_jsp.menu.btn.hotel_type.link.comfort"/></a></li>
                             <li class="more-item"><a
-                                    href="${pageContext.request.contextPath}/my-travel?command=searchTour&hotel=premium">Premium
-                                hotel</a></li>
+                                    href="${pageContext.request.contextPath}/my-travel?command=searchTour&hotel=premium">
+                                <fmt:message key="header_jsp.menu.btn.hotel_type.link.premium"/></a></li>
                             <li class="more-item"><a
-                                    href="${pageContext.request.contextPath}/my-travel?command=searchTour&hotel=boutique">Boutique
-                                hotel</a></li>
+                                    href="${pageContext.request.contextPath}/my-travel?command=searchTour&hotel=boutique">
+                                <fmt:message key="header_jsp.menu.btn.hotel_type.link.boutique"/></a></li>
                         </ul>
                     </li>
                 </ul>
@@ -110,32 +127,32 @@
             <c:if test="${not empty user}">
                 <c:choose>
                     <c:when test="${userRole == 'manager'}">
-                        <li class="menu-item"><a class="sub-btn">Manager tools</a>
+                        <li class="menu-item"><a class="sub-btn"><fmt:message key="header_jsp.menu.btn.manager_tools"/></a>
                             <ul class="sub-menu">
                                 <li class="sub-item"><a
-                                        href="${pageContext.request.contextPath}/my-travel?command=tourEditor">Manage
-                                    tours</a></li>
+                                        href="${pageContext.request.contextPath}/my-travel?command=tourEditor">
+                                    <fmt:message key="header_jsp.menu.btn.manager_tools.link.manage_tours"/></a></li>
                                 <li class="sub-item"><a
-                                        href="${pageContext.request.contextPath}/my-travel?command=orderEditor">Manage
-                                    orders</a></li>
+                                        href="${pageContext.request.contextPath}/my-travel?command=orderEditor">
+                                    <fmt:message key="header_jsp.menu.btn.manager_tools.link.manage_orders"/></a></li>
                             </ul>
                         </li>
                     </c:when>
                     <c:when test="${userRole == 'admin'}">
-                        <li class="menu-item"><a class="sub-btn">Admin tools</a>
+                        <li class="menu-item"><a class="sub-btn"><fmt:message key="header_jsp.menu.btn.admin_tools"/></a>
                             <ul class="sub-menu">
                                 <li class="sub-item"><a
-                                        href="${pageContext.request.contextPath}/my-travel?command=tourEditor">Tour
-                                    editor</a></li>
+                                        href="${pageContext.request.contextPath}/my-travel?command=tourEditor">
+                                    <fmt:message key="header_jsp.menu.btn.admin_tools.link.tour_editor"/></a></li>
                                 <li class="sub-item"><a
-                                        href="${pageContext.request.contextPath}/my-travel?command=orderEditor">Order
-                                    editor</a></li>
+                                        href="${pageContext.request.contextPath}/my-travel?command=orderEditor">
+                                    <fmt:message key="header_jsp.menu.btn.admin_tools.link.order_editor"/></a></li>
                                 <li class="sub-item"><a
-                                        href="${pageContext.request.contextPath}/my-travel?command=userEditor&role=user">User
-                                    editor</a></li>
+                                        href="${pageContext.request.contextPath}/my-travel?command=userEditor&role=user">
+                                    <fmt:message key="header_jsp.menu.btn.admin_tools.link.user_editor"/></a></li>
                                 <li class="sub-item"><a
-                                        href="${pageContext.request.contextPath}/my-travel?command=userEditor&role=manager">Manager
-                                    editor</a></li>
+                                        href="${pageContext.request.contextPath}/my-travel?command=userEditor&role=manager">
+                                    <fmt:message key="header_jsp.menu.btn.admin_tools.link.manager_editor"/></a></li>
                             </ul>
                         </li>
                     </c:when>
@@ -143,11 +160,11 @@
             </c:if>
 
             <li class="menu-item">
-                <a href="#">Language</a>
+                <a class="sub-btn"><fmt:message key="header_jsp.menu.btn.language"/></a>
                 <img src="${pageContext.request.contextPath}/images/world-icon.png" width="18px" height="18px">
                 <ul class="sub-menu">
-                    <li class="sub-item"><a href="#">english</a></li>
-                    <li class="sub-item"><a href="#">українська</a></li>
+                    <li class="sub-item"><a href="?currentLocale=en"><fmt:message key="header_jsp.menu.btn.language.link.english"/></a></li>
+                    <li class="sub-item"><a href="?currentLocale=uk"><fmt:message key="header_jsp.menu.btn.language.link.ukrainian"/></a></li>
                 </ul>
             </li>
             <li class="menu-item"><img src="${pageContext.request.contextPath}/images/account-icon.png" alt="Account"
@@ -158,26 +175,31 @@
                         <c:when test="${not empty user}">
                             <c:if test="${userRole == 'user'}">
                                 <li class="sub-item more">
-                                    <a class="more-btn">My Cabinet</a>
+                                    <a class="more-btn"><fmt:message key="header_jsp.menu.btn.account.btn.my_cabinet"/></a>
                                     <ul class="more-menu">
                                         <li class="more-item"><a
-                                                href="${pageContext.request.contextPath}/my-travel?command=userCabinet&menu=myOrders">My orders</a>
+                                                href="${pageContext.request.contextPath}/my-travel?command=userCabinet&menu=myOrders">
+                                            <fmt:message key="header_jsp.menu.btn.account.btn.my_cabinet.link.my_orders"/></a>
                                         </li>
                                         <li class="more-item"><a
-                                                href="${pageContext.request.contextPath}/my-travel?command=userCabinet&menu=myInfo">My info</a>
+                                                href="${pageContext.request.contextPath}/my-travel?command=userCabinet&menu=myInfo">
+                                            <fmt:message key="header_jsp.menu.btn.account.btn.my_cabinet.link.my_info"/></a>
                                         </li>
                                     </ul>
                                 </li>
                             </c:if>
                             <c:if test="${userRole == 'manager'}">
-                                <li class="sub-item"><a href="${pageContext.request.contextPath}/my-travel?command=userCabinet&menu=myInfo">My profile</a>
+                                <li class="sub-item"><a href="${pageContext.request.contextPath}/my-travel?command=userCabinet&menu=myInfo">
+                                <fmt:message key="header_jsp.menu.btn.account.btn.my_cabinet.link.my_profile"/></a>
                             </c:if>
-                            <li class="sub-item"><a href="${pageContext.request.contextPath}/my-travel?command=logout">Logout</a>
+                            <li class="sub-item"><a href="${pageContext.request.contextPath}/my-travel?command=logout">
+                                <fmt:message key="header_jsp.menu.btn.account.btn.my_cabinet.link.logout"/></a>
                             </li>
                         </c:when>
                         <c:otherwise>
                             <li class="sub-item"><a
-                                    href="${pageContext.request.contextPath}/my-travel?command=loginPage">Login/Register</a>
+                                    href="${pageContext.request.contextPath}/my-travel?command=loginPage">
+                                <fmt:message key="header_jsp.menu.btn.account.link.login_register"/></a>
                             </li>
                         </c:otherwise>
                     </c:choose>

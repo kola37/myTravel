@@ -63,7 +63,7 @@ header .navigation .menu{
 
 .menu-item a:hover{
     color: green;
-    transition: 0.3s;
+    transition: 0.8s;
 }
 
 .menu-item .account-btn{
@@ -95,7 +95,7 @@ header .navigation .menu{
     position: relative;
     padding: 7px 0;
     cursor: pointer;
-    min-width: 140px;
+    min-width: 150px;
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
     text-align: center;
 }
@@ -109,7 +109,7 @@ header .navigation .menu{
 
 .menu-item .sub-menu .sub-item a:hover {
     color: green;
-    transition: 0.3s;
+    transition: 0.8s;
 }
 
 .more .more-menu{
@@ -137,13 +137,13 @@ header .navigation .menu{
 .more .more-menu .more-item{
     padding: 7px 0;
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-    min-width: 170px;
+    min-width: 180px;
     text-align: center;
 }
 
 .more .more-menu .more-item:hover {
     color: green;
-    transition: 0.3s;
+    transition: 0.8s;
 }
 
 .greeting-msg{

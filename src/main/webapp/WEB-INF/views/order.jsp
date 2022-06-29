@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="entity.constant.TourType" %>
 
 <html>
@@ -33,22 +34,22 @@
 <form id="orderForm" action="${pageContext.request.contextPath}/my-travel?command=confirmOrder"
       method="post">
     <div class="tour-order-box">
-        <h3>This is an order confirmation form:</h3>
+        <h3><fmt:message key="order_jsp.form.title"/></h3>
         <hr>
         <input type="hidden" value="${tour.id}" name="tourId">
-        <h2>Tour: ${tour.name}</h2>
-        <h2>Client: ${user.firstName} ${user.lastName}</h2>
-        <p>Type: ${TourType.getType(tour.tourTypeId).getName()}</p>
-        <p>Hotel: ${hotels.stream().filter(hotel -> hotel.getId()==tour.hotelId).toList().get(0).name}</p>
-        <p>Person: ${tour.numOfPersons}</p>
+        <h2><fmt:message key="order_jsp.form.field.tour"/> ${tour.name}</h2>
+        <h2><fmt:message key="order_jsp.form.field.client"/> ${user.firstName} ${user.lastName}</h2>
+        <p><fmt:message key="order_jsp.form.field.type"/> ${TourType.getType(tour.tourTypeId).getName()}</p>
+        <p><fmt:message key="order_jsp.form.field.hotel"/> ${hotels.stream().filter(hotel -> hotel.getId()==tour.hotelId).toList().get(0).name}</p>
+        <p><fmt:message key="order_jsp.form.field.person"/> ${tour.numOfPersons}</p>
         <c:if test="${discount != '0'}">
-            <p>Price: ${tour.price} $</p>
-            <p>Your discount: ${discount} %</p>
+            <p><fmt:message key="order_jsp.form.field.price"/> ${tour.price} $</p>
+            <p><fmt:message key="order_jsp.form.field.discount"/> ${discount} %</p>
             <input type="hidden" name="discount" value="${discount}">
         </c:if>
-        <p>Total: ${totalPrice} $</p>
+        <p><fmt:message key="order_jsp.form.field.total"/> ${totalPrice} $</p>
         <input type="hidden" name="totalPrice" value="${totalPrice}">
-        <button type="submit" class="tour-order-btn">Confirm</button>
+        <button type="submit" class="tour-order-btn"><fmt:message key="order_jsp.form.btn.confirm"/></button>
     </div>
 </form>
 

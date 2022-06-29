@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static util.DBManager.close;
+import static util.DBUtils.close;
 
 /**
  * Class UserDAOIMpl implements UserDAO interface

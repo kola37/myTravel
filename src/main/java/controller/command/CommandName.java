@@ -15,7 +15,8 @@ public class CommandName {
     public static final String UPDATE_ORDER_COMMAND = "updateOrder";
     public static final String DELETE_TOUR_COMMAND = "deleteTour";
     public static final String UPDATE_TOUR_COMMAND = "updateTour";
-    public static final String NEW_TOUR_COMMAND = "newTour";
+    public static final String ADMIN_ADD_NEW_TOUR_COMMAND = "newTour";
+    public static final String ADMIN_ADD_NEW_MANAGER_COMMAND = "newManager";
     public static final String ADMIN_UPDATE_USER_COMMAND = "updateUser";
 
 

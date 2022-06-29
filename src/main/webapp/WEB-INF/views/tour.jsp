@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="entity.constant.TourType" %>
 
 <html>
@@ -28,22 +29,22 @@
     <div class="tour-order-content">
         <h3>${tour.name}</h3>
         <c:if test="${tour.isHot() == 'true'}">
-            <h2>Hot tour!</h2>
+            <h2><fmt:message key="tour_jsp.tour_box.field.hot"/></h2>
         </c:if>
-        <p>Type: ${TourType.getType(tour.tourTypeId).getName()}</p>
-        <p>Hotel: ${hotels.stream().filter(hotel -> hotel.getId()==tour.hotelId).toList().get(0).name}</p>
-        <p>Person: ${tour.numOfPersons}</p>
-        <p>Price: ${tour.price} $</p>
-        <p>Overview: ${tour.description}</p>
+        <p><fmt:message key="tour_jsp.tour_box.field.type"/> ${TourType.getType(tour.tourTypeId).getName()}</p>
+        <p><fmt:message key="tour_jsp.tour_box.field.hotel"/> ${hotels.stream().filter(hotel -> hotel.getId()==tour.hotelId).toList().get(0).name}</p>
+        <p><fmt:message key="tour_jsp.tour_box.field.person"/> ${tour.numOfPersons}</p>
+        <p><fmt:message key="tour_jsp.tour_box.field.price"/> ${tour.price} $</p>
+        <p><fmt:message key="tour_jsp.tour_box.field.overview"/> ${tour.description}</p>
         <c:if test="${userRole == 'user'}">
             <form method="get" action="${pageContext.request.contextPath}/my-travel?command=orderPage">
                 <input type="hidden" name="command" value="orderPage">
                 <input type="hidden" name="tourId" value="${tour.id}">
-                <button type="submit" class="tour-order-btn" id="showOrderForm">Make an order</button>
+                <button type="submit" class="tour-order-btn" id="showOrderForm"><fmt:message key="tour_jsp.tour_box.submit.btn.make_order"/></button>
             </form>
         </c:if>
         <c:if test="${user == null}">
-            <button class="tour-order-btn" id="showAlert">Make an order</button>
+            <button class="tour-order-btn" id="showAlert"><fmt:message key="tour_jsp.tour_box.submit.btn.make_order"/></button>
         </c:if>
     </div>
 </div>
@@ -51,11 +52,11 @@
 <%--Allerrt message for non-registered users!--%>
 <div class="tour-order-box" id="alertMsg">
     <span class="closeBtn" id="closeAlert">×</span>
-    <h3>Registered users only can make an order!</h3>
-    <h3>Please, sign up to continue!</h3>
+    <h3><fmt:message key="tour_jsp.alert.msg.need_register"/></h3>
+    <h3><fmt:message key="tour_jsp.alert.msg.sign_up_to_continue"/></h3>
     <li class="tour-order-btn">
         <c:set var="commandPrevious" value="/my-travel?command=tourPage&tourId=${tour.id}" scope="session"/>
-        <a href="${pageContext.request.contextPath}/my-travel?command=loginPage">Login/Register</a>
+        <a href="${pageContext.request.contextPath}/my-travel?command=loginPage"><fmt:message key="tour_jsp.alert.link.login"/></a>
     </li>
 </div>
 

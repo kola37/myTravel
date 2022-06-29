@@ -4,7 +4,6 @@ import controller.PagePath;
 import controller.command.Command;
 import controller.command.CommandResult;
 import controller.command.CommandResultType;
-import entity.Hotel;
 import entity.User;
 import entity.constant.UserRole;
 import exception.CommandException;
@@ -15,7 +14,6 @@ import service.ServiceFactory;
 import service.TourService;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -25,6 +23,8 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.Locale;
+import java.util.Properties;
 
 
 /**
@@ -33,11 +33,11 @@ import java.nio.file.StandardCopyOption;
  * @author Anatolii Koliaka
  */
 
-public class NewTourCommand implements Command {
+public class AdminAddNewTourCommand implements Command {
 
     private static final long serialVersionUID = 7451159402431449938L;
 
-    private static final Logger LOG = LogManager.getLogger(NewTourCommand.class);
+    private static final Logger LOG = LogManager.getLogger(AdminAddNewTourCommand.class);
 
     private static final String ATTR_ERROR_MESSAGE = "errorMessage";
     private static final String ATTR_USER = "user";
@@ -101,7 +101,6 @@ public class NewTourCommand implements Command {
             imagePath = "/images/".concat(fileName);
         }
 
-
         CommandResult result = new CommandResult(PagePath.PAGE_ERROR, CommandResultType.FORWARD);
 
         try {
@@ -116,11 +115,7 @@ public class NewTourCommand implements Command {
             }
             if (isSuccess) {
                 LOG.trace("Tour created/updated successfully!");
-                if (command != null && !command.isEmpty()) {
-                    result = new CommandResult(PagePath.PAGE_SUCCESS + command, CommandResultType.REDIRECT);
-                } else {
-                    result = new CommandResult(PagePath.PAGE_SUCCESS, CommandResultType.REDIRECT);
-                }
+                result = new CommandResult(PagePath.PAGE_SUCCESS + command, CommandResultType.REDIRECT);
             }
 
         } catch (ServiceException e) {

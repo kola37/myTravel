@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="entity.constant.TourType" %>
 
 <html>
@@ -24,16 +25,17 @@
 <%--Message for admin amd manager--%>
 <c:if test="${userRole == 'admin' || userRole == 'manager'}">
     <div class="info-msg">
-        <h3>Hello, ${userLogin}! This is ${userRole} version of site!</h3>
+        <h3><fmt:message key="home_jsp.greeting.user.hello"/> ${userLogin}! <fmt:message key="home_jsp.greeting.admin.hello.begin"/>
+                ${userRole} <fmt:message key="home_jsp.greeting.admin.hello.end"/></h3>
         <hr>
     </div>
 </c:if>
 
 <div class="tittle-container">
     <div class="tittle-item">
-        <h2>Tours</h2>
+        <h2><fmt:message key="tour_editor_jsp.container.tittle"/></h2>
         <c:if test="${userRole == 'admin'}">
-            <h2><a href="${pageContext.request.contextPath}/my-travel?command=addTour">Add new</a></h2>
+            <h2><a href="${pageContext.request.contextPath}/my-travel?command=addTour"><fmt:message key="tour_editor_jsp.container.btn.add_new"/></a></h2>
         </c:if>
     </div>
 </div>
@@ -43,20 +45,20 @@
     <div class="table">
 
         <div class="table-header">
-            <div class="header-item">id</div>
-            <div class="header-item">Name</div>
-            <div class="header-item">Overview</div>
-            <div class="header-item">Image</div>
-            <div class="header-item">Price</div>
-            <div class="header-item">Type</div>
-            <div class="header-item">Person</div>
-            <div class="header-item">Hotel</div>
-            <div class="header-item">Disc_Rate</div>
-            <div class="header-item">Max_Disc</div>
-            <div class="header-item">Hot</div>
-            <div class="header-item">Edit</div>
+            <div class="header-item"><fmt:message key="tour_editor_jsp.container.column.id"/></div>
+            <div class="header-item"><fmt:message key="tour_editor_jsp.container.column.name"/></div>
+            <div class="header-item"><fmt:message key="tour_editor_jsp.container.column.overview"/></div>
+            <div class="header-item"><fmt:message key="tour_editor_jsp.container.column.image"/></div>
+            <div class="header-item"><fmt:message key="tour_editor_jsp.container.column.price"/></div>
+            <div class="header-item"><fmt:message key="tour_editor_jsp.container.column.type"/></div>
+            <div class="header-item"><fmt:message key="tour_editor_jsp.container.column.person"/></div>
+            <div class="header-item"><fmt:message key="tour_editor_jsp.container.column.hotel"/></div>
+            <div class="header-item"><fmt:message key="tour_editor_jsp.container.column.disc_rate"/></div>
+            <div class="header-item"><fmt:message key="tour_editor_jsp.container.column.max_disc"/></div>
+            <div class="header-item"><fmt:message key="tour_editor_jsp.container.column.hot"/></div>
+            <div class="header-item"><fmt:message key="tour_editor_jsp.container.column.edit"/></div>
             <c:if test="${userRole == 'admin'}">
-                <div class="header-item">Delete</div>
+                <div class="header-item"><fmt:message key="tour_editor_jsp.container.column.delete"/></div>
             </c:if>
         </div>
         <div class="table-content">
@@ -100,8 +102,8 @@
                         <label>
                             <select name="isHot" id="${tour.id}" onchange="showSaveBtn(this.id)">
                                 <option selected disabled hidden></option>
-                                <option value="true">yes</option>
-                                <option value="false">no</option>
+                                <option value="true"><fmt:message key="tour_editor_jsp.container.select.value.true"/></option>
+                                <option value="false"><fmt:message key="tour_editor_jsp.container.select.value.false"/></option>
                             </select>
                         </label>
                     </div>
@@ -135,7 +137,7 @@
 
 <script>
     function deleteTour(clicked_id) {
-        const confirmed = confirm("Delete tour #" + clicked_id + "?");
+        const confirmed = confirm("<fmt:message key="tour_editor_jsp.alert.msg.delete"/>" + clicked_id + "?");
         if (!confirmed) return;
         fetch("${pageContext.request.contextPath}/my-travel?command=deleteTour&tourId=" + clicked_id, {
             method: 'POST',
@@ -192,7 +194,7 @@
         let editMaxDisc = document.getElementById("editMaxDisc" + clicked_id);
         let hot = document.getElementById("hot" + clicked_id);
         let editHot = document.getElementById("editHot" + clicked_id);
-        const confirmChanges = confirm("Save changes in tour #" + clicked_id + "?");
+        const confirmChanges = confirm("<fmt:message key="tour_editor_jsp.alert.msg.save_changes"/>" + clicked_id + "?");
         if (!confirmChanges) {
             editBtn.style.display = "block"
             saveBtn.style.display = "none"

@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="entity.constant.UserRole" %>
 <%@ page import="entity.constant.OrderStatus" %>
 
@@ -18,6 +19,7 @@
 <c:set var="users" value="${users}" scope="request"/>
 <c:set var="orders" value="${orders}" scope="request"/>
 <c:set var="tableTittle" value="${tableTittle}" scope="request"/>
+<c:set var="commandNext" value="/my-travel?command=userEditor&role=manager" scope="request"/>
 
 <%@ include file="/WEB-INF/views/fragment/header.jsp" %>
 <style>
@@ -29,37 +31,38 @@
 <%--Message for admin--%>
 <c:if test="${userRole == 'admin'}">
     <div class="info-msg">
-        <h3>Hello, ${userLogin}! This is ${userRole} version of site!</h3>
+        <h3><fmt:message key="home_jsp.greeting.user.hello"/> ${userLogin}! <fmt:message key="home_jsp.greeting.admin.hello.begin"/>
+            ${userRole} <fmt:message key="home_jsp.greeting.admin.hello.end"/></h3>
         <hr>
     </div>
 </c:if>
 
-<div class="tittle-container">
+<div class="tittle-container" id="main-view-tittle-container">
     <div class="tittle-item">
         <h2 id="roleName">${tableTittle}s</h2>
-        <c:if test="${tableTittle == 'Managers'}">
-            <h2><a href="${pageContext.request.contextPath}/my-travel?command=addManager">Add new</a></h2>
+        <c:if test="${tableTittle == 'manager'}">
+            <h2><a onclick="showNewManagerForm()"><fmt:message key="user_editor_jsp.container.link.add_new"/></a></h2>
         </c:if>
     </div>
 </div>
 
-<div class="container">
+<div class="container" id="main-view-container" action="">
     <div class="table">
 
         <div class="table-header">
-            <div class="header-item">id</div>
-            <div class="header-item">Login</div>
-            <div class="header-item">First name</div>
-            <div class="header-item">Last name</div>
-            <div class="header-item">Email</div>
-            <c:if test="${tableTittle == 'Users'}">
-                <div class="header-item">Orders</div>
-                <div class="header-item">Paid orders</div>
-                <div class="header-item">Cancelled orders</div>
+            <div class="header-item"><fmt:message key="user_editor_jsp.container.column.id"/></div>
+            <div class="header-item"><fmt:message key="user_editor_jsp.container.column.login"/></div>
+            <div class="header-item"><fmt:message key="user_editor_jsp.container.column.first_name"/></div>
+            <div class="header-item"><fmt:message key="user_editor_jsp.container.column.last_name"/></div>
+            <div class="header-item"><fmt:message key="user_editor_jsp.container.column.email"/></div>
+            <c:if test="${tableTittle == 'user'}">
+                <div class="header-item"><fmt:message key="user_editor_jsp.container.column.orders"/></div>
+                <div class="header-item"><fmt:message key="user_editor_jsp.container.column.paid_orders"/></div>
+                <div class="header-item"><fmt:message key="user_editor_jsp.container.column.cancelled_orders"/></div>
             </c:if>
-            <div class="header-item">Role</div>
-            <div class="header-item">Blocked</div>
-            <div class="header-item">Edit</div>
+            <div class="header-item"><fmt:message key="user_editor_jsp.container.column.role"/></div>
+            <div class="header-item"><fmt:message key="user_editor_jsp.container.column.blocked"/></div>
+            <div class="header-item"><fmt:message key="user_editor_jsp.container.column.edit"/></div>
         </div>
         <div class="table-content">
             <c:forEach var="user" items="${users}">
@@ -69,7 +72,7 @@
                     <div class="table-data">${user.firstName}</div>
                     <div class="table-data">${user.lastName}</div>
                     <div class="table-data">${user.email}</div>
-                    <c:if test="${tableTittle == 'Users'}">
+                    <c:if test="${tableTittle == 'user'}">
                         <div class="table-data">${orders.stream().filter(order -> order.userId==user.getId()).toList().size()}</div>
                         <div class="table-data">${orders.stream().filter(order -> order.userId==user.getId()&&order.statusId==OrderStatus.PAID.getIndex()).toList().size()}</div>
                         <div class="table-data">${orders.stream().filter(order -> order.userId==user.getId()&&order.statusId==OrderStatus.CANCELED.getIndex()).toList().size()}</div>
@@ -80,8 +83,8 @@
                         <label>
                             <select name="isBlocked-status" id="${user.id}" onchange="changeStatus(this.id)">
                                 <option selected disabled hidden></option>
-                                <option value="true">yes</option>
-                                <option value="false">no</option>
+                                <option value="true"><fmt:message key="tour_editor_jsp.container.select.value.true"/></option>
+                                <option value="false"><fmt:message key="tour_editor_jsp.container.select.value.false"/></option>
                             </select>
                         </label>
                     </div>
@@ -97,6 +100,39 @@
 </div>
 
 
+<div class="form-box" id="new-manager-form" style="display: none">
+    <div>
+        <h2><fmt:message key="user_editor_jsp.form.tittle"/></h2>
+    </div>
+    <form id="registerForm" class="input-group"
+          action="${pageContext.request.contextPath}/my-travel?command=newManager" method="post">
+        <label>
+            <input class="input-field" type="text" placeholder="<fmt:message key="login_register_jsp.form.placeholder.login"/>" name="login" required maxlength="15">
+        </label>
+        <label>
+            <input class="input-field" type="password" placeholder="<fmt:message key="login_register_jsp.form.placeholder.password"/>" name="password" required
+                   maxlength="15">
+        </label>
+        <label>
+            <input class="input-field" type="text" placeholder="<fmt:message key="login_register_jsp.form.placeholder.first_name"/>" name="firstName" required
+                   maxlength="20">
+        </label>
+        <label>
+            <input class="input-field" type="text" placeholder="<fmt:message key="login_register_jsp.form.placeholder.last_name"/>" name="lastName" required maxlength="20">
+        </label>
+        <label>
+            <input class="input-field" type="email" placeholder="<fmt:message key="login_register_jsp.form.placeholder.email"/>" name="email" required maxlength="40">
+        </label>
+        <label>
+            <input class="input-field" type="hidden" name="role" value="manager" required>
+            <input type="hidden" name="commandNext" value="${commandNext}">
+        </label>
+        <button type="button" class="submit-btn" id="cancelBtn"><fmt:message key="user_editor_jsp.form.btn.cancel"/></button>
+        <button type="submit" class="submit-btn"><fmt:message key="user_editor_jsp.form.btn.save"/></button>
+    </form>
+</div>
+
+
 <script>
     function showSelector(clicked_id) {
         let nonSelectable = document.getElementById("isBlocked-div" + clicked_id)
@@ -109,7 +145,7 @@
     function changeStatus(clicked_id) {
         let nonSelectable = document.getElementById("isBlocked-div" + clicked_id)
         let selectable = document.getElementById("isBlocked-selector" + clicked_id)
-        const confirmed = confirm("Save changes for user with id=" + clicked_id + "?");
+        const confirmed = confirm("<fmt:message key="user_editor_jsp.alert.msg.save_changes"/>" + clicked_id + "?");
         if (!confirmed) {
             nonSelectable.style.display = "block"
             selectable.style.display = "none"
@@ -128,6 +164,24 @@
             .then(response => {
                 window.location.href = "${pageContext.request.contextPath}/my-travel?command=userEditor&role=" + role
             });
+    }
+
+    function showNewManagerForm() {
+        let form = document.getElementById("new-manager-form")
+        let mainViewTittle = document.getElementById("main-view-tittle-container")
+        let mainViewContainer = document.getElementById("main-view-container")
+        let cancelBtn = document.getElementById("cancelBtn")
+
+        mainViewTittle.style.display = "none";
+        mainViewContainer.style.display = "none";
+        form.style.display = "block";
+
+        cancelBtn.addEventListener("click", function(){
+            fetch("${pageContext.request.contextPath}/my-travel?command=userEditor&role=manager", {method: "GET"})
+                .then(response => {
+                    window.location.href = "${pageContext.request.contextPath}/my-travel?command=userEditor&role=manager"
+                });
+        })
     }
 </script>
 

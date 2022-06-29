@@ -39,7 +39,25 @@
 
   <filter-mapping>
     <filter-name>EncodingFilter</filter-name>
-    <url-pattern>/WEB-INF/views/*</url-pattern>
+    <url-pattern>/*</url-pattern>
+    <servlet-name>main</servlet-name>
+  </filter-mapping>
+
+  <!--============================================================
+      Language filter
+  =============================================================-->
+  <filter>
+    <filter-name>LanguageFilter</filter-name>
+    <filter-class>filter.LanguageFilter</filter-class>
+    <init-param>
+      <param-name>language</param-name>
+      <param-value>uk</param-value>
+    </init-param>
+  </filter>
+
+  <filter-mapping>
+    <filter-name>LanguageFilter</filter-name>
+    <url-pattern>/*</url-pattern>
     <servlet-name>main</servlet-name>
   </filter-mapping>
 
@@ -72,6 +90,22 @@
       <max-age>1800</max-age>
     </cookie-config>
   </session-config>
+
+<!--Set localization -->
+  <context-param>
+    <param-name>javax.servlet.jsp.jstl.fmt.localizationContext</param-name>
+    <param-value>language</param-value>
+  </context-param>
+<!--  Set default language-->
+  <context-param>
+    <param-name>javax.servlet.jsp.jstl.fmt.locale</param-name>
+    <param-value>uk</param-value>
+  </context-param>
+  <!--  Set locales properties-->
+  <context-param>
+    <param-name>locales</param-name>
+    <param-value>/WEB-INF/locales.properties</param-value>
+  </context-param>
 
 
 </web-app>

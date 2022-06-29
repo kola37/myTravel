@@ -5,6 +5,7 @@ service/validator/Validator.class
 controller/command/impl/DefaultCommand.class
 controller/command/impl/transitition/GoToAddTourCommand.class
 controller/command/impl/transitition/GoToHomeCommand.class
+util/Messages.class
 dao/DAO.class
 controller/command/impl/transitition/GoToOrderEditorCommand.class
 exception/DAOException.class
@@ -15,6 +16,8 @@ entity/constant/HotelType.class
 dao/OrderDAO.class
 service/impl/UserServiceImpl.class
 tag/TourEntityTagHandler.class
+controller/command/impl/AdminAddNewManagerCommand.class
+filter/LanguageFilter.class
 controller/PagePath.class
 listener/ContextListener.class
 entity/User$Builder.class
@@ -32,7 +35,6 @@ controller/command/CommandResultType.class
 controller/command/impl/UpdateOrderCommand.class
 service/TourService.class
 controller/command/CommandContainer.class
-util/DBManager.class
 controller/command/impl/DeleteOrderCommand.class
 controller/command/Command.class
 controller/command/impl/RegisterCommand.class
@@ -40,13 +42,12 @@ service/impl/OrderServiceImpl.class
 entity/constant/OrderStatus.class
 service/HotelService.class
 controller/command/CommandResult.class
-Main2.class
-Main.class
 service/validator/AbstractValidator.class
 exception/ServiceException.class
 dao/HotelDAO.class
 controller/command/impl/transitition/GoToTourEditorCommand.class
 exception/CommandException.class
+controller/command/impl/AdminAddNewTourCommand.class
 controller/command/impl/AdminUpdateUserCommand.class
 entity/Order$Builder.class
 service/validator/impl/EmailValidatorImpl.class
@@ -62,10 +63,8 @@ entity/User.class
 service/Service.class
 entity/Tour.class
 entity/UserOrder.class
-controller/command/impl/NewTourCommand.class
 controller/command/impl/transitition/GoToTourCommand.class
 service/impl/TourServiceImpl.class
-exception/DBException.class
 dao/impl/OrderDAOImpl.class
 controller/command/impl/DeleteTourCommand.class
 entity/Tour$Builder.class
@@ -75,5 +74,4 @@ entity/constant/TourType.class
 dao/DAOFactory.class
 dao/impl/TourDAOImpl.class
 controller/command/impl/transitition/GoToOrderCommand.class
-entity/Promotion.class
 controller/command/impl/LoginCommand.class
