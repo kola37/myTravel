@@ -65,9 +65,21 @@
             <div class="header-item"><fmt:message key="user_editor_jsp.container.column.edit"/></div>
         </div>
         <div class="table-content">
+            <%--********************************************************************--%>
+            <%--Try to make pagination if tours.size() more than tours perPage value--%>
+            <%--********************************************************************--%>
+            <c:set var="totalCount" scope="session" value="${users.size()}"/>
+            <c:set var="perPage" scope="session" value="15"/>
+            <c:set var="pageStart" value="${param.start}"/>
+            <c:if test="${empty pageStart or pageStart < 0}">
+                <c:set var="pageStart" value="0"/>
+            </c:if>
+            <c:if test="${totalCount < pageStart}">
+                <c:set var="pageStart" value="${pageStart - perPage}"/>
+            </c:if>
             <c:forEach var="user" items="${users}">
                 <div class="table-row">
-                    <div class="table-data">${user.id}</div>
+                    <div class="table-data">${users.indexOf(user)+1}</div>
                     <div class="table-data">${user.login}</div>
                     <div class="table-data">${user.firstName}</div>
                     <div class="table-data">${user.lastName}</div>
@@ -98,7 +110,19 @@
         </div>
     </div>
 </div>
-
+<%--********************************************************************--%>
+<%--          Pagination div with current showing orders info            --%>
+<%--********************************************************************--%>
+<div id="page-div" class="pagination-div">
+    <c:if test="${(pageStart - perPage) >= 0}">
+        <a href="${pageContext.request.contextPath}/my-travel?command=userEditor&start=${(pageStart - perPage) > 0 ? (pageStart - perPage) : 0}"><<</a>
+    </c:if>
+    <h3><fmt:message key="user_editor_jsp.container.page_show"/> ${pageStart + 1} - ${(pageStart + perPage) < totalCount ? pageStart + perPage : totalCount}
+        <fmt:message key="user_editor_jsp.container.page_from"/> ${totalCount}</h3>
+    <c:if test="${(pageStart + perPage) < totalCount}">
+        <a href="${pageContext.request.contextPath}/my-travel?command=userEditor&start=${(pageStart + perPage) < totalCount ? (pageStart + perPage) : totalCount-1}">>></a>
+    </c:if>
+</div>
 
 <div class="form-box" id="new-manager-form" style="display: none">
     <div>
@@ -132,6 +156,7 @@
     </form>
 </div>
 
+<%@ include file="/WEB-INF/views/fragment/footer.jsp" %>
 
 <script>
     function showSelector(clicked_id) {
@@ -170,10 +195,12 @@
         let form = document.getElementById("new-manager-form")
         let mainViewTittle = document.getElementById("main-view-tittle-container")
         let mainViewContainer = document.getElementById("main-view-container")
+        let pageDiv = document.getElementById("page-div")
         let cancelBtn = document.getElementById("cancelBtn")
 
         mainViewTittle.style.display = "none";
         mainViewContainer.style.display = "none";
+        pageDiv.style.display = "none";
         form.style.display = "block";
 
         cancelBtn.addEventListener("click", function(){

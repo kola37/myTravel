@@ -9,7 +9,7 @@ body {
     /*set background image*/
     background-color: honeydew;
     /*Important!Use path without first "/"*/
-    background-image: url(images/background-img.png);
+    background-image: url(images/main.png);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center 100%;
@@ -49,7 +49,7 @@ body {
 
 .tour-container {
     list-style: none;
-    margin: 10px 0 0 30px;
+    margin: 20px 0 0 40px;
     padding: 0;
 }
 
@@ -86,7 +86,7 @@ body {
 .tour-item {
     position: relative;
     /*width: 300px;*/
-    margin: 0 20px 20px 0;
+    margin: 0 40px 40px 0;
     height: 360px;
     display: flex;
     /*flex: 0 0 300px;*/
@@ -127,7 +127,7 @@ body {
     align-items: center;
     justify-content: center;
     /*width: 375px;*/
-    margin: 0 30px 30px 0;
+    margin: 0 40px 40px 0;
     height: 400px;
     border-radius: 8px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
@@ -256,4 +256,29 @@ body {
 /* When moving the mouse over the close button */
 .closeBtn:hover {
     color: black;
+}
+
+/************************************************
+ Style for pagination
+************************************************/
+.pagination-div{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    margin-left: 25%;
+    margin-bottom: 30px;
+}
+
+.pagination-div h3{
+    color: darkslategray;
+    font-size: 22px;
+}
+
+.pagination-div >a{
+    text-decoration: none;
+    color: darkslategray;
+    font-size: 22px;
+    margin-left: 12px;
+    margin-right: 12px;
 }

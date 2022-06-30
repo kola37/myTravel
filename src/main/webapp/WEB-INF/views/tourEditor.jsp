@@ -62,9 +62,21 @@
             </c:if>
         </div>
         <div class="table-content">
-            <c:forEach var="tour" items="${tours}">
+            <%--********************************************************************--%>
+            <%--Try to make pagination if tours.size() more than tours perPage value--%>
+            <%--********************************************************************--%>
+            <c:set var="totalCount" scope="session" value="${tours.size()}"/>
+            <c:set var="perPage" scope="session" value="15"/>
+            <c:set var="pageStart" value="${param.start}"/>
+            <c:if test="${empty pageStart or pageStart < 0}">
+                <c:set var="pageStart" value="0"/>
+            </c:if>
+            <c:if test="${totalCount < pageStart}">
+                <c:set var="pageStart" value="${pageStart - perPage}"/>
+            </c:if>
+            <c:forEach var="tour" items="${tours}" begin="${pageStart}" end="${pageStart + perPage - 1}">
                 <div class="table-row">
-                    <div class="table-data">${tour.id}</div>
+                    <div class="table-data">${tours.indexOf(tour)+1}</div>
                     <div class="table-data">${tour.name}</div>
                     <div class="table-data" id="description">${tour.description}</div>
                     <div class="table-data">
@@ -133,7 +145,21 @@
         </div>
     </div>
 </div>
+<%--********************************************************************--%>
+<%--          Pagination div with current showing tours info            --%>
+<%--********************************************************************--%>
+<div class="pagination-div">
+    <c:if test="${(pageStart - perPage) >= 0}">
+        <a href="${pageContext.request.contextPath}/my-travel?command=tourEditor&start=${(pageStart - perPage) > 0 ? (pageStart - perPage) : 0}"><<</a>
+    </c:if>
+    <h3><fmt:message key="home_jsp.tour_container.page_show"/> ${pageStart + 1} - ${(pageStart + perPage) < totalCount ? pageStart + perPage : totalCount}
+        <fmt:message key="home_jsp.tour_container.page_from"/> ${totalCount}</h3>
+    <c:if test="${(pageStart + perPage) < totalCount}">
+        <a href="${pageContext.request.contextPath}/my-travel?command=tourEditor&start=${(pageStart + perPage) < totalCount ? (pageStart + perPage) : totalCount-1}">>></a>
+    </c:if>
+</div>
 
+<%@ include file="/WEB-INF/views/fragment/footer.jsp" %>
 
 <script>
     function deleteTour(clicked_id) {

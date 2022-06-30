@@ -42,6 +42,7 @@
 /Users/anatolii/IdeaProjects/myTravelAgency/src/main/java/exception/CommandException.java
 /Users/anatolii/IdeaProjects/myTravelAgency/src/main/java/controller/command/CommandName.java
 /Users/anatolii/IdeaProjects/myTravelAgency/src/main/java/controller/command/impl/transitition/GoToOrderCommand.java
+/Users/anatolii/IdeaProjects/myTravelAgency/src/main/java/tag/CopyrightTag.java
 /Users/anatolii/IdeaProjects/myTravelAgency/src/main/java/entity/Hotel.java
 /Users/anatolii/IdeaProjects/myTravelAgency/src/main/java/controller/command/impl/transitition/GoToTourCommand.java
 /Users/anatolii/IdeaProjects/myTravelAgency/src/main/java/controller/PagePath.java

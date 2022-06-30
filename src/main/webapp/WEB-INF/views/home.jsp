@@ -39,7 +39,8 @@
 <%--Message for admin amd manager--%>
 <c:if test="${userRole == 'admin' || userRole == 'manager'}">
     <div class="info-msg">
-        <h3><fmt:message key="home_jsp.greeting.user.hello"/> ${userLogin}! <fmt:message key="home_jsp.greeting.admin.hello.begin"/>
+        <h3><fmt:message key="home_jsp.greeting.user.hello"/> ${userLogin}! <fmt:message
+                key="home_jsp.greeting.admin.hello.begin"/>
                 ${userRole} <fmt:message key="home_jsp.greeting.admin.hello.end"/></h3>
         <hr>
     </div>
@@ -49,9 +50,10 @@
 <c:if test="${not empty searchParamMessage}">
     <div class="info-msg" id="search-param">
         <h3><fmt:message key="home_jsp.searching_tour_param.msg.begin"/> ${searchParamMessage}
-            <fmt:message key="home_jsp.searching_tour_param.msg.middle"/> ${tours.size()} <fmt:message key="home_jsp.searching_tour_param.msg.end"/>
+            <fmt:message key="home_jsp.searching_tour_param.msg.middle"/> ${tours.size()} <fmt:message
+                    key="home_jsp.searching_tour_param.msg.end"/>
             <a class="closeBtn" id="search-param-close"
-           href="${pageContext.request.contextPath}/my-travel?command=home">×</a></h3>
+               href="${pageContext.request.contextPath}/my-travel?command=home">×</a></h3>
         <hr>
     </div>
 </c:if>
@@ -65,8 +67,20 @@
     </div>
 </c:if>
 
+<%--********************************************************************--%>
+<%--Try to make pagination if tours.size() more than tours perPage value--%>
+<%--********************************************************************--%>
+<c:set var="totalCount" scope="session" value="${tours.size()}"/>
+<c:set var="perPage" scope="session" value="8"/>
+<c:set var="pageStart" value="${param.start}"/>
+<c:if test="${empty pageStart or pageStart < 0}">
+    <c:set var="pageStart" value="0"/>
+</c:if>
+<c:if test="${totalCount < pageStart}">
+    <c:set var="pageStart" value="${pageStart - perPage}"/>
+</c:if>
 <%--Create tour card--%>
-<c:forEach var="tour" items="${tours}">
+<c:forEach var="tour" items="${tours}" begin="${pageStart}" end="${pageStart + perPage - 1}">
     <div class="tour-container">
         <div class="tour-wrapper">
 
@@ -82,18 +96,36 @@
 
                 <div class="info-block">
                     <h3><fmt:message key="home_jsp.tour_container.info_block.more_info"/></h3>
-                    <p><fmt:message key="home_jsp.tour_container.info_block.type"/> ${TourType.getType(tour.tourTypeId).getName()}</p>
-                    <p><fmt:message key="home_jsp.tour_container.info_block.hotel"/> ${hotels.stream().filter(hotel -> hotel.getId()==tour.hotelId).toList().get(0).name}</p>
+                    <p><fmt:message
+                            key="home_jsp.tour_container.info_block.type"/> ${TourType.getType(tour.tourTypeId).getName()}</p>
+                    <p><fmt:message
+                            key="home_jsp.tour_container.info_block.hotel"/> ${hotels.stream().filter(hotel -> hotel.getId()==tour.hotelId).toList().get(0).name}</p>
                     <p><fmt:message key="home_jsp.tour_container.info_block.person"/> ${tour.numOfPersons}</p>
                     <p><fmt:message key="home_jsp.tour_container.info_block.price"/> ${tour.price} $</p>
                     <li class="more-info-btn">
-                        <a href="${pageContext.request.contextPath}/my-travel?command=tourPage&tourId=${tour.id}"><fmt:message key="home_jsp.tour_container.info_block.link.more_info"/></a>
+                        <a href="${pageContext.request.contextPath}/my-travel?command=tourPage&tourId=${tour.id}"><fmt:message
+                                key="home_jsp.tour_container.info_block.link.more_info"/></a>
                     </li>
                 </div>
             </div>
         </div>
     </div>
 </c:forEach>
+<%--********************************************************************--%>
+<%--          Pagination div with current showing tours info            --%>
+<%--********************************************************************--%>
+<div class="pagination-div">
+    <c:if test="${(pageStart - perPage) >= 0}">
+        <a href="${pageContext.request.contextPath}?start=${(pageStart - perPage) > 0 ? (pageStart - perPage) : 0}"><<</a>
+    </c:if>
+    <h3><fmt:message key="home_jsp.tour_container.page_show"/> ${pageStart + 1} - ${(pageStart + perPage) < totalCount ? pageStart + perPage : totalCount}
+        <fmt:message key="home_jsp.tour_container.page_from"/> ${totalCount}</h3>
+    <c:if test="${(pageStart + perPage) < totalCount}">
+        <a href="${pageContext.request.contextPath}?start=${(pageStart + perPage) < totalCount ? (pageStart + perPage) : totalCount-1}">>></a>
+    </c:if>
+</div>
+
+<%@ include file="/WEB-INF/views/fragment/footer.jsp" %>
 
 <script>
     let alertMsg = document.getElementById("alertMsg")

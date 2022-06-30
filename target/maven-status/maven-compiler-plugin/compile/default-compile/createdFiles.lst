@@ -45,6 +45,7 @@ controller/command/CommandResult.class
 service/validator/AbstractValidator.class
 exception/ServiceException.class
 dao/HotelDAO.class
+tag/CopyrightTag.class
 controller/command/impl/transitition/GoToTourEditorCommand.class
 exception/CommandException.class
 controller/command/impl/AdminAddNewTourCommand.class

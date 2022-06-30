@@ -138,6 +138,8 @@
     </div>
 </c:if>
 
+<%@ include file="/WEB-INF/views/fragment/footer.jsp" %>
+
 <%--Show editable form--%>
 <script>
     let editableForm = document.getElementById("editable")

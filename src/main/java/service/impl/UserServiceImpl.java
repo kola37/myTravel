@@ -195,6 +195,8 @@ public class UserServiceImpl implements UserService {
     }
 
     private boolean isUserInfoValid(String firstName, String lastName) {
+        firstName = firstName.substring(0,1).toUpperCase().concat(firstName.substring(1));
+        lastName = lastName.substring(0,1).toUpperCase().concat(lastName.substring(1));
         Validator userInfoValidator = new NameValidatorImpl();
         return (userInfoValidator.isValid(firstName) && userInfoValidator.isValid(lastName));
     }

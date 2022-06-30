@@ -202,3 +202,29 @@ body{
 #description:hover{
     display: flex;
 }
+
+
+/************************************************
+ Style for pagination
+************************************************/
+.pagination-div{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    margin-left: 25%;
+    margin-bottom: 30px;
+}
+
+.pagination-div h3{
+    color: darkslategray;
+    font-size: 22px;
+}
+
+.pagination-div >a{
+    text-decoration: none;
+    color: darkslategray;
+    font-size: 22px;
+    margin-left: 12px;
+    margin-right: 12px;
+}

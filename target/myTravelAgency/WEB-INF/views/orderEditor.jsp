@@ -26,7 +26,8 @@
 <%--Message for admin amd manager--%>
 <c:if test="${userRole == 'admin' || userRole == 'manager'}">
     <div class="info-msg">
-        <h3><fmt:message key="home_jsp.greeting.user.hello"/> ${userLogin}! <fmt:message key="home_jsp.greeting.admin.hello.begin"/>
+        <h3><fmt:message key="home_jsp.greeting.user.hello"/> ${userLogin}! <fmt:message
+                key="home_jsp.greeting.admin.hello.begin"/>
                 ${userRole} <fmt:message key="home_jsp.greeting.admin.hello.end"/></h3>
         <hr>
     </div>
@@ -54,9 +55,21 @@
             <div class="header-item"><fmt:message key="order_editor_jsp.container.column.delete"/></div>
         </div>
         <div class="table-content">
-            <c:forEach var="order" items="${orders}">
+            <%--********************************************************************--%>
+            <%--Try to make pagination if tours.size() more than tours perPage value--%>
+            <%--********************************************************************--%>
+            <c:set var="totalCount" scope="session" value="${orders.size()}"/>
+            <c:set var="perPage" scope="session" value="15"/>
+            <c:set var="pageStart" value="${param.start}"/>
+            <c:if test="${empty pageStart or pageStart < 0}">
+                <c:set var="pageStart" value="0"/>
+            </c:if>
+            <c:if test="${totalCount < pageStart}">
+                <c:set var="pageStart" value="${pageStart - perPage}"/>
+            </c:if>
+            <c:forEach var="order" items="${orders}" begin="${pageStart}" end="${pageStart + perPage - 1}">
                 <div class="table-row">
-                    <div class="table-data">${order.id}</div>
+                    <div class="table-data">${orders.indexOf(order)+1}</div>
                     <div class="table-data">${order.orderDate}</div>
                     <div class="table-data">${tours.stream().filter(tour -> tour.getId()==order.tourId).toList().get(0).name}</div>
                     <div class="table-data">${hotels.stream().filter(hotel -> hotel.getId()==tours.stream().filter(tour -> tour.getId()==order.tourId).toList().get(0).hotelId).toList().get(0).name}</div>
@@ -67,7 +80,8 @@
                     <div class="table-data" id="selectable${order.id}" style="display: none">
                         <label>
                             <select name="order_status" id="${order.id}" onchange="changeStatus(this.id)">
-                                <option disabled selected><fmt:message key="order_editor_jsp.container.select.choose_status"/></option>
+                                <option disabled selected><fmt:message
+                                        key="order_editor_jsp.container.select.choose_status"/></option>
                                 <option value="1">${OrderStatus.getStatus(1).name()}</option>
                                 <option value="2">${OrderStatus.getStatus(2).name()}</option>
                                 <option value="3">${OrderStatus.getStatus(3).name()}</option>
@@ -87,7 +101,19 @@
         </div>
     </div>
 </div>
-
+<%--********************************************************************--%>
+<%--          Pagination div with current showing orders info            --%>
+<%--********************************************************************--%>
+<div class="pagination-div">
+    <c:if test="${(pageStart - perPage) >= 0}">
+        <a href="${pageContext.request.contextPath}/my-travel?command=orderEditor&start=${(pageStart - perPage) > 0 ? (pageStart - perPage) : 0}"><<</a>
+    </c:if>
+    <h3><fmt:message key="order_editor_jsp.container.page_show"/> ${pageStart + 1} - ${(pageStart + perPage) < totalCount ? pageStart + perPage : totalCount}
+        <fmt:message key="order_editor_jsp.container.page_from"/> ${totalCount}</h3>
+    <c:if test="${(pageStart + perPage) < totalCount}">
+        <a href="${pageContext.request.contextPath}/my-travel?command=orderEditor&start=${(pageStart + perPage) < totalCount ? (pageStart + perPage) : totalCount-1}">>></a>
+    </c:if>
+</div>
 
 <script>
     function deleteOrder(clicked_id) {
@@ -125,7 +151,7 @@
         let options = {
             method: "POST"
         }
-        fetch("${pageContext.request.contextPath}/my-travel?command=updateOrder&orderId=" + clicked_id +"&statusId=" + value, options)
+        fetch("${pageContext.request.contextPath}/my-travel?command=updateOrder&orderId=" + clicked_id + "&statusId=" + value, options)
             .then(response => {
                 window.location.href = "${pageContext.request.contextPath}/my-travel?command=orderEditor"
             })
