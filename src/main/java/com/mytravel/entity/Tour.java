@@ -25,7 +25,6 @@ public class Tour implements Serializable {
     private int tourTypeId;
     private int numOfPersons;
     private int hotelId;
-//    private int promotionId;
     private boolean isHot;
 
     public Tour() {
@@ -111,14 +110,6 @@ public class Tour implements Serializable {
         this.hotelId = hotelId;
     }
 
-//    public int getPromotionId() {
-//        return promotionId;
-//    }
-//
-//    public void setPromotionId(int promotionId) {
-//        this.promotionId = promotionId;
-//    }
-
     public boolean isHot() {
         return isHot;
     }
@@ -153,7 +144,6 @@ public class Tour implements Serializable {
                 ", tourTypeId=" + tourTypeId +
                 ", person=" + numOfPersons +
                 ", hotelId=" + hotelId +
-//                ", promotionId=" + promotionId +
                 ", isHot='" + isHot +
                 '}';
     }
@@ -220,11 +210,6 @@ public class Tour implements Serializable {
             tour.hotelId = hotelId;
             return this;
         }
-
-//        public Builder withPromotionId(int promotionId){
-//            tour.promotionId = promotionId;
-//            return this;
-//        }
 
         public Builder isHot(boolean isHot){
             tour.isHot = isHot;

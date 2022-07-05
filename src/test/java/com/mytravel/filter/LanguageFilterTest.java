@@ -1,9 +1,6 @@
 package com.mytravel.filter;
 
-import com.mytravel.controller.Controller;
 import com.mytravel.controller.PagePath;
-import com.mytravel.controller.command.CommandResult;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -19,9 +16,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.concurrent.atomic.AtomicBoolean;
-
-import static org.mockito.Mockito.times;
 
 public class LanguageFilterTest {
 
