@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ page import="entity.constant.TourType" %>
+<%@ page import="com.mytravel.entity.constant.TourType" %>
 
 <html>
 <c:set var="title" value="Home | My Travel Agency"/>
@@ -118,14 +118,15 @@
     <c:if test="${(pageStart - perPage) >= 0}">
         <a href="${pageContext.request.contextPath}?start=${(pageStart - perPage) > 0 ? (pageStart - perPage) : 0}"><<</a>
     </c:if>
-    <h3><fmt:message key="home_jsp.tour_container.page_show"/> ${pageStart + 1} - ${(pageStart + perPage) < totalCount ? pageStart + perPage : totalCount}
+    <h3><fmt:message key="home_jsp.tour_container.page_show"/> ${pageStart + 1}
+        - ${(pageStart + perPage) < totalCount ? pageStart + perPage : totalCount}
         <fmt:message key="home_jsp.tour_container.page_from"/> ${totalCount}</h3>
     <c:if test="${(pageStart + perPage) < totalCount}">
         <a href="${pageContext.request.contextPath}?start=${(pageStart + perPage) < totalCount ? (pageStart + perPage) : totalCount-1}">>></a>
     </c:if>
 </div>
 
-<jsp:include page="fragment/footer.jsp"/>
+<%@ include file="/WEB-INF/views/fragment/footer.jsp" %>
 
 <script>
     let alertMsg = document.getElementById("alertMsg")

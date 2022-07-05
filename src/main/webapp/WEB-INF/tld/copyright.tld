@@ -11,7 +11,7 @@
 
     <tag>
         <name>copyright</name>
-        <tag-class>tag.CopyrightTag</tag-class>
+        <tag-class>com.mytravel.tag.CopyrightTag</tag-class>
         <body-content>empty</body-content>
         <attribute>
             <name>year</name>

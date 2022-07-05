@@ -42,9 +42,19 @@
     <img src="${pageContext.request.contextPath}/images/travel-icon.png" alt="Logo" class="logo-img" width="108"
          height="80">
     <p class="logo">My travel</p>
+
     <div class="navigation">
         <ul class="menu">
-            <li class="menu-item"><a href="${pageContext.request.contextPath}/my-travel?command=home"><fmt:message key="header_jsp.menu.link.home"/></a></li>
+            <%--Searching window--%>
+            <li class="menu-item" id="searchWindow" style="visibility: hidden">
+                <label>
+                    <input type="text" id="searchInput" placeholder="<fmt:message key="header_jsp.menu.search_input.placeholder"/>">
+                </label>
+                <button type="button" onclick="searchTourByName()"><fmt:message key="header_jsp.menu.search_input.btn.search"/></button>
+            </li>
+
+            <li class="menu-item"><a href="${pageContext.request.contextPath}/my-travel?command=home"><fmt:message
+                    key="header_jsp.menu.link.home"/></a></li>
             <li class="menu-item">
                 <a class="sub-btn"><fmt:message key="header_jsp.menu.btn.search_tour"/></a>
                 <ul class="sub-menu">
@@ -120,6 +130,10 @@
                                 <fmt:message key="header_jsp.menu.btn.hotel_type.link.boutique"/></a></li>
                         </ul>
                     </li>
+
+                    <li class="sub-item more"><a onclick="showSearchWindow()">
+                        <fmt:message key="header_jsp.menu.btn.search_by_name"/></a>
+                    </li>
                 </ul>
             </li>
 
@@ -127,7 +141,8 @@
             <c:if test="${not empty user}">
                 <c:choose>
                     <c:when test="${userRole == 'manager'}">
-                        <li class="menu-item"><a class="sub-btn"><fmt:message key="header_jsp.menu.btn.manager_tools"/></a>
+                        <li class="menu-item"><a class="sub-btn"><fmt:message
+                                key="header_jsp.menu.btn.manager_tools"/></a>
                             <ul class="sub-menu">
                                 <li class="sub-item"><a
                                         href="${pageContext.request.contextPath}/my-travel?command=tourEditor">
@@ -139,7 +154,8 @@
                         </li>
                     </c:when>
                     <c:when test="${userRole == 'admin'}">
-                        <li class="menu-item"><a class="sub-btn"><fmt:message key="header_jsp.menu.btn.admin_tools"/></a>
+                        <li class="menu-item"><a class="sub-btn"><fmt:message
+                                key="header_jsp.menu.btn.admin_tools"/></a>
                             <ul class="sub-menu">
                                 <li class="sub-item"><a
                                         href="${pageContext.request.contextPath}/my-travel?command=tourEditor">
@@ -163,8 +179,10 @@
                 <a class="sub-btn"><fmt:message key="header_jsp.menu.btn.language"/></a>
                 <img src="${pageContext.request.contextPath}/images/world-icon.png" width="18px" height="18px">
                 <ul class="sub-menu">
-                    <li class="sub-item"><a href="?currentLocale=en"><fmt:message key="header_jsp.menu.btn.language.link.english"/></a></li>
-                    <li class="sub-item"><a href="?currentLocale=uk"><fmt:message key="header_jsp.menu.btn.language.link.ukrainian"/></a></li>
+                    <li class="sub-item"><a href="?currentLocale=en"><fmt:message
+                            key="header_jsp.menu.btn.language.link.english"/></a></li>
+                    <li class="sub-item"><a href="?currentLocale=uk"><fmt:message
+                            key="header_jsp.menu.btn.language.link.ukrainian"/></a></li>
                 </ul>
             </li>
             <li class="menu-item"><img src="${pageContext.request.contextPath}/images/account-icon.png" alt="Account"
@@ -175,15 +193,18 @@
                         <c:when test="${not empty user}">
                             <c:if test="${userRole == 'user'}">
                                 <li class="sub-item more">
-                                    <a class="more-btn"><fmt:message key="header_jsp.menu.btn.account.btn.my_cabinet"/></a>
+                                    <a class="more-btn"><fmt:message
+                                            key="header_jsp.menu.btn.account.btn.my_cabinet"/></a>
                                     <ul class="more-menu">
                                         <li class="more-item"><a
                                                 href="${pageContext.request.contextPath}/my-travel?command=userCabinet&menu=myOrders">
-                                            <fmt:message key="header_jsp.menu.btn.account.btn.my_cabinet.link.my_orders"/></a>
+                                            <fmt:message
+                                                    key="header_jsp.menu.btn.account.btn.my_cabinet.link.my_orders"/></a>
                                         </li>
                                         <li class="more-item"><a
                                                 href="${pageContext.request.contextPath}/my-travel?command=userCabinet&menu=myInfo">
-                                            <fmt:message key="header_jsp.menu.btn.account.btn.my_cabinet.link.my_info"/></a>
+                                            <fmt:message
+                                                    key="header_jsp.menu.btn.account.btn.my_cabinet.link.my_info"/></a>
                                         </li>
                                     </ul>
                                 </li>
@@ -207,6 +228,23 @@
             </li>
         </ul>
     </div>
+
+    <script>
+        let searchWindow = document.getElementById("searchWindow")
+
+        function showSearchWindow() {
+            searchWindow.style.visibility = "visible"
+        }
+
+        function searchTourByName() {
+            let input = document.getElementById("searchInput").value;
+
+            fetch("${pageContext.request.contextPath}/my-travel?command=searchTour&name=" + input, {method: "GET"})
+                .then(response => {
+                    window.location.href = "${pageContext.request.contextPath}/my-travel?command=searchTour&name=" + input
+                });
+        }
+    </script>
 
 </header>
 

@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ page import="entity.constant.TourType" %>
+<%@ page import="com.mytravel.entity.constant.TourType" %>
 
 <html>
 <c:set var="title" value="Tour editor | My Travel Agency"/>

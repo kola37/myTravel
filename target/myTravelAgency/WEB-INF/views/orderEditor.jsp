@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ page import="entity.constant.OrderStatus" %>
+<%@ page import="com.mytravel.entity.constant.OrderStatus" %>
 
 <html>
 <c:set var="title" value="Order editor | My Travel Agency"/>
@@ -114,6 +114,8 @@
         <a href="${pageContext.request.contextPath}/my-travel?command=orderEditor&start=${(pageStart + perPage) < totalCount ? (pageStart + perPage) : totalCount-1}">>></a>
     </c:if>
 </div>
+
+<%@ include file="/WEB-INF/views/fragment/footer.jsp" %>
 
 <script>
     function deleteOrder(clicked_id) {

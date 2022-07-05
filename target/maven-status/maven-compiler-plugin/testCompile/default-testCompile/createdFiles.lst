@@ -1,0 +1,15 @@
+com/mytravel/service/validator/impl/NameValidatorTest.class
+com/mytravel/dao/impl/UserDAOTest.class
+com/mytravel/dao/impl/HotelDAOTest.class
+com/mytravel/dao/DAOFactoryTest.class
+com/mytravel/service/impl/HotelServiceTest.class
+com/mytravel/filter/EncodingFilterTest.class
+com/mytravel/util/DBUtilsTest.class
+com/mytravel/dao/impl/TourDAOTest.class
+com/mytravel/filter/LanguageFilterTest.class
+com/mytravel/service/impl/OrderServiceTest.class
+com/mytravel/dao/impl/OrderDAOTest.class
+com/mytravel/service/impl/UserServiceTest.class
+com/mytravel/service/validator/impl/EmailValidatorTest.class
+com/mytravel/service/ServiceFactoryTest.class
+com/mytravel/service/impl/TourServiceTest.class

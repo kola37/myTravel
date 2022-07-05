@@ -8,8 +8,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ page import="entity.constant.UserRole" %>
-<%@ page import="entity.constant.OrderStatus" %>
+<%@ page import="com.mytravel.entity.constant.UserRole" %>
+<%@ page import="com.mytravel.entity.constant.OrderStatus" %>
 
 
 <html>
@@ -156,6 +156,7 @@
     </form>
 </div>
 
+<%@ include file="/WEB-INF/views/fragment/footer.jsp" %>
 
 <script>
     function showSelector(clicked_id) {

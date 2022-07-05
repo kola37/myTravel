@@ -46,7 +46,7 @@ CREATE TABLE hotel_types(
 --------------------------------------------------------
 CREATE TABLE hotels (
 	id INTEGER AUTO_INCREMENT,
-	name VARCHAR(15) NOT NULL UNIQUE,
+	name VARCHAR(30) NOT NULL UNIQUE,
     hotel_type_id INTEGER NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (hotel_type_id) REFERENCES hotel_types(id) ON DELETE CASCADE ON UPDATE RESTRICT
@@ -109,25 +109,4 @@ CREATE TABLE orders (
     FOREIGN KEY (status_id) REFERENCES statuses(id) ON DELETE CASCADE ON UPDATE RESTRICT
 );
 
--- ----------------------------------------------------------------
--- ------------- Table PROMOTIONS
--- ----------------------------------------------------------------
--- CREATE TABLE promotions(
--- 	id INTEGER AUTO_INCREMENT,
--- 	discount_rate INTEGER NOT NULL DEFAULT 0,
--- 	max_discount INTEGER NOT NULL DEFAULT 0,
--- 	PRIMARY KEY (id)
--- );
-
----------------------------------------------------------------
-------------- Table USERS_ORDERS
------------represent relation between user and his order
-----------------------------------------------------------------
---CREATE TABLE users_orders(
---    user_id INTEGER NOT NULL,
---    order_id INTEGER NOT NULL,
---    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
---    FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE,
---    UNIQUE (user_id, order_id)
---);
 
